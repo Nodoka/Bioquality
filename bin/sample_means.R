@@ -22,7 +22,7 @@ frequencies <- as.vector(table(star)[GHI.colours])
 # generate a random subsample of frequencies half the size of the dataset
 # and calculate the frequencies of the subsample
 subsample_size = sum(frequencies) %/% 2
-number_of_subsamples = 100
+number_of_subsamples = 1000
 
 # generate lots of subsamples and record their frequency distributions
 # in a big matrix
@@ -31,3 +31,6 @@ subsample_frequencies <-
 
 # calculate score for each column in subsample_frequencies
 scores <- apply(subsample_frequencies, 2, GHI.score)
+
+# plot results
+hist(scores)
