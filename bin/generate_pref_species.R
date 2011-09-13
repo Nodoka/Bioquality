@@ -12,5 +12,8 @@ species_pref <- merge(species_cell, cell_pref)
 # select unique species-prefecture pairs
 species_pref <- unique(species_pref[,c('species','star','X.Pref_en')])
 
+# remove subcells representing water parts of cells, with no prefecture
+species_pref <- subset(species_pref, X.Pref_en != "")
+
 # write results to file
 write.csv(species_pref, file="../data/species_pref.csv", fileEncoding="UTF-8")
