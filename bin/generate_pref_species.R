@@ -16,4 +16,7 @@ species_pref <- unique(species_pref[,c('species','star','X.Pref_en')])
 species_pref <- subset(species_pref, X.Pref_en != "")
 
 # write results to file
-write.csv(species_pref, file="../data/species_pref.csv", fileEncoding="UTF-8")
+write.csv(species_pref,
+          file="../data/species_pref.csv",
+          fileEncoding="UTF-8",
+          row.names = FALSE)
