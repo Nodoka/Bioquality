@@ -1,3 +1,3 @@
-FILE <- (function() { 
-  attr(body(sys.function()), "srcfile")
-})()$filename 
+FILE <- function() { 
+  attr(body(sys.function()), "srcfile")$filename
+}

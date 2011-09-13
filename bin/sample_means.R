@@ -14,10 +14,10 @@ dataset <- testsamplerbs09
 # dataset <- testsamprbs10
 
 # extract the 'star' column of a chosen dataset
-star <- dataset$star
+stars <- dataset$star
 
 # extract the frequencies of 'BK', 'GD', 'BU' and 'GN' as a vector
-frequencies <- as.vector(table(star)[GHI.colours])
+frequencies <- GHI.star_frequencies(stars)
 
 # generate a random subsample of frequencies half the size of the dataset
 # and calculate the frequencies of the subsample
