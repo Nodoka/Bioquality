@@ -15,6 +15,10 @@ species_pref <- unique(species_pref[,c('species','star','X.Pref_en')])
 # remove subcells representing water parts of cells, with no prefecture
 species_pref <- subset(species_pref, X.Pref_en != "")
 
+# rename column from 'X.Pref_en' to 'pref'
+column_index <- which(names(species_pref) == 'X.Pref_en')
+names(species_pref)[column_index] <- 'pref'
+
 # write results to file
 write.csv(species_pref,
           file="../data/species_pref.csv",
