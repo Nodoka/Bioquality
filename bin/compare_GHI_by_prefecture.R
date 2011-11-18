@@ -10,8 +10,8 @@ hori <- sanitise_hori(hori)
 foj  <- sanitise_foj(foj)
 
 # number of species by star and prefecture
-calculate_score = function(subset) {
-  GHI.score(GHI.star_frequencies(subset$stars))
+calculate_score = function(subgroup) {
+  GHI.score(GHI.star_frequencies(subgroup))
 }
 
 hori_scores <- tapply(hori$star, hori$pref, calculate_score)
