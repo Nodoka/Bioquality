@@ -1,18 +1,21 @@
 source('../library/GHI.R')
 
-sanitise_foj <- function(foj) {
-  # rename column from 'sampname' to 'pref'
-  column_index <- which(names(foj) == 'sampname')
-  names(foj)[column_index] <- 'pref'
-
-  # select relevant columns
-  foj[,c('species', 'star', 'pref')]
-  
-  filter_star(foj)
+sanitise <- function(species_pref_data) {
+  species_pref_data <- rename_sampname_to_pref(species_pref_data)
+  species_pref_data <- select_relevant_columns(species_pref_data)
+  species_pref_data <- filter_star(species_pref_data)
 }
 
-sanitise_hori <- function(hori) {
-  filter_star(hori)
+rename_sampname_to_pref <- function(species_pref_data) {
+  # rename column from 'sampname' to 'pref'
+  column_index <- which(names(species_pref_data) == 'sampname')
+  names(species_pref_data)[column_index] <- 'pref'
+  
+  return(species_pref_data)
+}
+
+select_relevant_columns <- function(species_pref_data) {
+  species_pref_data[,c('spnumber', 'star', 'pref')]
 }
 
 filter_star <- function(species_pref_data) {
