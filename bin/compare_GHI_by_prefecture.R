@@ -14,5 +14,11 @@ calculate_score = function(subgroup) {
   GHI.score(GHI.star_frequencies(subgroup))
 }
 
+calculate_proportions = function(subgroup) {
+  GHI.star_frequencies(subgroup) / length(subgroup)
+}
+
+
+
 hori_scores <- tapply(hori$star, hori$pref, calculate_score)
 foj_scores  <- tapply(foj$star,  foj$pref,  calculate_score)
