@@ -2,10 +2,10 @@ source('../library/GHI.R')
 
 # load all data
 plants          <- read.csv('../data/plants.csv',          row.names = 1)
-mainsplistR     <- read.csv('../data/mainsplistR.CSV',     row.names = NULL)
-testsamplerbs09 <- read.csv('../data/testsamplerbs09.CSV', row.names = NULL)
-testsampleutaki <- read.csv('../data/testsampleutaki.CSV', row.names = NULL)
-testsamprbs10   <- read.csv('../data/testsamprbs10.CSV',   row.names = NULL)
+mainsplistR     <- read.csv('../data/mainsplistR.csv',     row.names = NULL)
+testsamplerbs09 <- read.csv('../data/testsamplerbs09.csv', row.names = NULL)
+testsampleutaki <- read.csv('../data/testsampleutaki.csv', row.names = NULL)
+testsamprbs10   <- read.csv('../data/testsamprbs10.csv',   row.names = NULL)
 
 # uncomment to select a dataset
 # dataset <- mainsplistR
