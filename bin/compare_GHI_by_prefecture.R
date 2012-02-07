@@ -20,3 +20,5 @@ calculate_proportions <- function(subgroup) {
 
 hori_scores <- tapply(hori$star, hori$pref, calculate_score)
 foj_scores  <- tapply(foj$star,  foj$pref,  calculate_score)
+
+barplot(rbind(hori_scores, foj_scores), beside=TRUE)
