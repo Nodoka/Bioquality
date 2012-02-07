@@ -33,3 +33,6 @@ write.csv(hori_scores,
 write.csv(foj_scores,
           file="../data/foj_scores.csv",
           fileEncoding="UTF-8",)
+
+barplot(rbind(hori_scores, foj_scores), beside=TRUE)
+
