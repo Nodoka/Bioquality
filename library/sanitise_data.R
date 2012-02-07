@@ -27,3 +27,14 @@ filter_star <- function(species_pref_data) {
   
   return(species_pref_data)
 }
+
+filter_rows_by_valid_star <- function(star_sensitivity_data, column_name) {
+  # only consider GHI.colours
+  valid_star <- star_sensitivity_data[,column_name] %in% GHI.colours
+  star_sensitivity_data <- star_sensitivity_data[valid_star,]
+
+  # remove unnecessary levels in star_sensitivity_data$star*
+  star_sensitivity_data[,column_name] <- factor(star_sensitivity_data[,column_name], GHI.colours)
+  
+  return(star_sensitivity_data)
+}
