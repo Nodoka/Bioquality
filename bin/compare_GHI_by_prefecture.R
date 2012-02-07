@@ -20,3 +20,16 @@ calculate_proportions <- function(subgroup) {
 
 hori_scores <- tapply(hori$star, hori$pref, calculate_score)
 foj_scores  <- tapply(foj$star,  foj$pref,  calculate_score)
+
+# paired-t test (correaltion analysis as second step) on scores between hori and foj
+# t.test(hori_scores,foj_scores,paired=TRUE)
+
+
+# write results (scores) to file, to be checked for labels
+write.csv(hori_scores,
+          file="../data/hori_scores.csv",
+          fileEncoding="UTF-8",)
+
+write.csv(foj_scores,
+          file="../data/foj_scores.csv",
+          fileEncoding="UTF-8",)
