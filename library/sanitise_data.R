@@ -1,9 +1,13 @@
 source('../library/GHI.R')
 
+preflist <- read.csv('../data/preflist.csv')$pref
+
+# data preperation steps for prefecture data analysis
 sanitise <- function(species_pref_data) {
   species_pref_data <- rename_sampname_to_pref(species_pref_data)
   species_pref_data <- select_relevant_columns(species_pref_data)
   species_pref_data <- filter_star(species_pref_data)
+  species_pref_data <- set_pref_levels(species_pref_data)
 }
 
 rename_sampname_to_pref <- function(species_pref_data) {
@@ -37,4 +41,11 @@ filter_rows_by_valid_star <- function(star_sensitivity_data, column_name) {
   star_sensitivity_data[,column_name] <- factor(star_sensitivity_data[,column_name], GHI.colours)
   
   return(star_sensitivity_data)
+}
+
+set_pref_levels <- function(species_pref_data)
+{
+  # set necessary levels (all prefectures) in species_pref_data$pref
+  species_pref_data$pref <- factor(species_pref_data$pref,preflist)
+  return(species_pref_data)
 }
