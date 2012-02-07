@@ -19,10 +19,10 @@ select_relevant_columns <- function(species_pref_data) {
 }
 
 filter_star <- function(species_pref_data) {
-  # only consider GHI.colours in species_pref_hori
+  # only consider GHI.colours in species_pref_data
   species_pref_data <- subset(species_pref_data, star %in% GHI.colours)
 
-  # remove unnecessary levels in species_pref_hori$star
+  # remove unnecessary levels in species_pref_data$star
   species_pref_data$star <- factor(species_pref_data$star, GHI.colours)
   
   return(species_pref_data)
