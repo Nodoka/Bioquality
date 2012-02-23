@@ -35,7 +35,6 @@ write.csv(scores_frame,
           row.names=FALSE,
           fileEncoding="UTF-8")
 
-
 # scatter plot on scores
 plot(valid_scores[,1],valid_scores[,2])
 # scatter plot onscores in ranked order
@@ -58,9 +57,5 @@ t.test(hori_scores,foj_scores,paired=TRUE)
 plot(density(foj_scores,na.rm=TRUE))
 plot(density(hori_scores,na.rm=TRUE))
 
-
 # bar plot
 barplot(rbind(hori_scores, foj_scores), beside=TRUE)
-
-
-
