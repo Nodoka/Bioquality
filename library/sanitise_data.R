@@ -2,10 +2,21 @@ source('../library/GHI.R')
 
 preflist <- read.csv('../data/preflist.csv')$pref
 
+star_columns <- c('star', 'star_geo', 'star_geod', 'star_geou', 'star_infa', 'star_infs')
+
+# data preperation steps for star sensitivity analysis
+sanitise_sens <- function(star_sensitivity_data) {
+  star_sensitivity_data <- rename_sampname_to_pref(star_sensitivity_data)
+  star_sensitivity_data <- select_sensitivity_columns(star_sensitivity_data)
+  for (column in star_columns) {
+    star_sensitivity_data <- filter_rows_by_valid_star(star_sensitivity_data, column)
+  }
+}
+
 # data preperation steps for prefecture data analysis
 sanitise <- function(species_pref_data) {
   species_pref_data <- rename_sampname_to_pref(species_pref_data)
-  species_pref_data <- select_relevant_columns(species_pref_data)
+  species_pref_data <- select_plot_columns(species_pref_data)
   species_pref_data <- filter_star(species_pref_data)
   species_pref_data <- set_pref_levels(species_pref_data)
 }
@@ -18,8 +29,15 @@ rename_sampname_to_pref <- function(species_pref_data) {
   return(species_pref_data)
 }
 
-select_relevant_columns <- function(species_pref_data) {
-  species_pref_data[,c('spnumber', 'star', 'pref')]
+select_sensitivity_columns <- function(star_sensitivity_data) {
+  # select relevant star column to filter for valid stars
+  columns <- c('species', 'spnumber', 'pref', star_columns)
+  star_sensitivity_data[,columns]
+}
+
+select_plot_columns <- function(species_pref_data) {
+  # select relevant pref-plot columns
+  species_pref_data[,c('species', 'spnumber', 'pref', 'star')]
 }
 
 filter_star <- function(species_pref_data) {
