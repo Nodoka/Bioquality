@@ -4,9 +4,7 @@ source('../library/sanitise_data.R')
 # load data
 foj  <- read.csv('../data/species_pref_foj.csv', row.names = NULL)
 
-# neaten up raw data frames
-# foj  <- sanitise(foj)
-# within sanitise, only do
+# neaten up raw data frames, within sanitise, only do the followings.
 foj <- rename_sampname_to_pref(foj)
 foj <- select_sensitivity_columns(foj)
 foj <- set_pref_levels(foj)
@@ -25,7 +23,7 @@ foj_star_infs <- filter_rows_by_valid_star(foj,'star_infs')
 # GHI scores by prefecture for each star classification method
 # foj_scores_star*  <- tapply(foj_star*$star*,  foj_star*$pref,  calculate_score)
 # combine GHI scores by prefecture with all star classification methods
-# sens_scores <- t(rbind (foj_scores_star*,,,))
+# sens_scores <- cbind (foj_scores_star*,,,))
 
 # individual scripts run in R
 foj_scores_star <- tapply(foj_star$star,  foj_star$pref, calculate_score)
@@ -34,7 +32,7 @@ foj_scores_star_geou  <- tapply(foj_star_geou$star_geou,  foj_star_geou$pref,  c
 foj_scores_star_geod  <- tapply(foj_star_geod$star_geod,  foj_star_geod$pref,  calculate_score)
 foj_scores_star_infa  <- tapply(foj_star_infa$star_infa,  foj_star_infa$pref,  calculate_score)
 foj_scores_star_infs  <- tapply(foj_star_infs$star_infs,  foj_star_infs$pref,  calculate_score)
-sens_scores <- t(rbind(foj_scores_star,foj_scores_star_geo,foj_scores_star_geou,foj_scores_star_geod,foj_scores_star_infa,foj_scores_star_infs))
+sens_scores <- cbind(foj_scores_star,foj_scores_star_geo,foj_scores_star_geou,foj_scores_star_geod,foj_scores_star_infa,foj_scores_star_infs))
 
 # convert scores to dataframe
 sens_scores_frame <- data.frame(preflist=row.names(sens_scores), star_default=sens_scores[,1], star_geo=sens_scores[,2], star_geou=sens_scores[,3],star_geod=sens_scores[,4], star_infa=sens_scores[,5], star_infs=sens_scores[,6], row.names=NULL)
