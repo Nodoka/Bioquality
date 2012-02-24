@@ -13,16 +13,19 @@ foj <- set_pref_levels(foj)
 
 # make species list by prefecture for each star classification method
 # how to avoid redundancy in star* used across this section?
-foj_star* <- filter_rows_by_valid_star(foj,'star*')
+# foj_star* <- filter_rows_by_valid_star(foj,'star*')
 
 # individual scripts run in R
+for(column in star_columns) {
+  
+}
+
 foj_star <- filter_rows_by_valid_star(foj,'star')
 foj_star_geo <- filter_rows_by_valid_star(foj,'star_geo')
 foj_star_geou <- filter_rows_by_valid_star(foj,'star_geou')
 foj_star_geod <- filter_rows_by_valid_star(foj,'star_geod')
 foj_star_infa <- filter_rows_by_valid_star(foj,'star_infa')
 foj_star_infs <- filter_rows_by_valid_star(foj,'star_infs')
-
 
 # GHI calculation function (could be out in library)
 calculate_score <- function(subgroup) {
@@ -34,9 +37,9 @@ calculate_proportions <- function(subgroup) {
 }
 
 # GHI scores by prefecture for each star classification method
-foj_scores_star*  <- tapply(foj_star*$star*,  foj_star*$pref,  calculate_score)
+# foj_scores_star*  <- tapply(foj_star*$star*,  foj_star*$pref,  calculate_score)
 # combine GHI scores by prefecture with all star classification methods
-sens_scores <- t(rbind (foj_scores_star*,,,))
+# sens_scores <- t(rbind (foj_scores_star*,,,))
 
 # individual scripts run in R
 foj_scores_star <- tapply(foj_star$star,  foj_star$pref, calculate_score)
