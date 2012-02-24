@@ -22,3 +22,11 @@ GHI.subsample_frequencies <- function(frequencies, subsample_size) {
   as.vector(table(sample(ordered_coefficient_factor,subsample_size)))
 }
 
+# GHI calculation functions
+calculate_score <- function(subgroup) {
+  GHI.score(GHI.star_frequencies(subgroup))
+}
+
+calculate_proportions <- function(subgroup) {
+  GHI.star_frequencies(subgroup) / length(subgroup)
+}
