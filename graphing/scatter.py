@@ -1,12 +1,8 @@
 """
 make a scatter plot with varying color and size arguments
 """
-import csv
-import matplotlib
 import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib.mlab as mlab
-import matplotlib.cbook as cbook
 
 # load a numpy record array from scores.csv
 scores = np.genfromtxt("../data/scores.csv", delimiter=',', dtype=None, names=True)
