@@ -2,5 +2,7 @@ foj_scores.csv
 hori_scores.csv
 merged_scores.csv
 scores.csv
+scores_geo.csv
+sensitivity_scores.csv
 spnos.csv
 *.tiff
