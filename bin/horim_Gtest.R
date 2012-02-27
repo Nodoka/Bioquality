@@ -8,7 +8,7 @@ horiw <- filter_rows_by_valid_star(horiw,'star_geo')
 
 # filter species for Japanese endemics
 filter_endemics <- function(hori_data) {
-  # only consider GHI.colours in hori_data
+  # only consider endemics in hori_data
   hori_data <- subset(hori_data, horim_end %in% 'endemic')
 
   # remove unnecessary levels in hori_data$horim_end
@@ -16,6 +16,9 @@ filter_endemics <- function(hori_data) {
   
   return(hori_data)
 }
+
+# alternative method of filtering
+# horiw <- horiw[horiw$horim_end %in% 'endemic',]
 
 # uncomment to run analysis only with endemics
 # horiw <- filter_endemics(horiw)
