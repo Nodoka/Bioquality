@@ -23,7 +23,7 @@ foj_star_infs <- filter_rows_by_valid_star(foj,'star_infs')
 # GHI scores by prefecture for each star classification method
 # foj_scores_star*  <- tapply(foj_star*$star*,  foj_star*$pref,  calculate_score)
 # combine GHI scores by prefecture with all star classification methods
-# sens_scores <- cbind (foj_scores_star*,,,))
+# sens_scores <- cbind (foj_scores_star*,,,)
 
 # individual scripts run in R
 foj_scores_star <- tapply(foj_star$star,  foj_star$pref, calculate_score)
@@ -32,7 +32,7 @@ foj_scores_star_geou  <- tapply(foj_star_geou$star_geou,  foj_star_geou$pref,  c
 foj_scores_star_geod  <- tapply(foj_star_geod$star_geod,  foj_star_geod$pref,  calculate_score)
 foj_scores_star_infa  <- tapply(foj_star_infa$star_infa,  foj_star_infa$pref,  calculate_score)
 foj_scores_star_infs  <- tapply(foj_star_infs$star_infs,  foj_star_infs$pref,  calculate_score)
-sens_scores <- cbind(foj_scores_star,foj_scores_star_geo,foj_scores_star_geou,foj_scores_star_geod,foj_scores_star_infa,foj_scores_star_infs))
+sens_scores <- cbind(foj_scores_star,foj_scores_star_geo,foj_scores_star_geou,foj_scores_star_geod,foj_scores_star_infa,foj_scores_star_infs)
 
 # calculate the differences of each star method from the default
 differences <- sens_scores[,-1] - replicate(5,sens_scores[,1])
