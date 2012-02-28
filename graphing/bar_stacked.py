@@ -8,20 +8,25 @@ spno_geo  = np.genfromtxt('../data/FOJKew_geo_Gtestdata.csv',  delimiter=',', dt
 spno_star = np.genfromtxt('../data/FOJKew_star_Gtestdata.csv', delimiter=',', dtype = None, names=True)
 
 # extract columns
-star = map(lambda row: row[0], spno_geo)
-foj = map(lambda row: row[1], spno_geo)
-kew  = map(lambda row: row[2], spno_geo)
+geo_category  = map(lambda row: row[0], spno_geo )
+geo_foj       = map(lambda row: row[1], spno_geo )
+geo_kew       = map(lambda row: row[2], spno_geo )
+star_category = map(lambda row: row[0], spno_star)
+star_foj      = map(lambda row: row[1], spno_star)
+star_kew      = map(lambda row: row[2], spno_star)
 
+# check that star names are the same and in the same order
+assert geo_category == star_category
 
 # plot data
-# p1 = plt.bar(ind, menMeans,   width, color='r', yerr=womenStd)
-# p2 = plt.bar(ind, womenMeans, width, color='y',
-#              bottom=menMeans, yerr=menStd)
-# 
-# plt.ylabel('Scores')
-# plt.title('Scores by group and gender')
-# plt.xticks(ind+width/2., ('G1', 'G2', 'G3', 'G4', 'G5') )
-# plt.yticks(np.arange(0,81,10))
-# plt.legend( (p1[0], p2[0]), ('Men', 'Women') )
-# 
-# plt.show()
+ind = np.arange(4)
+width = 0.35
+p1 = plt.bar(ind, geo_foj, width, color='r')
+p2 = plt.bar(ind, geo_kew, width, color='y')
+
+plt.ylabel('Scores')
+plt.title('')
+plt.xticks(ind+width/2., geo_category )
+plt.legend( (p1[0], p2[0]), ('GEO FOJ', 'GEO Kew') )
+
+plt.show()
