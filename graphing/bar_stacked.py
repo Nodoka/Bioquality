@@ -43,3 +43,18 @@ plt.ylabel('Number of Taxa')
 plt.title('Number of Taxa Assigned to Stars from 4 Data Sources')
 
 plt.show()
+
+# calculate proportions by normalising populations
+# use float to prevent integer arithmetic (rounding down to zero)
+norm_star_foj = star_foj / np.sum(star_foj).astype(float)
+norm_star_kew = star_kew / np.sum(star_kew).astype(float)
+norm_geo_foj  = geo_foj  / np.sum(geo_foj ).astype(float)
+norm_geo_kew  = geo_kew  / np.sum(geo_kew ).astype(float)
+
+proportions = np.array([norm_star_foj,norm_star_kew,norm_geo_foj,norm_geo_kew])
+
+plot_stacked_bar(proportions)
+plt.ylabel('Proportion of Taxa')
+plt.title('Proportion of Taxa Assigned to Stars from 4 Data Sources')
+
+plt.show()
