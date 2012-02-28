@@ -24,10 +24,10 @@ populations = np.array([star_foj,star_kew,geo_foj,geo_kew])
 # plot data
 def plot_stacked_bar(results):
     # extract each column into a variable
-    bk = results[0,:]
-    gd = results[1,:]
-    bu = results[2,:]
-    gn = results[3,:]
+    bk = results[:,0]
+    gd = results[:,1]
+    bu = results[:,2]
+    gn = results[:,3]
     ind = np.arange(4)
     width = 0.35
     p1 = plt.bar(ind, bk, width, color='black')
