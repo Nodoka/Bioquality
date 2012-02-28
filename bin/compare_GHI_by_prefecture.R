@@ -41,6 +41,9 @@ compare_scores <- lm(rank(valid_scores[,2]) ~ rank(valid_scores[,1]))
 # draw a linear model graph with a linear regression line
 abline(compare_scores)
 
+# save plot as tiff
+savePlot(filename=("../data/FOJHori_ranked_score.tiff"),type="tiff")
+
 # paired-t test on scores between hori and foj. 
 # This test is probably not good because data are not normally distributed (check histogram).
 t.test(hori_scores,foj_scores,paired=TRUE)
