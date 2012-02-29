@@ -40,6 +40,11 @@ difference <- sum_table[,-1]-replicate(5,sum_table[,1])
 # bar plot
 barplot(sum_table,legend.text=c("star","star_geo","star_geou","star_geod","star_infa","star_infs"),beside=TRUE)
  
+# write results to csv file. change sum_table to dataframe or modify the first row label 'star'.
+write.csv(sum_table,
+	  file="../data/star_sensitivity_spnos_data.csv",
+          fileEncoding="UTF-8")
+
 # graphs needed: proportion bar graphs, one grouped by star on x; series = star_scenario, the other grouped by star_scenario; series = star
 ---------
 # alternative way?
