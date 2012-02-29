@@ -29,7 +29,13 @@ star_table_star_geou <- table(splist_star_geou[,'star_geou'])
 star_table_star_geod <- table(splist_star_geod[,'star_geod'])
 star_table_star_infa <- table(splist_star_infa[,'star_infa'])
 star_table_star_infs <- table(splist_star_infs[,'star_infs'])
-sum_table <- rbind(star_table_star,star_table_star_geo,star_table_star_geou,star_table_star_geod,star_table_star_infa,star_table_star_infs)
+# summary table of star species numbers in all classification method, row=method by column=star. 
+# sum_table <- rbind(star_table_star,star_table_star_geo,star_table_star_geou,star_table_star_geod,star_table_star_infa,star_table_star_infs)
+# summary table of star species numbers in all classification method, row=star by column=method.
+sum_table <- cbind(star_table_star,star_table_star_geo,star_table_star_geou,star_table_star_geod,star_table_star_infa,star_table_star_infs)
+
+# calculate the differences of each star method from the default
+difference <- sum_table[,-1]-replicate(5,sum_table[,1])
 
 # bar plot
 barplot(sum_table,legend.text=c("star","star_geo","star_geou","star_geod","star_infa","star_infs"),beside=TRUE)
