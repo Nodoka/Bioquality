@@ -38,8 +38,9 @@ sens_scores           <- cbind(foj_scores_star,foj_scores_star_geo,foj_scores_st
 differences      <- sens_scores[,-1] - replicate(5,sens_scores[,1])
 difference_means <- apply(differences,2,mean)
 difference_sds   <- apply(differences,2,sd)
+
 # convert results of differences to table and to dataframe (check r or c bind!!)
-difference_table <- rbind(diffrence_means, difference_sds)
+difference_table <- rbind(difference_means, difference_sds)
 difference_frame <- data.frame(data_type=row.names(difference_table),      star_geo=difference_table[,1],
 		     star_geou=difference_table[,2],
 		     star_geod=difference_table[,3],
