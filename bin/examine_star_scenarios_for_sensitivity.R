@@ -10,11 +10,11 @@ star_columns <- c('star', 'star_geo', 'star_geod', 'star_geou', 'star_infa', 'st
 
 # filter rows by valid star on selected column
 # how to reduce redundancy in star* used across this section?
-splist_star_scenario* <- filter_rows_by_valid_star(mainsplistR,'star*')
+# splist_star_scenario* <- filter_rows_by_valid_star(mainsplistR,'star*')
 # summary of the number of valid stars for each star classification methods
-star_table_scenario* <- table(splist_star_scenario[,'star*'])
+# star_table_scenario* <- table(splist_star_scenario[,'star*'])
 # star summary table with all star classification methods
-stars_table <- rbind(star_table_scenario,,,,,)
+# stars_table <- rbind(star_table_scenario,,,,,)
 
 # individual scripts run in R
 splist_star <- filter_rows_by_valid_star(mainsplistR,'star')
