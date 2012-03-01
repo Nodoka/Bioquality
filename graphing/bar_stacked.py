@@ -37,7 +37,7 @@ def plot_stacked_bar(results):
     plt.xlabel('Data Source')
     plt.legend( (p1[0], p2[0], p3[0], p4[0]), star_category )
     plt.xticks(ind+width/2., ('Star FOJ','Star Kew','GEO FOJ','GEO Kew') )
-    
+
 plot_stacked_bar(populations)
 plt.ylabel('Number of Taxa')
 plt.title('Number of Taxa Assigned to Stars from 4 Data Sources')
