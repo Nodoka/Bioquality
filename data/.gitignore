@@ -6,3 +6,6 @@ scores_geo.csv
 sensitivity_scores.csv
 spnos.csv
 *.tiff
+*.svg
+species_qrgrid.csv
+species_x1grid.csv
