@@ -24,8 +24,6 @@ foj_star_infs <- filter_rows_by_valid_star(foj,'star_infs')
 # foj_scores_star*  <- tapply(foj_star*$star*,  foj_star*$pref,  calculate_score)
 # combine GHI scores by prefecture with all star classification methods
 # sens_scores <- cbind (foj_scores_star*,,,)
-
-# individual scripts run in R
 foj_scores_star       <- tapply(foj_star$star,  foj_star$pref, calculate_score)
 foj_scores_star_geo   <- tapply(foj_star_geo$star_geo,  foj_star_geo$pref,  calculate_score)
 foj_scores_star_geou  <- tapply(foj_star_geou$star_geou,  foj_star_geou$pref,  calculate_score)
@@ -34,7 +32,7 @@ foj_scores_star_infa  <- tapply(foj_star_infa$star_infa,  foj_star_infa$pref,  c
 foj_scores_star_infs  <- tapply(foj_star_infs$star_infs,  foj_star_infs$pref,  calculate_score)
 sens_scores           <- cbind(foj_scores_star,foj_scores_star_geo,foj_scores_star_geou,foj_scores_star_geod,foj_scores_star_infa,foj_scores_star_infs)
 
-# calculate the differences of each star method from the default
+# calculate the differences of scoes between each star method and the default
 differences      <- sens_scores[,-1] - replicate(5,sens_scores[,1])
 difference_means <- apply(differences,2,mean)
 difference_sds   <- apply(differences,2,sd)
@@ -68,6 +66,7 @@ write.csv(difference_frame,
           row.names=FALSE,
           fileEncoding="UTF-8")
 
+-----------------------------------------------
 # bar plot
 barplot(foj_scores_sensitivity,legend.text=c('star','star_geo','star_geou','star_geod','star_infa','star_infs'),beside=TRUE,xlab='prefecture',ylab='GHI score')
 
@@ -75,3 +74,17 @@ barplot(foj_scores_sensitivity,legend.text=c('star','star_geo','star_geou','star
 cor(foj_scores_sensitivity[1,],foj_scores_sensitivity[*,],method="spearman")
 
 # graph: linear regression line between x: foj_scores_star (default) vs. y: one of scenarios, or all in one graph showing variation
+------------------------------------------------
+# calculate number of species in prefecture for each method
+foj_spsum_star       <- table(foj_star$pref)
+foj_spsum_star_geo   <- table(foj_star_geo$pref)
+foj_spsum_star_geou  <- table(foj_star_geou$pref)
+foj_spsum_star_geod  <- table(foj_star_geod$pref)
+foj_spsum_star_infa  <- table(foj_star_infa$pref)
+foj_spsum_star_infs  <- table(foj_star_infs$pref)
+sens_spsum           <- cbind(foj_spsum_star,foj_spsum_star_geo,foj_spsum_star_geou,foj_spsum_star_geod,foj_spsum_star_infa,foj_spsum_star_infs)
+
+# calculate the differences of the number of species between each star method and the default
+spsum_diff <- sens_spsum[,-1] - replicate(5,sens_spsum[,1])
+spsum_diff_means <- apply(spsum_diff,2,mean)
+spsum_diff_sds   <- apply(spsum_diff,2,sd)
