@@ -1,5 +1,7 @@
 """
-make a scatter plot with varying color and size arguments
+A scatter graph of hori vs foj raw scores,
+with bubble size inversely proportional to
+total number of foj species in prefecture.
 """
 import numpy as np
 import matplotlib.pyplot as plt
