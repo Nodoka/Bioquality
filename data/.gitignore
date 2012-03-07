@@ -4,8 +4,14 @@ merged_scores.csv
 scores.csv
 scores_geo.csv
 sensitivity_scores.csv
+sens_scores_diff.csv
 spnos.csv
+star_sensitivity_spnos_data.csv
+star_sensitivity_spnos_diff.csv
 *.tiff
-*.svg
 species_qrgrid.csv
 species_x1grid.csv
+species_qrarea.csv
+species_x1area.csv
+species_qrcount.csv
+species_x1count.csv
