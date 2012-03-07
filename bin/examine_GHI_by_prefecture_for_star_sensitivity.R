@@ -39,14 +39,16 @@ difference_sds   <- apply(differences,2,sd)
 
 # convert results of differences to table and to dataframe (check r or c bind!!)
 difference_table <- rbind(difference_means, difference_sds)
-difference_frame <- data.frame(data_type=row.names(difference_table),      star_geo=difference_table[,1],
-		     star_geou=difference_table[,2],
-		     star_geod=difference_table[,3],
-                     star_infa=difference_table[,4],
-		     star_infs=difference_table[,5])
+difference_frame <- data.frame(data_type=row.names(difference_table),      
+		    star_geo=difference_table[,1],
+		    star_geou=difference_table[,2],
+		    star_geod=difference_table[,3],
+                    star_infa=difference_table[,4],
+		    star_infs=difference_table[,5])
 
 # convert scores to dataframe
-sens_scores_frame <- data.frame(preflist=row.names(sens_scores), 			     star_default=sens_scores[,1], 
+sens_scores_frame <- data.frame(preflist=row.names(sens_scores), 			     
+		     star_default=sens_scores[,1], 
 		     star_geo=sens_scores[,2], 
                      star_geou=sens_scores[,3],
                      star_geod=sens_scores[,4], 
