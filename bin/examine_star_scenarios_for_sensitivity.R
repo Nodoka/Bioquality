@@ -45,6 +45,10 @@ write.csv(sum_table,
 	  file="../data/star_sensitivity_spnos_data.csv",
           fileEncoding="UTF-8")
 
+write.csv(difference,
+	  file="../data/star_sensitivity_spnos_diff.csv",
+          fileEncoding="UTF-8")
+
 # graphs needed: proportion bar graphs, one grouped by star on x; series = star_scenario, the other grouped by star_scenario; series = star
 ---------
 # alternative way?
