@@ -45,13 +45,13 @@ horia_1gr <- tapply(horiw$X1gr_totalland, horiw$star_infs, mean)
 
 # merge resulting mean tables to one
 meanhori_count <- rbind(horic_mgr,horic_qgr,horic_1gr)
-meanhori_area <- rbind(horia_mgr,horia_qgr,horia_1gr)
+meanhori_area  <- rbind(horia_mgr,horia_qgr,horia_1gr)
 
 # calculate weights for stars
 weight_count <- meanhori_count[,'GN']/meanhori_count
-weight_area <- meanhori_area[,'GN']/meanhori_area
+weight_area  <- meanhori_area[,'GN']/meanhori_area
 
 # calculate the differences of distribution from that of finest resolution
-differences <- horiw[,c('qgr_totalland','X1gr_totalland')] - replicate(2,horiw[,'mgr_totalland'])
+differences      <- horiw[,c('qgr_totalland','X1gr_totalland')] - replicate(2,horiw[,'mgr_totalland'])
 difference_means <- apply(differences,2,mean)
-difference_sds <- apply(differences,2,sd)
+difference_sds   <- apply(differences,2,sd)
