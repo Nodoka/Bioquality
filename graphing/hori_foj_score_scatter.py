@@ -7,8 +7,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # load a numpy record array from scores.csv
-scores = np.genfromtxt("../data/scores.csv", delimiter=',', dtype=None, names=True)
-spnos = np.array(list(np.genfromtxt("../data/spnos.csv",delimiter=',', dtype=None, names=True)[0])[1:])
+scores = np.genfromtxt("../data/FOJHori_scores.csv", delimiter=',', dtype=None, names=True)
+spnos = np.genfromtxt("../data/FOJHori_spnos.csv", delimiter=',', dtype=None, names=True)
+# old script using a differently formatted dataset
+# spnos = np.array(list(np.genfromtxt("../data/spnos.csv",delimiter=',', dtype=None, names=True)[0])[1:])
 
 prefectures = map(lambda row: row[0], scores)
 hori_scores = map(lambda row: row[1], scores)

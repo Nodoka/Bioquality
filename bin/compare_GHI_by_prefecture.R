@@ -13,8 +13,8 @@ hori_scores <- tapply(hori$star, hori$pref, calculate_score)
 foj_scores  <- tapply(foj$star,  foj$pref,  calculate_score)
 
 
-# merge and transpose scores into one table
-merged_scores <- t(rbind(foj_scores,hori_scores))
+# merge scores into one table
+merged_scores <- cbind(foj_scores,hori_scores)
 # filter out invalid values (NA) on scores
 valid_scores <- na.omit(merged_scores)
 # convert scores to dataframe
@@ -22,7 +22,7 @@ scores_frame <- data.frame(preflist=row.names(valid_scores), foj_scores=valid_sc
 
 # write results (scores) to file
 write.csv(scores_frame,
-          file="../data/scores.csv",
+          file="../data/FOJHori_scores.csv",
           row.names=FALSE,
           fileEncoding="UTF-8")
 
