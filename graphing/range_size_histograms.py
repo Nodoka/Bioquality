@@ -1,5 +1,6 @@
 #!/usr/local/bin/ipython -i
 import numpy as np
+import matplotlib.pyplot as plt
 import pylab
 
 # extract data from csv
@@ -16,6 +17,30 @@ gd = grid_land[star_infs == "GD"]
 bu = grid_land[star_infs == "BU"]
 gn = grid_land[star_infs == "GN"]
 
+# box plots
+fig = plt.figure()
+ax = fig.add_subplot(111)
+bp = ax.boxplot([bk, gd, bu, gn],
+                vert=0,
+                sym='k+',
+                patch_artist=True,
+                positions=[1,2,3,4],
+                notch=1,
+                bootstrap=5000)
+
+# configure axes
+ax.set_xlim(0, 10000)
+
+# text_transform= mtransforms.blended_transform_factory(ax.transData,
+#                                                      ax.transAxes)
+# ax.set_xlabel('treatment')
+# ax.set_ylabel('response')
+# ax.set_ylim(-0.2, 1.4)
+# plt.setp(bp['whiskers'], color='k',  linestyle='-' )
+# plt.setp(bp['fliers'], markersize=3.0)
+plt.show()
+
+# histograms
 n, bins, patches = pylab.hist([bk,gd,bu,gn],
                               bins=5,
                               normed=True,
