@@ -42,8 +42,7 @@ plt.show()
 
 # histograms
 n, bins, patches = pylab.hist([bk,gd,bu,gn],
-                              bins=5,
+                              bins=25,
                               normed=True,
-                              color=['k', 'y', 'b', 'g'])
-                              
+                              color=['k', 'y', 'b', 'g'])                
 pylab.show()
