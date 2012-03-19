@@ -8,7 +8,9 @@ file_name = "../data/Hori_area_weight.csv"
 
 # columns:
 # 12 - star_infs
-# 19 - mgr_total_land
+# 19 - mgr_totalland
+# 23 - qgr_totalland
+# 26 - X1gr_totalland
 star_infs = np.genfromtxt(file_name, delimiter=',', dtype=None, skip_header=1, usecols=12)
 grid_land = np.genfromtxt(file_name, delimiter=',', dtype=None, skip_header=1, usecols=19)
 
@@ -33,12 +35,13 @@ ax.set_xlim(0, 10000)
 
 # text_transform= mtransforms.blended_transform_factory(ax.transData,
 #                                                      ax.transAxes)
-# ax.set_xlabel('treatment')
-# ax.set_ylabel('response')
+ax.set_xlabel('Range Size')
+ax.set_ylabel('Star')
 # ax.set_ylim(-0.2, 1.4)
 # plt.setp(bp['whiskers'], color='k',  linestyle='-' )
 # plt.setp(bp['fliers'], markersize=3.0)
 plt.show()
+# plt.savefig("../graphing/horiall_boxplot.png")
 
 # histograms
 n, bins, patches = pylab.hist([bk,gd,bu,gn],
@@ -46,3 +49,4 @@ n, bins, patches = pylab.hist([bk,gd,bu,gn],
                               normed=True,
                               color=['k', 'y', 'b', 'g'])                
 pylab.show()
+# pylab.savefig("../graphing/horiall_histogram.png")
