@@ -10,7 +10,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # extract data from csv
-file_name = "../data/sensitivity_diffs.csv"
+file_name = "../data/sensitivity_scores_diffs.csv"
 
 # load a numpy record array from the file
 # column headings:
