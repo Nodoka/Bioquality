@@ -32,22 +32,13 @@ foj_scores_star_infa  <- tapply(foj_star_infa$star_infa,  foj_star_infa$pref,  c
 foj_scores_star_infs  <- tapply(foj_star_infs$star_infs,  foj_star_infs$pref,  calculate_score)
 sens_scores           <- cbind(foj_scores_star,foj_scores_star_geo,foj_scores_star_geou,foj_scores_star_geod,foj_scores_star_infa,foj_scores_star_infs)
 
-# calculate the differences of scoes between each star method and the default
+# calculate the differences of scores between each star method and the default
 differences      <- sens_scores[,-1] - replicate(5,sens_scores[,1])
 difference_means <- apply(differences,2,mean)
 difference_sds   <- apply(differences,2,sd)
 
-# convert results of differences to table and to dataframe (check r or c bind!!)
-difference_table <- rbind(difference_means, difference_sds)
-difference_frame <- data.frame(data_type=row.names(difference_table),      
-		    star_geo=difference_table[,1],
-		    star_geou=difference_table[,2],
-		    star_geod=difference_table[,3],
-                    star_infa=difference_table[,4],
-		    star_infs=difference_table[,5])
-
 # convert scores to dataframe
-sens_scores_frame <- data.frame(preflist=row.names(sens_scores), 			     
+sens_scores_frame <- data.frame(preflist=row.names(sens_scores), 
 		     star_default=sens_scores[,1], 
 		     star_geo=sens_scores[,2], 
                      star_geou=sens_scores[,3],
@@ -56,15 +47,39 @@ sens_scores_frame <- data.frame(preflist=row.names(sens_scores),
                      star_infs=sens_scores[,6],
                      row.names=NULL)
 
-# write results of scores using difference star methods to file
+# convert results of differences to table and to dataframe (check r or c # bind!!)
+difference_table <- rbind(difference_means, difference_sds)
+difference_frame <- data.frame(data_type=row.names(difference_table),      
+		    star_geo=difference_table[,1],
+		    star_geou=difference_table[,2],
+		    star_geod=difference_table[,3],
+                    star_infa=difference_table[,4],
+		    star_infs=difference_table[,5])
+
+# convert calculated differences to dataframe
+score_diffs <- data.frame(preflist=row.names(differences), 
+		     star_geo=differences[,1], 
+                     star_geou=differences[,2],
+                     star_geod=differences[,3], 
+                     star_infa=differences[,4], 
+                     star_infs=differences[,5],
+                     row.names=NULL)
+
+# write results of scores using different star methods to file
 write.csv(sens_scores_frame,
           file="../data/sensitivity_scores.csv",
           row.names=FALSE,
           fileEncoding="UTF-8")
 
-# write results of differences to file
+# write results of differences statistics to file
 write.csv(difference_frame,
-          file="../data/sens_scores_diff.csv",
+          file="../data/sens_scores_difftable.csv",
+          row.names=FALSE,
+          fileEncoding="UTF-8")
+
+# write results of differences to file
+write.csv(score_diffs,
+          file="../data/sensitivity_scores_diffs.csv",
           row.names=FALSE,
           fileEncoding="UTF-8")
 
