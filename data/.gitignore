@@ -4,7 +4,8 @@ merged_scores.csv
 scores.csv
 scores_geo.csv
 sensitivity_scores.csv
-sens_scores_diff.csv
+sensitivity_scores_diffs.csv
+sens_scores_difftable.csv
 spnos.csv
 star_sensitivity_spnos_data.csv
 star_sensitivity_spnos_diff.csv
