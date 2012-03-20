@@ -32,6 +32,7 @@ foj_scores_star_infa  <- tapply(foj_star_infa$star_infa,  foj_star_infa$pref,  c
 foj_scores_star_infs  <- tapply(foj_star_infs$star_infs,  foj_star_infs$pref,  calculate_score)
 sens_scores           <- cbind(foj_scores_star,foj_scores_star_geo,foj_scores_star_geou,foj_scores_star_geod,foj_scores_star_infa,foj_scores_star_infs)
 
+# OPTIONAL: filter out spcount < 40 using the command at the bottom.
 # calculate the differences of scores between each star method and the default
 differences      <- sens_scores[,-1] - replicate(5,sens_scores[,1])
 difference_means <- apply(differences,2,mean)
@@ -105,3 +106,8 @@ sens_spsum           <- cbind(foj_spsum_star,foj_spsum_star_geo,foj_spsum_star_g
 spsum_diff <- sens_spsum[,-1] - replicate(5,sens_spsum[,1])
 spsum_diff_means <- apply(spsum_diff,2,mean)
 spsum_diff_sds   <- apply(spsum_diff,2,sd)
+
+# index T/F of spcount > 39 using default star method
+spcount       <- foj_spsum_star > 39
+# then filter tdwg with the index.
+sens_scores <- sens_scores[spcount,]
