@@ -19,7 +19,7 @@ infs_kew       = map(lambda row: row[2], spno_infs )
 assert star_category == infs_category
 
 # create array of populations
-populations = np.array([star_foj,star_kew,infs_foj,infs_kew])
+populations = np.array([star_foj,infs_foj,star_kew,infs_kew])
 
 
 # plot data
@@ -36,13 +36,12 @@ def plot_stacked_bar(results):
     p3 = plt.bar(ind, bu, width, color='blue'  , bottom=bk + gd)
     p4 = plt.bar(ind, gn, width, color='green' , bottom=bk + gd + bu)
     plt.xlabel('Data Source')
-    plt.legend( (p1[0], p2[0], p3[0], p4[0]), star_category )
-    plt.xticks(ind+width/2., ('Star FOJ','Star Kew','infs FOJ','infs Kew') )
+    plt.legend( (p1[0], p2[0], p3[0], p4[0]), star_category)
+    plt.xticks(ind+width/2., ('Star FOJ','infs FOJ','Star Kew','infs Kew') )
 
 plot_stacked_bar(populations)
 plt.ylabel('Number of Taxa')
 plt.title('Number of Taxa Assigned to Stars from 4 Data Sources')
-
 plt.show()
 
 # calculate proportions by normalising populations
@@ -52,7 +51,7 @@ norm_star_kew  = star_kew / np.sum(star_kew).astype(float)
 norm_infs_foj  = infs_foj  / np.sum(infs_foj ).astype(float)
 norm_infs_kew  = infs_kew  / np.sum(infs_kew ).astype(float)
 
-proportions = np.array([norm_star_foj,norm_star_kew,norm_infs_foj,norm_infs_kew])
+proportions = np.array([norm_star_foj,norm_infs_foj,norm_star_kew,norm_infs_kew])
 
 plot_stacked_bar(proportions)
 plt.ylabel('Proportion of Taxa')
