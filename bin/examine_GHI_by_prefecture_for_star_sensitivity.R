@@ -88,8 +88,8 @@ write.csv(score_diffs,
 # bar plot
 barplot(foj_scores_sensitivity,legend.text=c('star','star_geo','star_geou','star_geod','star_infa','star_infs'),beside=TRUE,xlab='prefecture',ylab='GHI score')
 
-# rank correlation analysis
-cor(foj_scores_sensitivity[1,],foj_scores_sensitivity[*,],method="spearman")
+# rank correlation analysis: * = 3~7
+# cor(sens_scores_frame[,2],sens_scores_frame[,*],method="spearman")
 
 # graph: linear regression line between x: foj_scores_star (default) vs. y: one of scenarios, or all in one graph showing variation
 ------------------------------------------------
