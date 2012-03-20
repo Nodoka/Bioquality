@@ -25,15 +25,15 @@ scoring_types = (
 def plot_scatter(index):
     ax = fig.add_subplot(230 + index)
     ax.scatter(scores[:,0], scores[:,index], alpha=0.5)
-
-    # xtix = arange(0, 700.1, 100)
-    # ytix = arange(0, 2000.1, 500)
+    
+    # xtix = arange(0, 1200.1, 200)
+    # ytix = arange(0, 1200.1, 200)
     # xticks(xtix)
     # yticks(ytix)
     
-    ax.set_xlabel(scoring_types[0]     + ' score', fontsize=18)
-    ax.set_ylabel(scoring_types[index] + ' score', fontsize=18)
-    ax.set_title('Comparison of GHI Scores From ' + scoring_types[0] + ' and ' + scoring_types[index], fontsize=22)
+    ax.set_xlabel(scoring_types[0]     + ' score', fontsize=10)
+    ax.set_ylabel(scoring_types[index] + ' score', fontsize=10)
+    ax.set_title('Comparison of GHI Scores From ' + scoring_types[0] + ' and ' + scoring_types[index], fontsize=10)
     
     ax.grid(True)
 
