@@ -6,6 +6,13 @@ horiw <- read.csv('../data/Hori_area_weight.csv', row.names=NULL)
 # filter for valid stars
 horiw <- filter_rows_by_valid_star(horiw,'star_infs')
 
+# filter infra
+infra <- horiw[,'infra']
+not_infra <- infra != 'infra'
+sp_horiw <- horiw[not_infra,]
+# uncomment to run analysis without infraspecific taxa.
+# horiw <- sp_horiw
+
 # filter species for Japanese endemics
 filter_endemics <- function(hori_data) {
   # only consider endemics in hori_data
@@ -19,7 +26,6 @@ filter_endemics <- function(hori_data) {
 
 # alternative method of filtering
 # horiw <- horiw[horiw$horim_end %in% 'endemic',]
-
 # uncomment to run analysis only with endemics
 # horiw <- filter_endemics(horiw)
 
@@ -33,6 +39,7 @@ filter_mainisl <- function(hori_data) {
 # uncomment to run analysis only with grids on main islands
 # horiw <- filter_mainisl(horiw)
 
+---------------------------
 # calculate mean of selected column (count of grid cells of occurrence) grouped by stars
 horic_mgr <- tapply(horiw$horimgrid, horiw$star_infs, mean)
 horic_qgr <- tapply(horiw$quartergrid, horiw$star_infs, mean)
@@ -55,3 +62,10 @@ weight_area  <- meanhori_area[,'GN']/meanhori_area
 differences      <- horiw[,c('qgr_totalland','X1gr_totalland')] - replicate(2,horiw[,'mgr_totalland'])
 difference_means <- apply(differences,2,mean)
 difference_sds   <- apply(differences,2,sd)
+
+# write filtered data to file [error in " or' setting? cannot be recognised in python]
+write.csv(horiw,
+          file="../data/Hori_area_weight_filtered.csv",
+          row.names=FALSE,
+          fileEncoding="UTF-8")
+
