@@ -6,6 +6,9 @@ import pylab
 # extract data from csv
 file_name = "../data/Hori_area_weight.csv"
 
+# uncomment when using filtered data
+# file_name = "../data/Hori_area_weight_filtered.csv"
+
 # columns:
 # 12 - star_infs
 # 19 - mgr_totalland
@@ -35,7 +38,7 @@ ax.set_xlim(0, 10000)
 
 # text_transform= mtransforms.blended_transform_factory(ax.transData,
 #                                                      ax.transAxes)
-ax.set_xlabel('Range Size')
+ax.set_xlabel('Species Range Size')
 ax.set_ylabel('Star')
 # ax.set_ylim(-0.2, 1.4)
 # plt.setp(bp['whiskers'], color='k',  linestyle='-' )
