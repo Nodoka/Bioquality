@@ -85,14 +85,16 @@ write.csv(score_diffs,
           fileEncoding="UTF-8")
 
 -----------------------------------------------
-# bar plot
-barplot(foj_scores_sensitivity,legend.text=c('star','star_geo','star_geou','star_geod','star_infa','star_infs'),beside=TRUE,xlab='prefecture',ylab='GHI score')
-
 # rank correlation analysis: * = 3~7
 # cor(sens_scores_frame[,2],sens_scores_frame[,*],method="spearman")
 
-# graph: linear regression line between x: foj_scores_star (default) vs. y: one of scenarios, or all in one graph showing variation
-------------------------------------------------
+# wilcoxon's signed-ranks test : non-parametric equivalent of paried-t test 
+# for non-normally distributed data
+# null hypothesis: difference in medians of two related samples = 0
+# pair: default = frame[,2] vs clessification method * = 3~7
+# wilcox.test(sens_scores_frame[,2], sens_scores_frame[,*], paired=T, conf.int=T)
+
+----------------------------
 # calculate number of species in prefecture for each method
 foj_spsum_star       <- table(foj_star$pref)
 foj_spsum_star_geo   <- table(foj_star_geo$pref)
@@ -111,3 +113,9 @@ spsum_diff_sds   <- apply(spsum_diff,2,sd)
 spcount       <- foj_spsum_star > 39
 # then filter tdwg with the index.
 sens_scores <- sens_scores[spcount,]
+
+------------------------------------
+# bar plot
+barplot(foj_scores_sensitivity,legend.text=c('star','star_geo','star_geou','star_geod','star_infa','star_infs'),beside=TRUE,xlab='prefecture',ylab='GHI score')
+
+# graph: linear regression line between x: foj_scores_star (default) vs. y: one of scenarios, or all in one graph showing variation
