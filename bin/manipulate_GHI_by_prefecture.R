@@ -1,7 +1,7 @@
 source('../library/sanitise_data.R')
 
 # load all data
-cell_score <- read.csv('../data/Hori_plot_score.csv', row.names = NULL)
+# cell_score <- read.csv('../data/Hori_plot_score.csv', row.names = NULL)
 cell_pref  <- read.csv('../data/cell_pref.csv',    row.names = NULL)
 
 # rename column from 'Pref' to 'pref'
@@ -24,6 +24,10 @@ species_cell   <- read.csv('../data/species_cell.csv', row.names = NULL)
 # filter valid stars for chosen star column
 species_cell   <- filter_rows_by_valid_star(species_cell,'star_infs')
 
+# OPTIONAL: remove moss species (horim_page = 471~500)
+not_moss <- subset(species_cell, horim_page <471 | horim_page>500) 
+species_cell <- not_moss
+
 # GHI scores by cell (sampname) for a chosen star classification method
 cal_cell_score <- tapply(species_cell$star_infs,  species_cell$sampname,  calculate_score)
 
@@ -31,6 +35,14 @@ cal_cell_score <- tapply(species_cell$star_infs,  species_cell$sampname,  calcul
 cell_score     <- data.frame(sampname=row.names(cal_cell_score),      
 		    GHI=cal_cell_score[],
 		    row.names=NULL)
+
+# OPTIONAL: filter cell with spcount > 39
+# calculate species count for cell
+spnum_cell <- table(species_cell$sampname)
+# index T/F of spcount >39
+spcount <- spnum_cell > 39
+# filter cell with index
+cell_score <- cell_score[spcount,]
 
 -------------------------------------
 # merge dataframes
@@ -47,7 +59,6 @@ score_meanframe <- data.frame(pref=row.names(pref_score_mean),
 
 score_maxframe  <- data.frame(pref=row.names(pref_score_max),      
 		    maxGHI=pref_score_max[])
-
 
 # write results of scores
 write.csv(score_meanframe,
