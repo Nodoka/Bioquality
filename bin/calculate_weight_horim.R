@@ -40,12 +40,14 @@ filter_mainisl <- function(hori_data) {
 # horiw <- filter_mainisl(horiw)
 
 ---------------------------
-# calculate mean of selected column (count of grid cells of occurrence) grouped by stars
+# calculate mean of selected column (count of grid cells of occurrence) 
+# grouped by stars
 horic_mgr <- tapply(horiw$horimgrid, horiw$star_infs, mean)
 horic_qgr <- tapply(horiw$quartergrid, horiw$star_infs, mean)
 horic_1gr <- tapply(horiw$X1grid, horiw$star_infs, mean)
 
-# calculate mean of selected column (total land area of grid cells of occurrence) grouped by stars
+# calculate mean of selected column (total land area of grid cells of 
+# occurrence) grouped by stars
 horia_mgr <- tapply(horiw$mgr_totalland, horiw$star_infs, mean)
 horia_qgr <- tapply(horiw$qgr_totalland, horiw$star_infs, mean)
 horia_1gr <- tapply(horiw$X1gr_totalland, horiw$star_infs, mean)
@@ -63,7 +65,8 @@ differences      <- horiw[,c('qgr_totalland','X1gr_totalland')] - replicate(2,ho
 difference_means <- apply(differences,2,mean)
 difference_sds   <- apply(differences,2,sd)
 
-# write filtered data to file [error in " or' setting? cannot be recognised in python]
+# write filtered data to file 
+# [error in " or' setting? cannot be recognised in python]
 write.csv(horiw,
           file="../data/Hori_area_weight_filtered.csv",
           row.names=FALSE,
