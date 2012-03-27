@@ -1,6 +1,6 @@
 # load all data
-# species_cell <- read.csv('../data/species_cell.csv', row.names = NULL)
-species_cell <- read.csv('../data/species_cell_rmmoss.csv', row.names = NULL)
+# species_cell <- read.csv('../data/species_cell_rmmoss.csv', row.names = # NULL)
+species_cell <- read.csv('../data/species_cell.csv', row.names = NULL)
 cell_pref    <- read.csv('../data/cell_pref.csv',    row.names = NULL)
 
 # OPTIONAL: remove moss species (horim_page = 471~500)
