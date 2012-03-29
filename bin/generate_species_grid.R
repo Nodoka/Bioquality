@@ -1,6 +1,12 @@
+source('../library/sanitise_data.R')
+
 # load all data
 species_cell <- read.csv('../data/species_cell.csv', row.names = NULL)
 cell_grid    <- read.csv('../data/Horicell_qrx1.csv',    row.names = NULL)
+
+# select and rename relevant star columns
+species_cell <- rename_star_to_xstar(species_cell)
+species_cell <- rename_starinfs_to_star(species_cell)
  
 # filter for relevant columns
 cell_grid    <- cell_grid[,c('sampname','MAINISL_KM','SMALLISL_KM','ID','ID_2')]

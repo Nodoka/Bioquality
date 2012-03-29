@@ -5,10 +5,15 @@ source('../library/sanitise_data.R')
 hori <- read.csv('../data/species_pref.csv',     row.names = NULL)
 foj  <- read.csv('../data/species_pref_foj.csv', row.names = NULL)
 
+# select and rename relevant star columns
+foj <- rename_star_to_xstar(foj)
+foj <- rename_starinfs_to_star(foj)
+
 # neaten up raw data frames
 hori <- sanitise(hori)
 foj  <- sanitise(foj)
 
+# calculate GHI scores
 hori_scores <- tapply(hori$star, hori$pref, calculate_score)
 foj_scores  <- tapply(foj$star,  foj$pref,  calculate_score)
 

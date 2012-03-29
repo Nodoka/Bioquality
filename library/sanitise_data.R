@@ -67,3 +67,17 @@ set_pref_levels <- function(species_pref_data)
   species_pref_data$pref <- factor(species_pref_data$pref,preflist)
   return(species_pref_data)
 }
+
+rename_star_to_xstar <- function(species_star_data){
+  # rename star to xstar
+  column_index <- which(names(species_star_data) == 'star')
+  names(species_star_data)[column_index] <- 'xstar'
+  return(species_star_data)
+}
+
+rename_starinfs_to_star <- function(species_star_data){
+  # rename star_infs to star
+  column_index <- which(names(species_star_data) == 'star_infs')
+  names(species_star_data)[column_index] <- 'star'
+  return(species_star_data)
+}
