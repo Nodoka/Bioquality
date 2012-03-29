@@ -6,10 +6,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # extract data from csv
-file_name = "../data/Hori_area_weight.csv"
+# file_name = "../data/Hori_area_weight.csv"
 
 # uncomment when using filtered data
-# file_name = "../data/Hori_area_weight_filtered.csv"
+file_name = "../data/Hori_area_weight_filtered.csv"
 
 # columns:
 # 12 - star_infs
@@ -27,6 +27,11 @@ grid_land = np.genfromtxt(file_name, delimiter=',', dtype=None, skip_header=1, u
 
 # threshold = 1500
 # colours = star_infs???
+# bk = grid_land[star_infs == "BK"]
+# gd = grid_land[star_infs == "GD"]
+# bu = grid_land[star_infs == "BU"]
+# gn = grid_land[star_infs == "GN"]
+# color=['k', 'y', 'b', 'g']
 # colours = map(lambda spno: 'r' if spno < threshold else 'b', spnos)
 
 fig = plt.figure()
