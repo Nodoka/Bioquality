@@ -17,7 +17,6 @@ foj  <- sanitise(foj)
 hori_scores <- tapply(hori$star, hori$pref, calculate_score)
 foj_scores  <- tapply(foj$star,  foj$pref,  calculate_score)
 
-
 # merge scores into one table
 merged_scores <- cbind(foj_scores,hori_scores)
 # filter out invalid values (NA) on scores

@@ -24,6 +24,9 @@ foj_spno  <- table(foj[,c('pref')])
 # merge species number into one table
 spnos <- cbind(foj_spno,hori_spno)
 
+# remove prefectures with no data
+spnos <- spnos[hori_spno != 0 & foj_spno != 0,]
+
 # convert scores to dataframe
 spnos_frame <- data.frame(preflist=row.names(spnos), foj_spno=spnos[,1], hori_spno=spnos[,2], row.names=NULL)
 
