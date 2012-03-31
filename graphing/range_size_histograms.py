@@ -36,8 +36,7 @@ bp = ax.boxplot([bk, gd, bu, gn],
 # configure axes
 ax.set_xlim(0, 10000)
 
-# text_transform= mtransforms.blended_transform_factory(ax.transData,
-#                                                      ax.transAxes)
+ax.yaxis.set_ticklabels(["Black","Gold","Blue","Green"])
 ax.set_xlabel('Species Range Size')
 ax.set_ylabel('Star')
 # ax.set_ylim(-0.2, 1.4)
