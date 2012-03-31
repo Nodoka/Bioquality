@@ -17,14 +17,13 @@ file_name = "../data/sensitivity_scores_diffs.csv"
 preflist = np.genfromtxt(file_name, delimiter=',', dtype=None, skip_header=1, usecols=0)
 scores = np.genfromtxt(file_name, delimiter=',', dtype=None, skip_header=1, usecols=range(1,6))
 
-# scoring_types = (
-#     'star_default'
-#     'star_geo',
-#     'star_geou',
-#     'star_geod',
-#     'star_infa',
-#     'star_infs',
-# )
+scoring_types = (
+    'star_geo',
+    'star_geou',
+    'star_geod',
+    'star_infa',
+    'star_infs',
+)
 
 # box plots
 fig = plt.figure()
@@ -37,6 +36,7 @@ bp = ax.boxplot(scores,
                 bootstrap=5000)
 # configure axes
 ax.set_ylim(-100, 100)
+ax.xaxis.set_ticklabels(scoring_types)
 # ax.set_xlim(,)
 # x NAMES!!!
 # plt.setp(bp['whiskers'], color='k',  linestyle='-' )
