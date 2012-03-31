@@ -4,15 +4,16 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # extract column of the dataset
-data = np.genfromtxt('../data/sens_scores_difftable.csv',delimiter=',',dtype=None)
+data = np.genfromtxt('../data/sens_scores_difftable.csv',delimiter=',',dtype=None,skip_header=True,usecols=range(1,6))
+
 star_category = data[0,1:6]
-diffmeans     = data[1,1:6]
-diffstd       = data[2,1:6]
+diffmeans     = data[0,0:5]
+diffstd       = data[1,0:5]
 
 # or type in the data
-N = 5
-diffmeans = (8.2784, 15.6807, 0.9163, -40.3757, -18.6863)
-diffstd =   (10.5863, 10.0328, 9.9718, 35.6703, 28.8641)
+#N = 5
+#diffmeans = (8.2784, 15.6807, 0.9163, -40.3757, -18.6863)
+#diffstd =   (10.5863, 10.0328, 9.9718, 35.6703, 28.8641)
 
 ind = np.arange(5)  # the x locations for the groups
 width = 0.35       # the width of the bars
