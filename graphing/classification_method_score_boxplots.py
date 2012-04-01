@@ -37,8 +37,6 @@ bp = ax.boxplot(scores,
 # configure axes
 ax.set_ylim(-100, 100)
 ax.xaxis.set_ticklabels(scoring_types)
-# ax.set_xlim(,)
-# x NAMES!!!
 # plt.setp(bp['whiskers'], color='k',  linestyle='-' )
 # plt.setp(bp['fliers'], markersize=3.0)
 ax.set_xlabel('Star Classification Methods')
