@@ -15,14 +15,14 @@ cell_pref <- set_pref_levels(cell_pref)
 cell_pref <- subset(cell_pref, pref != "")
 
 # unique pair of cell vs. pref
-cell_pref <- aggregate(cell_pref$sect_area, list(sampname=cell_pref$sampname,pref=cell_pref$pref), sum)
+cell_pref <- aggregate(cell_pref$sect_area, list(sampname=cell_pref$sampname,pref=cell_pref$Pref), sum)
 
 # rename the column "x"
 names(cell_pref)[3] <- 'sect_areasum'
 
 # rearrange data in descending order of sect_areasum
-cell_pref <- cell_pref[order(-cell_pref$sect_areasum),]
+cell_pref <- cell_pref[order(-cell_pref$sect_area),]
 
 # order remaining, dont filter
 # select unique cell-pref pair
-cell_pref <- unique(cell_pref[,c('sampname','pref')])
+cell_pref <- cell_pref[!duplicated(cell_pref$sampname),]
