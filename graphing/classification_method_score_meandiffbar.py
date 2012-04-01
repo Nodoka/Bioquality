@@ -4,16 +4,14 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # extract column of the dataset
-data = np.genfromtxt('../data/sens_scores_difftable.csv',delimiter=',',dtype=None,skip_header=True,usecols=range(1,6))
-
-star_category = data[0,1:6]
-diffmeans     = data[0,0:5]
-diffstd       = data[1,0:5]
+data = np.genfromtxt("../data/sens_scores_difftable.csv" ,delimiter=',',dtype=None,skip_header=True,usecols=range(1,6))
+diffmeans = data[0,0:5]
+diffstd   = data[1,0:5]
 
 # or type in the data
-#N = 5
-#diffmeans = (8.2784, 15.6807, 0.9163, -40.3757, -18.6863)
-#diffstd =   (10.5863, 10.0328, 9.9718, 35.6703, 28.8641)
+# N = 5
+# diffmeans = (8.2784, 15.6807, 0.9163, -40.3757, -18.6863)
+# diffstd =   (10.5863, 10.0328, 9.9718, 35.6703, 28.8641)
 
 ind = np.arange(5)  # the x locations for the groups
 width = 0.35       # the width of the bars
@@ -37,20 +35,20 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # extract column of the dataset
-diffdata = np.genfromtxt('../data/sens_scores_difftable.csv',delimiter=',',dtype=None)
+diffdata = np.genfromtxt('../data/sens_scores_difftable.csv',delimiter=',',dtype=None,skip_header=True,usecols=range(1,6))
 
 # plot data
 def plot_bar_with_error(results):
     fig = plt.figure()
     ax = fig.add_subplot(111)
     # extract each column into a variable
-    diffmeans = results[1,1:6]
-    diffstd = results[2,1:6]
+    diffmeans = results[0,0:5]
+    diffstd = results[1,0:5]
     ind = np.arange(5)
     width = 0.35
     p1 = ax.bar(ind, diffmeans, width, color='r', yerr=diffstd)
     plt.xlabel('Star Classification Method')
-    plt.legend( (p1[0], p1[1], p1[2], p1[3], p1[4]), label)
+    #plt.legend( (p1[0], p1[1], p1[2], p1[3], p1[4]), label)
     plt.xticks(ind+width/2., ('Default','GEO','GEO-Up','GEO-Down','INFRA-Auto','INFRA-Selective') )
 
 plot_bar_with_error(diffdata)
