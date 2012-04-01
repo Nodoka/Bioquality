@@ -4,8 +4,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # extract columns of each dataset
-label = np.genfromtxt('../data/star_sensitivity_spnos_data.csv',delimiter=',',dtype=None,skip_header=1,usecols=0)
-
+labels = np.genfromtxt('../data/star_sensitivity_spnos_data.csv',delimiter=',',dtype=None,skip_header=1,usecols=0)
+labels = [label[1:-1] for label in labels]
 star_sens = np.genfromtxt('../data/star_sensitivity_spnos_data.csv',delimiter=',',dtype=None,skip_header=1,usecols=range(1,7))
 
 # plot data
@@ -22,7 +22,7 @@ def plot_stacked_bar(results):
     p3 = plt.bar(ind, bu, width, color='blue'  , bottom=bk + gd)
     p4 = plt.bar(ind, gn, width, color='green' , bottom=bk + gd + bu)
     plt.xlabel('Star Classification Method')
-    plt.legend( (p1[0], p2[0], p3[0], p4[0]), label)
+    plt.legend( (p1[0], p2[0], p3[0], p4[0]), labels)
     plt.xticks(ind+width/2., ('Default','GEO','GEO-Up','GEO-Down','INFRA-Auto','INFRA-Selective') )
 
 plot_stacked_bar(star_sens)
