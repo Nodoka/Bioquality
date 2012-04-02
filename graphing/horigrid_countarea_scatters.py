@@ -24,24 +24,19 @@ grid_land = np.genfromtxt(file_name, delimiter=',', dtype=None, skip_header=1, u
 # remove "" from the text string
 stars = [star[1:-1] for star in star_infs]
 
-# colours = star_infs???
-# bk = grid_land[star_infs == "BK"]
-# gd = grid_land[star_infs == "GD"]
-# bu = grid_land[star_infs == "BU"]
-# gn = grid_land[star_infs == "GN"]
-# color=['k', 'y', 'b', 'g']
-
 colours = map(lambda star_colour: 'k' if star_colour == 'BK' else 'y' if star_colour == 'GD' else 'b' if star_colour == 'BU' else 'g' if star_colour == 'GN' else 'w', stars)
 
 fig = plt.figure()
 ax = fig.add_subplot(111)
+# grid_land/10000 to rescale the range
 ax.scatter(grid_land, grid_count, c=colours, alpha=0.5)
-
-#error: name xticks|yticks not defined.
-#xtix = arange(0, 380000.1, 500)
-#ytix = arange(0, 1000.1, 100)
-#xticks(xtix)
-#yticks(ytix)
+ax.set_xlim(0, 380000.1)
+ax.set_ylim(0, 1000.1)
+# uncomment to manually set ticks
+# xtix = np.arange(0, 380000.1, 100000)
+# ytix = np.arange(0, 1000.1, 200)
+# ax.xaxis.set_ticks(xtix)
+# ax.yaxis.set_ticks(ytix)
 
 ax.set_xlabel('Horikawa grid area', fontsize=18)
 ax.set_ylabel('Horikawa grid count', fontsize=18)
