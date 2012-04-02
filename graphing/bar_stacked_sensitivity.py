@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 
 # extract columns of each dataset
 labels = np.genfromtxt('../data/star_sensitivity_spnos_data.csv',delimiter=',',dtype=None,skip_header=1,usecols=0)
+# remove "" from the text string
 labels = [label[1:-1] for label in labels]
 star_sens = np.genfromtxt('../data/star_sensitivity_spnos_data.csv',delimiter=',',dtype=None,skip_header=1,usecols=range(1,7))
 
