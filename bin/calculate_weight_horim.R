@@ -10,8 +10,14 @@ horiw <- filter_rows_by_valid_star(horiw,'star_infs')
 infra <- horiw[,'infra']
 not_infra <- infra != 'infra'
 sp_horiw <- horiw[not_infra,]
+
+# shufle column location of 'species' to the end
+species <- sp_horiw$species
+sp_horiw <- cbind(sp_horiw[,-5],species)
+
 # uncomment to run analysis without infraspecific taxa.
 # horiw <- sp_horiw
+
 
 # filter species for Japanese endemics
 filter_endemics <- function(hori_data) {
@@ -65,8 +71,9 @@ differences      <- horiw[,c('qgr_totalland','X1gr_totalland')] - replicate(2,ho
 difference_means <- apply(differences,2,mean)
 difference_sds   <- apply(differences,2,sd)
 
+-----------------------------
 # write filtered data to file 
-# [error in " or' setting? cannot be recognised in python]
+# Note: data name is horiw
 write.csv(horiw,
           file="../data/Hori_area_weight_filtered.csv",
           row.names=FALSE,
