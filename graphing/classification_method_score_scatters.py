@@ -1,3 +1,4 @@
+#!/usr/local/bin/ipython -i
 """
 Scatter graphs of foj prefecture scores
 of 5 classification methods against baseline

@@ -1,3 +1,4 @@
+#!/usr/local/bin/ipython -i
 """
 A scatter graph of grid count vs grid area.
 Check for xy limits, possible in multi panel?

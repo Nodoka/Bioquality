@@ -1,3 +1,4 @@
+#!/usr/local/bin/ipython -i
 """
 A scatter graph of hori vs foj raw scores,
 with bubble size inversely proportional to
