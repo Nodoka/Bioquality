@@ -4,23 +4,25 @@ import matplotlib.pyplot as plt
 import pylab
 
 # extract data from csv
-file_name = "../data/Hori_area_weight.csv"
+# CAUTION!! column locations differ from filtered
+# file_name = "../data/Hori_area_weight.csv"
 
 # uncomment when using filtered data
-# file_name = "../data/Hori_area_weight_filtered.csv"
+file_name = "../data/Hori_area_weight_filtered.csv"
 
 # columns:
-# 12 - star_infs
-# 19 - mgr_totalland
-# 23 - qgr_totalland
-# 26 - X1gr_totalland
-star_infs = np.genfromtxt(file_name, delimiter=',', dtype=None, skip_header=1, usecols=12)
-grid_land = np.genfromtxt(file_name, delimiter=',', dtype=None, skip_header=1, usecols=19)
+# 12 or 11(filtered) - star_infs
+# 19 or 18(filtered) - mgr_totalland
+# 23 or 22(filtered) - qgr_totalland
+# 26 or 25(filtered) - X1gr_totalland
+star_infs = np.genfromtxt(file_name, delimiter=',', dtype=None, skip_header=1, usecols=11)
+grid_land = np.genfromtxt(file_name, delimiter=',', dtype=None, skip_header=1, usecols=22)
 
-bk = grid_land[star_infs == "BK"]
-gd = grid_land[star_infs == "GD"]
-bu = grid_land[star_infs == "BU"]
-gn = grid_land[star_infs == "GN"]
+# delete "" when using original data
+bk = grid_land[star_infs == '"BK"']
+gd = grid_land[star_infs == '"GD"']
+bu = grid_land[star_infs == '"BU"']
+gn = grid_land[star_infs == '"GN"']
 
 # box plots
 fig = plt.figure()
