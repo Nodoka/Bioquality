@@ -33,11 +33,12 @@ resolutions = (
 )
 
 fig = plt.figure()
+fig.suptitle('Comparison of Species Within-Japan Range Size Between Area and Count Measured at 3 Resolutions Using Horikawa Maps', fontsize=12)
 
 # for a single graph, check script updated last on 3rd April 
 # github change titled: "added setting of xy limits, ticks." 
 def plot_scatter(index):
-    ax = fig.add_subplot(310 + index)
+    ax = fig.add_subplot(311 + index)
     # grid_land/10000 to rescale the range
     ax.scatter(grid_land[:,index], grid_count[:,index], c=colours, alpha=0.5)
     ax.set_xlim(0, 380000.1)
@@ -47,9 +48,9 @@ def plot_scatter(index):
     # ytix = np.arange(0, 1000.1, 200)
     # ax.xaxis.set_ticks(xtix)
     # ax.yaxis.set_ticks(ytix)
-    ax.set_xlabel('Horikawa grid area at ' + resolutions[index],      fontsize=12)
-    ax.set_ylabel('Horikawa grid count at ' + resolutions[index], fontsize=12)
-    ax.set_title('Comparison of range size between area and count at ' + resolutions[index], fontsize=12)
+    ax.set_xlabel('Grid area at ' + resolutions[index], fontsize=10)
+    ax.set_ylabel('Grid count at ' + resolutions[index], fontsize=8)
+    #ax.set_title('Comparison of range size between area and count at ' + resolutions[index], fontsize=12)
     ax.grid(True)
 
 for index in range(0,3):
