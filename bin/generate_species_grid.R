@@ -119,8 +119,3 @@ write.csv(spx1_area,
           file="../data/species_x1area.csv",
           fileEncoding="UTF-8",
           row.names = FALSE)
-
-
-
-  }
-}
