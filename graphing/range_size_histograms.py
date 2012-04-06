@@ -45,12 +45,16 @@ ax.set_ylabel('Star')
 # plt.setp(bp['whiskers'], color='k',  linestyle='-' )
 # plt.setp(bp['fliers'], markersize=3.0)
 plt.show()
-# plt.savefig("../graphing/horiall_boxplot.png")
+#dir plt.savefig("../graphing/horiall_boxplot.png")
 
 # histograms
-n, bins, patches = pylab.hist([bk,gd,bu,gn],
+histfig = plt.figure()
+histaxes = histfig.add_subplot(111)
+n, bins, patches = histaxes.hist([bk,gd,bu,gn],
                               bins=25,
                               normed=True,
-                              color=['k', 'y', 'b', 'g'])                
-pylab.show()
+                              color=['k', 'y', 'b', 'g'])  
+histaxes.set_xlabel('Species Range Size')              
+histaxes.set_ylabel('Frequency')
+plt.show()
 # pylab.savefig("../graphing/horiall_histogram.png")
