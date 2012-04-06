@@ -3,6 +3,8 @@ source('../library/sanitise_data.R')
 # load all data
 # cell_score <- read.csv('../data/Hori_plot_score.csv', row.names = NULL)
 cell_pref  <- read.csv('../data/cell_pref.csv',    row.names = NULL)
+# uncomment to work on cell_uniq pref pairs
+# cell_pref  <- read.csv('../data/cell_uniqpref.csv',    row.names = NULL)
 
 # rename column from 'Pref' to 'pref'
 column_index <- which(names(cell_pref) == 'Pref')
@@ -61,6 +63,7 @@ score_maxframe  <- data.frame(pref=row.names(pref_score_max),
 		    maxGHI=pref_score_max[])
 
 # write results of scores
+# change file name to "horiuniq_m*scores" when using cell_uniqpref
 write.csv(score_meanframe,
           file="../data/hori_meanscores.csv",
           row.names=FALSE,
