@@ -35,7 +35,7 @@ resolutions = (
 # Figure for count
 fig = plt.figure()
 fig.suptitle('Comparison of Species Within-Japan Range Size Measured at 3 Resolutions Using Horikawa Maps', fontsize=12)
- 
+
 def plot_scatter(index):
     ax = fig.add_subplot(211 + index)
     ax.scatter(hori_count, grid_count[:,index], c=colours, alpha=0.5)
@@ -58,7 +58,6 @@ for index in range(0,2):
 
 plt.show()
 
-----
 # Figure for total_land
 fig = plt.figure()
 fig.suptitle('Comparison of Species Within-Japan Range Size Measured at 3 Resolutions Using Horikawa Maps', fontsize=12)
