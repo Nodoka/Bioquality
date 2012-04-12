@@ -1,4 +1,4 @@
-#!/usr/local/bin/ipython -i
+#!/usr/bin/env python
 import numpy as np
 import matplotlib.pyplot as plt
 import pylab
