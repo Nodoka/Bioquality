@@ -8,6 +8,8 @@ tdwg <- filter_rows_by_valid_star(tdwg,'star_infs')
 
 # filter infra taxa
 tdwg_sp <- subset(tdwg, rank1 != "subsp." & rank1 != "var.")
+# uncomment to run analysis without infra taxa
+# tdwg <- tdwg_sp
 
 # index T/F of family != (not equal) Gramineae,
 fam           <- tdwg[,'family']
@@ -24,3 +26,13 @@ meantdwg    <- rbind(tdwgc,tdwga)
 
 # calculate weights for stars
 weight_tdwg <- meantdwg[,'GN']/meantdwg
+
+# select and reshuffle relevant columns
+tdwg_data <- tdwg[,c('spnumber','star_infs','tdwgtotals','tdwgareas',
+'family','genus','sp1','rank1','sp2','species')]
+
+# save filtered data to csv
+write.csv(tdwg_data,
+          file="../data/tdwgsp_filtered.csv",
+          row.names=FALSE,
+          fileEncoding="UTF-8")
