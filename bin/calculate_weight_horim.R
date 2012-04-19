@@ -1,4 +1,5 @@
 source('../library/sanitise_data.R')
+source('../library/star_weight_stats.R')
 
 # load data
 horiw <- read.csv('../data/Hori_area_weight.csv', row.names=NULL)
@@ -46,25 +47,14 @@ filter_mainisl <- function(hori_data) {
 # horiw <- filter_mainisl(horiw)
 
 ---------------------------
-# calculate mean of selected column (count of grid cells of occurrence) 
-# grouped by stars
-horic_mgr <- tapply(horiw$horimgrid, horiw$star_infs, mean)
-horic_qgr <- tapply(horiw$quartergrid, horiw$star_infs, mean)
-horic_1gr <- tapply(horiw$X1grid, horiw$star_infs, mean)
 
-# calculate mean of selected column (total land area of grid cells of 
-# occurrence) grouped by stars
-horia_mgr <- tapply(horiw$mgr_totalland, horiw$star_infs, mean)
-horia_qgr <- tapply(horiw$qgr_totalland, horiw$star_infs, mean)
-horia_1gr <- tapply(horiw$X1gr_totalland, horiw$star_infs, mean)
-
-# merge resulting mean tables to one
-meanhori_count <- rbind(horic_mgr,horic_qgr,horic_1gr)
-meanhori_area  <- rbind(horia_mgr,horia_qgr,horia_1gr)
+# mean counts and land areas of grid cells of occurrence, grouped by stars
+hori_mean_count <- compute_count_for_3_grids(horiw, mean)
+hori_mean_area <- compute_area_for_3_grids(horiw, mean)
 
 # calculate weights for stars
-weight_count <- meanhori_count[,'GN']/meanhori_count
-weight_area  <- meanhori_area[,'GN']/meanhori_area
+weight_count <- hori_mean_count[,'GN']/hori_mean_count
+weight_area  <- hori_mean_area[,'GN']/hori_mean_area
 
 # calculate the differences of distribution from that of finest resolution
 differences      <- horiw[,c('qgr_totalland','X1gr_totalland')] - replicate(2,horiw[,'mgr_totalland'])

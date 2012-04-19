@@ -1,4 +1,5 @@
 source('../library/sanitise_data.R')
+source('../library/star_weight_stats.R')
 
 # load data
 horiw <- read.csv('../data/Hori_area_weight.csv', row.names=NULL)
@@ -27,55 +28,33 @@ filter_smallisl <- function(hori_data) {
 main <- filter_mainisl(horiw)
 small <- filter_smallisl(horiw)
 
-# calculate mean and sd of selected column grouped by star_infs
-# for main and small islands species
-mainc_mgr <- tapply(main$horimgrid, main$star_infs, mean)
-mainc_qgr <- tapply(main$quartergrid, main$star_infs, mean)
-mainc_1gr <- tapply(main$X1grid, main$star_infs, mean)
+# mean counts and land areas of grid cells of occurrence, grouped by stars
+main_mean_count <- compute_count_for_3_grids(main, mean)
+main_mean_area <- compute_area_for_3_grids(main, mean)
 
-maina_mgr <- tapply(main$mgr_totalland, main$star_infs, mean)
-maina_qgr <- tapply(main$qgr_totalland, main$star_infs, mean)
-maina_1gr <- tapply(main$X1gr_totalland, main$star_infs, mean)
-
-# merge resulting mean tables to one
-meanmain_count <- rbind(mainc_mgr,mainc_qgr,mainc_1gr)
-meanmain_area  <- rbind(maina_mgr,maina_qgr,maina_1gr)
-
-# calculate standard deviation of selected column grouped by stars
-sdmainc_mgr <- tapply(main$horimgrid, main$star_infs, sd)
-sdmainc_qgr <- tapply(main$quartergrid, main$star_infs, sd)
-sdmainc_1gr <- tapply(main$X1grid, main$star_infs, sd)
-
-# calculate sd of selected column (total land area of grid cells of 
-# occurrence) grouped by stars
-sdmaina_mgr <- tapply(main$mgr_totalland, main$star_infs, sd)
-sdmaina_qgr <- tapply(main$qgr_totalland, main$star_infs, sd)
-sdmaina_1gr <- tapply(main$X1gr_totalland, main$star_infs, sd)
-
-# merge resulting sd tables to one
-sdmain_count <- rbind(sdmainc_mgr,sdmainc_qgr,sdmainc_1gr)
-sdmain_area  <- rbind(sdmaina_mgr,sdmaina_qgr,sdmaina_1gr)
+main_sd_count <- compute_count_for_3_grids(main, sd)
+main_sd_area <- compute_area_for_3_grids(main, sd)
 
 # convert to dataframe (count, mean)
-main_count <- data.frame(datatype=row.names(meanmain_count),
-                    mean_bk=meanmain_count[,1],
-                    mean_gd=meanmain_count[,2],
-                    mean_bu=meanmain_count[,3],
-                    mean_gn=meanmain_count[,4],
-                    sd_bk=sdmain_count[,1],
-                    sd_gd=sdmain_count[,2],
-                    sd_bu=sdmain_count[,3],
-                    sd_gn=sdmain_count[,4])
+main_count <- data.frame(datatype=row.names(main_mean_count),
+                    mean_bk=main_mean_count[,1],
+                    mean_gd=main_mean_count[,2],
+                    mean_bu=main_mean_count[,3],
+                    mean_gn=main_mean_count[,4],
+                    sd_bk=main_sd_count[,1],
+                    sd_gd=main_sd_count[,2],
+                    sd_bu=main_sd_count[,3],
+                    sd_gn=main_sd_count[,4])
 
-main_area <- data.frame(datatype=row.names(meanmain_area),
-                    mean_bk=meanmain_area[,1],
-                    mean_gd=meanmain_area[,2],
-                    mean_bu=meanmain_area[,3],
-                    mean_gn=meanmain_area[,4],
-                    sd_bk=sdmain_area[,1],
-                    sd_gd=sdmain_area[,2],
-                    sd_bu=sdmain_area[,3],
-                    sd_gn=sdmain_area[,4])
+main_area <- data.frame(datatype=row.names(main_mean_area),
+                    mean_bk=main_mean_area[,1],
+                    mean_gd=main_mean_area[,2],
+                    mean_bu=main_mean_area[,3],
+                    mean_gn=main_mean_area[,4],
+                    sd_bk=main_sd_area[,1],
+                    sd_gd=main_sd_area[,2],
+                    sd_bu=main_sd_area[,3],
+                    sd_gn=main_sd_area[,4])
 
 # write filtered data to file 
 write.csv(main_count,
@@ -88,32 +67,12 @@ write.csv(main_area,
           row.names=FALSE,
           fileEncoding="UTF-8")
 
-smallc_mgr <- tapply(small$horimgrid, small$star_infs, mean)
-smallc_qgr <- tapply(small$quartergrid, small$star_infs, mean)
-smallc_1gr <- tapply(small$X1grid, small$star_infs, mean)
+# mean counts and land areas of grid cells of occurrence, grouped by stars
+small_mean_count <- compute_count_for_3_grids(small, mean)
+small_mean_area <- compute_area_for_3_grids(small, mean)
 
-smalla_mgr <- tapply(small$mgr_totalland, small$star_infs, mean)
-smalla_qgr <- tapply(small$qgr_totalland, small$star_infs, mean)
-smalla_1gr <- tapply(small$X1gr_totalland, small$star_infs, mean)
-
-# merge resulting mean tables to one
-meansmall_count <- rbind(smallc_mgr,smallc_qgr,smallc_1gr)
-meansmall_area  <- rbind(smalla_mgr,smalla_qgr,smalla_1gr)
-
-# calculate standard deviation of selected column grouped by stars
-sdsmallc_mgr <- tapply(small$horimgrid, small$star_infs, sd)
-sdsmallc_qgr <- tapply(small$quartergrid, small$star_infs, sd)
-sdsmallc_1gr <- tapply(small$X1grid, small$star_infs, sd)
-
-# calculate sd of selected column (total land area of grid cells of 
-# occurrence) grouped by stars
-sdsmalla_mgr <- tapply(small$mgr_totalland, small$star_infs, sd)
-sdsmalla_qgr <- tapply(small$qgr_totalland, small$star_infs, sd)
-sdsmalla_1gr <- tapply(small$X1gr_totalland, small$star_infs, sd)
-
-# merge resulting sd tables to one
-sdsmall_count <- rbind(sdsmallc_mgr,sdsmallc_qgr,sdsmallc_1gr)
-sdsmall_area  <- rbind(sdsmalla_mgr,sdsmalla_qgr,sdsmalla_1gr)
+small_sd_count <- compute_count_for_3_grids(small, sd)
+small_sd_area <- compute_area_for_3_grids(small, sd)
 
 # convert to dataframe (count, mean)
 small_count <- data.frame(datatype=row.names(meansmall_count),
