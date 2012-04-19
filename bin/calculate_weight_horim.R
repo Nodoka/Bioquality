@@ -11,7 +11,7 @@ infra <- horiw[,'infra']
 not_infra <- infra != 'infra'
 sp_horiw <- horiw[not_infra,]
 
-# shufle column location of 'species' to the end
+# shuffle column location of 'species' to the end
 species <- sp_horiw$species
 sp_horiw <- cbind(sp_horiw[,-5],species)
 
