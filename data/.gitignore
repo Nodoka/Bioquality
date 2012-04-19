@@ -28,4 +28,6 @@ cell_uniqpref.csv
 Horisp_resol_diffs.csv
 testprefscores.csv
 horiw*.csv
+tdwg*.csv
+hori*mean.csv
 
