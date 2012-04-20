@@ -30,30 +30,12 @@ write.csv(scores_frame,
           row.names=FALSE,
           fileEncoding="UTF-8")
 
-# scatter plot on scores
-plot(valid_scores[,1],valid_scores[,2])
-# scatter plot onscores in ranked order
-plot(rank(valid_scores[,1]),rank(valid_scores[,2]))
-
 # ranked correlation analysis in 3 ways. uncomment to run alternative methods.
 cor(rank(valid_scores[,1]),rank(valid_scores[,2]))
 # cor(valid_scores[,1],valid_scores[,2], method = "spearman")
 # cor(foj_scores,hori_scores, use= "na.or.complete", method = "spearman")
 
-# fit a linear model (linear regression analysis)
-compare_scores <- lm(rank(valid_scores[,2]) ~ rank(valid_scores[,1]))
-# draw a linear model graph with a linear regression line
-abline(compare_scores)
-
-# save plot as tiff
-savePlot(filename=("../data/FOJHori_ranked_score.tiff"),type="tiff")
-
 # paired-t test on scores between hori and foj. 
 # This test is probably not good because data are not normally distributed (check histogram).
 t.test(hori_scores,foj_scores,paired=TRUE)
-# histogram of scores
-plot(density(foj_scores,na.rm=TRUE))
-plot(density(hori_scores,na.rm=TRUE))
 
-# bar plot
-barplot(rbind(hori_scores, foj_scores), beside=TRUE)
