@@ -1,4 +1,3 @@
-source('../library/GHI.R')
 source('../library/sanitise_data.R')
 
 # load data
