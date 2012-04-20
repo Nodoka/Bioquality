@@ -1,4 +1,5 @@
 source('../library/sanitise_data.R')
+source('../bin/produce_cell_score.R')
 
 # load all data
 # cell_score <- read.csv('../data/Hori_plot_score.csv', row.names = NULL)
@@ -16,28 +17,7 @@ cell_pref <- set_pref_levels(cell_pref)
 # filter for relevant columns
 cell_pref <- cell_pref[,c('pref','sampname')]
 
----------------------------------
-# manually calculate cell_score
-source('../library/GHI.R')
-
-# load data
-species_cell   <- read.csv('../data/species_cell.csv', row.names = NULL)
-
-# filter valid stars for chosen star column
-species_cell   <- filter_rows_by_valid_star(species_cell,'star_infs')
-
-# OPTIONAL: remove moss species (horim_page = 471~500)
-not_moss <- subset(species_cell, horim_page <471 | horim_page>500) 
-species_cell <- not_moss
-
-# GHI scores by cell (sampname) for a chosen star classification method
-cal_cell_score <- tapply(species_cell$star_infs,  species_cell$sampname,  calculate_score)
-
-# convert results to dataframe
-cell_score     <- data.frame(sampname=row.names(cal_cell_score),      
-		    GHI=cal_cell_score[],
-		    row.names=NULL)
-
+# cell_score is generated in produce_cell_score.R
 # OPTIONAL: filter cell with spcount > 39
 # calculate species count for cell
 spnum_cell <- table(species_cell$sampname)
@@ -46,14 +26,12 @@ spcount <- spnum_cell > 39
 # filter cell with index
 cell_score <- cell_score[spcount,]
 
--------------------------------------
-# merge dataframes
+# merge data sets
 pref_score <- merge(cell_score, cell_pref)
 
 # calculate mean and maximum scores by prefecture
 pref_score_mean <- tapply(pref_score$GHI, pref_score$pref, mean)
 pref_score_max  <- tapply(pref_score$GHI, pref_score$pref, max)
-
 
 # convert results to dataframe
 score_meanframe <- data.frame(pref=row.names(pref_score_mean),      
@@ -74,42 +52,9 @@ write.csv(score_maxframe,
           row.names=FALSE,
           fileEncoding="UTF-8")
 
------------------------------------------
-# filter out Gramineae for seperate analyses without Gramineae (optional)
-# index T/F of family != (not equal) Gramineae
-fam           <- species_cell[,'family']
-not_gramineae <- fam != 'Gramineae'
-# then filter tdwg with the index.
-xgrass_spcell <- species_cell[not_gramineae,]
-
-# GHI scores by cell without Gramineae for a chosen star classification method
-xgrass_cell_score <- tapply(xgrass_spcell$star_infs,  xgrass_spcell$sampname,  calculate_score)
-
-# convert results to dataframe
-xgrass_cell_score <- data.frame(sampname=row.names(xgrass_cell_score),      
-		     GHI=xgrass_cell_score[],
-		     row.names=NULL)
-
-# merge dataframes
-xgrass_prefscore <- merge(xgrass_cell_score, cell_pref)
-
-# calculate mean and maximum scores by prefecture
-xgrass_prefscore_mean <- tapply(xgrass_prefscore$GHI, xgrass_prefscore$pref, mean)
-xgrass_prefscore_max  <- tapply(xgrass_prefscore$GHI, xgrass_prefscore$pref, max)
-
-
-# convert results to dataframe
-xgscore_meanframe <- data.frame(pref=row.names(xgrass_prefscore_mean),      
-		     xgmeanGHI=xgrass_prefscore_mean[])
-
-xgscore_maxframe  <- data.frame(pref=row.names(xgrass_prefscore_max),      
-		     xgmaxGHI=xgrass_prefscore_max[])
-
+# for analysis without Gramineae
+# filter out Gramineae in produce_cell_score.R
+# generate score_frame using the script above, change output name
 # calculate differences
-diff_mean <- score_meanframe[,2]-xgscore_meanframe[,2]
-diff_max  <- score_maxframe[,2]-xgscore_maxframe[,2]
-
-
-
-
-
+# diff_mean <- score_meanframe[,2]-xgscore_meanframe[,2]
+# diff_max  <- score_maxframe[,2]-xgscore_maxframe[,2]
