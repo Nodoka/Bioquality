@@ -11,7 +11,7 @@ horiw <- filter_rows_by_valid_star(horiw,'star_infs')
 horiw <- filter_infra(horiw)
 
 # filter records for main island vs small island species
-main   <- filter_mainisl(horiw)
+main  <- filter_mainisl(horiw)
 small <- filter_smallisl(horiw)
 
 # mean counts and land areas of grid cells of occurrence
@@ -25,7 +25,7 @@ main_sd_area  <- compute_area_for_3_grids(main, sd)
 # mean counts and land areas of grid cells of occurrence
 # for small island species, grouped by stars
 small_mean_count <- compute_count_for_3_grids(small, mean)
-small_mean_area <- compute_area_for_3_grids(small, mean)
+small_mean_area  <- compute_area_for_3_grids(small, mean)
 # standard deviation
 small_sd_count <- compute_count_for_3_grids(small, sd)
 small_sd_area  <- compute_area_for_3_grids(small, sd)
