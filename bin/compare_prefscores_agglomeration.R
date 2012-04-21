@@ -56,29 +56,15 @@ preflist <- read.csv('../data/preflist.csv')$pref
 pref <- make.names(preflist)
 
 # merge scores into one table
-merged_scores <- cbind(pref, scores, spnos, meanhori, maxhori)
+merged_scores_and_spnos <- merge(scores, spnos, sort=F)
+merged_meanhori_and_maxhori <- merge(meanhori, maxhori, sort=F)
+merged_scores <- merge(merged_scores_and_spnos, merged_meanhori_and_maxhori, by.x='preflist', by.y='pref', sort=F)
+
 # filter out invalid values (NA) on scores
 valid_scores <- na.omit(merged_scores)
 
-# convert scores to dataframe
-scores_frame <- data.frame(preflist=row.names(valid_scores), foj_scores=valid_scores[,1], hori_scores=valid_scores[,2], row.names=NULL)
-
 # write results (scores) to file
-write.csv(scores_frame,
+write.csv(valid_scores,
           file="../data/scores_bmethods.csv",
           row.names=FALSE,
           fileEncoding="UTF-8")
-
-validscores  <- data.frame(pref=row.names(validscores),      
-		    fojscores=validscores[,1],
-                    horiscores=validscores[,2],
-                    hmeanscores=validscores[,3],
-                    hmaxscores=validscores[,4]
-)
-
-write.csv(validscores,
-          file="../data/testprefscores.csv",
-          row.names=FALSE,
-          fileEncoding="UTF-8")
-
-
