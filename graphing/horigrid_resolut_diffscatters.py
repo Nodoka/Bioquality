@@ -5,6 +5,7 @@ A multi-panel scatter graph of grid count or grid total_land comparing two large
 import numpy as np
 import matplotlib.pyplot as plt
 
+
 # extract data from csv
 file_name = "../data/Hori_area_weight_filtered.csv"
 
@@ -24,6 +25,7 @@ grid_land = np.genfromtxt(file_name, delimiter=',', dtype=None, skip_header=1, u
 
 # remove "" from the text string
 stars = [star[1:-1] for star in star_infs]
+
 
 colours = map(lambda star_colour: 'k' if star_colour == 'BK' else 'y' if star_colour == 'GD' else 'b' if star_colour == 'BU' else 'g' if star_colour == 'GN' else 'w', stars)
 
