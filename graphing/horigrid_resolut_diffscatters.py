@@ -65,11 +65,12 @@ fig.suptitle('Comparison of Species Within-Japan Range Size Measured at 3 Resolu
 
 def plot_scatter(index):
     ax = fig.add_subplot(211 + index)
-    ax.scatter(hori_land/10000, grid_land[:,index]/10000 - hori_land/10000, c=colours, alpha=0.5)
-    ax.set_aspect(1)
+    y = np.log((grid_land[:,index] - hori_land)/hori_land+1)
+    ax.scatter(hori_land, y, c=colours, alpha=0.5)
+    #ax.set_aspect(1)
     # max.total_land is 380000/10000
-    ax.set_xlim([0, 40])
-    ax.set_ylim([0, 40])
+    ax.set_xlim([0, 350000])
+    ax.set_ylim([0, 6])
     # uncomment to manually set ticks
     # xtix = np.arange(0, 380000.1, 100000)
     # ytix = np.arange(0, 1000.1, 200)
