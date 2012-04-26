@@ -33,12 +33,13 @@ resolutions = (
 
 fig = plt.figure()
 fig.suptitle('Difference in Mean within-Japan Range Size for Main vs. Small Islands Species',fontsize=12)
-
+#fig.figtext(0,0,'Star Category')
+#fig.ylabel('Mean Range Size at')
 def plot_meanbar(index):
     ax = fig.add_subplot(311+index)
     p1 = ax.bar(ind, main_logmeans[index,], width, color='r', yerr=main_logsds[index,])
     p2 = ax.bar(ind+width, small_logmeans[index,], width, color='y', yerr=small_logsds[index,])
-    #ax.set_ylim(0,350)
+    ax.set_ylim(0,12)
     ax.set_xlabel('Star Category')
     ax.set_ylabel('Mean Range size at ' + resolutions[index],fontsize=8)
     ax.set_xticks(ind+width)
