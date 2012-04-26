@@ -2,6 +2,9 @@ source('../library/sanitise_data.R')
 
 # load data
 tdwg <- read.csv('../data/tdwgsp.csv',     row.names = NULL)
+# uncomment to use R generated tdwg species list
+# tdwgr <- read.csv('../data/tdwgspR.csv',     row.names = NULL)
+# tdwg <- tdwgr
 
 # filter for valid stars
 tdwg <- filter_rows_by_valid_star(tdwg,'star_infs')
