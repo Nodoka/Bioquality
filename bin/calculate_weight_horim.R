@@ -29,9 +29,10 @@ weight_count <- hori_mean_count[,'GN']/hori_mean_count
 weight_area  <- hori_mean_area[,'GN']/hori_mean_area
 
 # calculate the differences of distribution from that of finest resolution
-differences      <- horiw[,c('qgr_totalland','X1gr_totalland')] - replicate(2,horiw[,'mgr_totalland'])
-difference_means <- apply(differences,2,mean)
-difference_sds   <- apply(differences,2,sd)
+differences <- as.matrix(horiw[,c('qgr_totalland','X1gr_totalland')]) - replicate(2,horiw[,'mgr_totalland'])
+logdiff     <- log(differences/horiw[,'mgr_totalland']+1)
+
+diff_frame <- data.frame(rownum=row.names(logdiff), qrt_landdiff=logdiff[,1], x1_landdiff=logdiff[,2])
 
 -----------------------------
 # write filtered data to file 
