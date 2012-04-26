@@ -34,6 +34,12 @@ resolutions = (
     '1 lat. by 1 long. grid',
 )
 
+# make count as proportions??
+# calculate proportions by normalising populations
+# use float to prevent integer arithmetic (rounding down to zero)
+# norm_qrgrid_count  = grid_count[:,0]*100 / 330
+# norm_x1grid_count  = grid_count[:,1]*100 / 122 np.sum(star_kew).astype(float)
+
 # Figure for count
 fig = plt.figure()
 fig.suptitle('Comparison of Species Within-Japan Range Size Measured at 3 Resolutions Using Horikawa Maps', fontsize=12)
