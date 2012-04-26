@@ -10,7 +10,7 @@ tdwg <- read.csv('../data/tdwgsp.csv',     row.names = NULL)
 tdwg <- filter_rows_by_valid_star(tdwg,'star_infs')
 
 # filter infra taxa
-tdwg_sp <- subset(tdwg, rank1 != "subsp." & rank1 != "var.")
+tdwg_sp <- subset(tdwg, rank1 != "subsp." & rank1 != "var." & rank1 != "f.")
 # uncomment to run analysis without infra taxa
 # tdwg <- tdwg_sp
 
