@@ -3,12 +3,12 @@ spall <- read.csv('../data/tdwgl3spdataall.csv',row.names=NULL)
 tdwg_l3     <- read.csv('../data/tdwgl3_brahms.csv',    row.names = NULL)
 
 # rename columns from 'tdwg', 'l3code' to 'l3code', 'xl3code'
-column_index <- which(names(spall) == 'l3code') 
-                names(spall)[column_index] <- 'xl3code'
-column_index <- which(names(spall) == 'tdwg') 
-                names(spall)[column_index] <- 'l3code'
+# column_index <- which(names(spall) == 'l3code') 
+#                 names(spall)[column_index] <- 'xl3code'
+# column_index <- which(names(spall) == 'tdwg') 
+#                 names(spall)[column_index] <- 'l3code'
 
-# referenc species list
+# reference species list
 splist <- unique(spall[,c('spnumber','star_infs','family','genus','sp1','rank1','sp2')])
 
 # filter for relevant columns
