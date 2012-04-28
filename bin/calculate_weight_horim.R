@@ -20,6 +20,9 @@ horiw <- filter_infra(horiw)
 # uncomment to run analysis only with grids on main islands
 # horiw <- filter_mainisl(horiw)
 
+# uncomment to run analysis without GN
+# horiw <- filter_nogn(horiw)
+
 # mean counts and land areas of grid cells of occurrence, grouped by stars
 hori_mean_count <- compute_count_for_3_grids(horiw, mean)
 hori_mean_area <- compute_area_for_3_grids(horiw, mean)

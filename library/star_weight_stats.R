@@ -31,6 +31,13 @@ filter_smallisl <- function(horiw_data) {
   return(horiw_data)
 }
 
+# filter out species with GN status
+filter_nogn <- function(horiw_data){
+  # only consider star_infs is NOT GN
+  horiw_data <- subset(horiw_data, star_infs != "GN")
+  return(horiw_data)
+}
+ 
 # compute range size stats
 compute_range_size_stats_for_3_grids <- function(grid_records, grouping, stat) {
   mgr <- tapply(grid_records[,1], grouping, stat)
