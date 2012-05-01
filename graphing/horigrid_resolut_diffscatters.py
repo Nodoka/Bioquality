@@ -40,6 +40,10 @@ resolutions = (
 # norm_qrgrid_count  = grid_count[:,0]*100 / 330
 # norm_x1grid_count  = grid_count[:,1]*100 / 122 np.sum(star_kew).astype(float)
 
+norm_hori_count = hori_count / 1418.0
+grid_count_matrix = np.mat(grid_count)
+norm_grid_count = np.asarray(np.hstack([grid_count_matrix[:,0]/330.0, grid_count_matrix[:,1]/122.0]))
+
 # Figure for count
 fig = plt.figure()
 fig.suptitle('Comparison of Species Within-Japan Range Size Measured at 3 Resolutions Using Horikawa Maps', fontsize=12)
@@ -47,16 +51,10 @@ fig.suptitle('Comparison of Species Within-Japan Range Size Measured at 3 Resolu
 def plot_scatter(index):
     ax = fig.add_subplot(211 + index)
     #change to proportions
-    ax.scatter(hori_count, grid_count[:,index] - hori_count, c=colours, alpha=0.5)
+    ax.scatter(norm_hori_count, norm_grid_count[:,index], c=colours, alpha=0.5)
     ax.set_aspect(1)
-    ax.set_xlim([0, 1200])
-    # qrgrid = 330, x1grid = 122
-    #ax.set_ylim([0, 300])
-    # uncomment to manually set ticks
-    # xtix = np.arange(0, 380000.1, 100000)
-    # ytix = np.arange(0, 1000.1, 200)
-    # ax.xaxis.set_ticks(xtix)
-    # ax.yaxis.set_ticks(ytix)
+    ax.set_xlim([0, 1])
+    ax.set_ylim([0, 1])
     ax.set_xlabel('Grid count at 0.1 lat. by 0.15 long. geoquadrat', fontsize=12)
     ax.set_ylabel('Grid count at ' + resolutions[index], fontsize=12)
     #ax.set_title('Comparison of range size between area and count at ' + resolutions[index], fontsize=12)
