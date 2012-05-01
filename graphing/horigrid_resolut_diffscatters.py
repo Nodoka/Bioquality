@@ -34,15 +34,14 @@ resolutions = (
     '1 lat. by 1 long. grid',
 )
 
-# make count as proportions??
-# calculate proportions by normalising populations
-# use float to prevent integer arithmetic (rounding down to zero)
-# norm_qrgrid_count  = grid_count[:,0]*100 / 330
-# norm_x1grid_count  = grid_count[:,1]*100 / 122 np.sum(star_kew).astype(float)
-
+# calculate proportions of count by normalising populations
 norm_hori_count = hori_count / 1418.0
 grid_count_matrix = np.mat(grid_count)
 norm_grid_count = np.asarray(np.hstack([grid_count_matrix[:,0]/330.0, grid_count_matrix[:,1]/122.0]))
+
+# add y = x line
+lx = np.arange(0,2)
+ly = np.arange(0,2)
 
 # Figure for count
 fig = plt.figure()
@@ -52,6 +51,7 @@ def plot_scatter(index):
     ax = fig.add_subplot(211 + index)
     #change to proportions
     ax.scatter(norm_hori_count, norm_grid_count[:,index], c=colours, alpha=0.5)
+    ax.plot(lx, ly, c="k", alpha=0.2)
     ax.set_aspect(1)
     ax.set_xlim([0, 1])
     ax.set_ylim([0, 1])
