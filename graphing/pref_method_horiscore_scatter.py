@@ -8,22 +8,15 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # load a numpy record array from scores.csv
-scores = np.genfromtxt("../data/testprefscores.csv", delimiter=',', dtype=None, names=True)
-
-#spnos = np.genfromtxt("../data/FOJHori_spnos.csv", delimiter=',', dtype=None, names=True)
-
-# check that the prefecture labels are the same and in the same order
-#scores_prefnames = [row[0] for row in scores]
-#spnos_prefnames  = [row[0] for row in spnos]
-#assert scores_prefnames == spnos_prefnames, "scores and spnos have different prefnames"
-
+scores = np.genfromtxt("../data/prefscores_calc_methods.csv", delimiter=',', dtype=None, names=True)
 
 # extract scores and spnos
-foj_scores  = np.array( map(lambda row: row[1], scores) )
-hori_scores = np.array( map(lambda row: row[2], scores) )
-hmean_scores = np.array( map(lambda row: row[3], scores) )
-hmax_scores  = np.array( map(lambda row: row[4], scores) )
-
+foj_scores   = np.array( map(lambda row: row[1], scores) )
+hori_scores  = np.array( map(lambda row: row[2], scores) )
+foj_spnos    = np.array( map(lambda row: row[3], scores) )
+hori_spnos   = np.array( map(lambda row: row[4], scores) )
+hmean_scores = np.array( map(lambda row: row[5], scores) )
+hmax_scores  = np.array( map(lambda row: row[6], scores) )
 
 # plot 2 graphs
 def make_axes_pretty(ax):
