@@ -9,6 +9,8 @@ import matplotlib.pyplot as plt
 
 # load a numpy record array from scores.csv
 scores = np.genfromtxt("../data/prefscores_calc_methods.csv", delimiter=',', dtype=None, names=True)
+# uncomment to use uniq method
+# scores = np.genfromtxt("../data/prefscores_calc_uniqmethods.csv", delimiter=',', dtype=None, names=True)
 
 # extract scores and spnos
 foj_scores   = np.array( map(lambda row: row[1], scores) )

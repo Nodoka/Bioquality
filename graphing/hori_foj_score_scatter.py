@@ -11,6 +11,10 @@ import matplotlib.pyplot as plt
 scores = np.genfromtxt("../data/FOJHori_scores.csv", delimiter=',', dtype=None, names=True)
 spnos = np.genfromtxt("../data/FOJHori_spnos.csv", delimiter=',', dtype=None, names=True)
 
+# uncomment to use uniq method
+# scores = np.genfromtxt("../data/FOJHoriuniq_scores.csv", delimiter=',', dtype=None, names=True)
+# spnos = np.genfromtxt("../data/FOJHoriuniq_spnos.csv", delimiter=',', dtype=None, names=True)
+
 # check that the prefecture labels are the same and in the same order
 scores_prefnames = [row[0] for row in scores]
 spnos_prefnames  = [row[0] for row in spnos]
