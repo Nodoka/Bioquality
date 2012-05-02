@@ -1,8 +1,16 @@
 source('../library/sanitise_data.R')
 
+# uncomment to select agglomeration method
+# agglomeration <- ''
+agglomeration <- 'uniq'
+# corresponding input and output file names
+input_file    <- paste('../data/cell_', agglomeration, 'pref.csv', sep='')
+output_file   <- paste("../data/species_", agglomeration, "pref.csv", sep="") 
+
 # load all data
 species_cell <- read.csv('../data/species_cell.csv', row.names = NULL)
-cell_pref    <- read.csv('../data/cell_pref.csv',    row.names = NULL)
+# cell_pref    <- read.csv('../data/cell_pref.csv',    row.names = NULL)
+cell_pref    <- read.csv(input_file,                 row.names = NULL)
 
 # select and rename relevant star columns
 species_cell <- rename_star_to_xstar(species_cell)
@@ -31,6 +39,7 @@ names(species_pref)[column_index] <- 'pref'
 
 # write results to file
 write.csv(species_pref,
-          file="../data/species_pref.csv",
+          file=output_file,
+          #file="../data/species_pref.csv",
           fileEncoding="UTF-8",
           row.names = FALSE)

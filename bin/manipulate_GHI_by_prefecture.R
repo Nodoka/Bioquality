@@ -1,11 +1,18 @@
 source('../library/sanitise_data.R')
 source('../bin/produce_cell_score.R')
 
+# uncomment to select agglomeration method
+# agglomeration <- ''
+agglomeration <- 'uniq'
+# corresponding input and output file names
+input_file       <- paste('../data/cell_', agglomeration, 'pref.csv', sep='')
+output_file_mean <- paste("../data/hori", agglomeration, "_meanscores.csv", sep="") 
+output_file_max  <- paste("../data/hori", agglomeration, "_maxscores.csv", sep="") 
+
 # load all data
 # cell_score <- read.csv('../data/Hori_plot_score.csv', row.names = NULL)
-cell_pref  <- read.csv('../data/cell_pref.csv',    row.names = NULL)
-# uncomment to work on cell_uniq pref pairs
-# cell_pref  <- read.csv('../data/cell_uniqpref.csv',    row.names = NULL)
+# cell_pref  <- read.csv('../data/cell_pref.csv',    row.names = NULL)
+cell_pref  <- read.csv(input_file, row.names = NULL)
 
 # rename column from 'Pref' to 'pref'
 column_index <- which(names(cell_pref) == 'Pref')
@@ -43,12 +50,14 @@ score_maxframe  <- data.frame(pref=row.names(pref_score_max),
 # write results of scores
 # change file name to "horiuniq_m*scores" when using cell_uniqpref
 write.csv(score_meanframe,
-          file="../data/hori_meanscores.csv",
+          file=output_file_mean,
+          #file="../data/hori_meanscores.csv",
           row.names=FALSE,
           fileEncoding="UTF-8")
 
 write.csv(score_maxframe,
-          file="../data/hori_maxscores.csv",
+          file=output_file_max,
+          #file="../data/hori_maxscores.csv",
           row.names=FALSE,
           fileEncoding="UTF-8")
 

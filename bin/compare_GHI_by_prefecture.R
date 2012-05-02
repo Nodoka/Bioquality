@@ -1,8 +1,16 @@
 source('../library/GHI.R')
 source('../library/sanitise_data.R')
 
+# uncomment to select agglomeration method
+# agglomeration <- ''
+agglomeration <- 'uniq'
+# corresponding input and output file names
+input_file    <- paste('../data/species_', agglomeration, 'pref.csv', sep='')
+output_file   <- paste("../data/FOJHori", agglomeration, "_scores.csv", sep="") 
+
 # load data
-hori <- read.csv('../data/species_pref.csv',     row.names = NULL)
+# hori <- read.csv('../data/species_pref.csv',     row.names = NULL)
+hori <- read.csv(input_file,                     row.names = NULL)
 foj  <- read.csv('../data/species_pref_foj.csv', row.names = NULL)
 
 # select and rename relevant star columns
@@ -25,8 +33,10 @@ valid_scores <- na.omit(merged_scores)
 scores_frame <- data.frame(preflist=row.names(valid_scores), foj_scores=valid_scores[,1], hori_scores=valid_scores[,2], row.names=NULL)
 
 # write results (scores) to file
+# change file name to "FOJHoriuniq_scores" when using cell_uniqpref
 write.csv(scores_frame,
-          file="../data/FOJHori_scores.csv",
+          file=output_file,
+          #file="../data/FOJHori_scores.csv",
           row.names=FALSE,
           fileEncoding="UTF-8")
 

@@ -1,8 +1,16 @@
 source('../library/GHI.R')
 source('../library/sanitise_data.R')
 
+# uncomment to select agglomeration method
+# agglomeration <- ''
+agglomeration <- 'uniq'
+# corresponding input and output file names
+input_file    <- paste('../data/species_', agglomeration, 'pref.csv', sep='')
+output_file   <- paste("../data/FOJHori", agglomeration, "_spnos.csv", sep="") 
+
 # load data
-hori <- read.csv('../data/species_pref.csv',     row.names = NULL)
+# hori <- read.csv('../data/species_pref.csv',     row.names = NULL)
+hori <- read.csv(input_file,                     row.names = NULL)
 foj  <- read.csv('../data/species_pref_foj.csv', row.names = NULL)
 
 # select and rename relevant star columns
@@ -32,7 +40,8 @@ spnos_frame <- data.frame(preflist=row.names(spnos), foj_spno=spnos[,1], hori_sp
 
 # write results (scores) to file
 write.csv(spnos_frame,
-          file="../data/FOJHori_spnos.csv",
+          file=output_file,
+          #file="../data/FOJHori_spnos.csv",
           row.names=FALSE,
           fileEncoding="UTF-8")
 
