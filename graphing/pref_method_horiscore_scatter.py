@@ -18,7 +18,14 @@ hori_scores  = np.array( map(lambda row: row[2], scores) )
 foj_spnos    = np.array( map(lambda row: row[3], scores) )
 hori_spnos   = np.array( map(lambda row: row[4], scores) )
 hmean_scores = np.array( map(lambda row: row[5], scores) )
-hmax_scores  = np.array( map(lambda row: row[6], scores) )
+hmean_spnos  = np.array( map(lambda row: row[6], scores) )
+hmax_scores  = np.array( map(lambda row: row[7], scores) )
+hmax_spnos   = np.array( map(lambda row: row[8], scores) )
+
+# flag outliers in red
+## in compasion with hori_spnos?????
+mean_colours  = map(lambda spno: 'r' if spno < 100 else 'b', hmean_spnos)
+max_colours = map(lambda spno: 'r' if spno < 100  else 'b', hmax_spnos)
 
 # plot 2 graphs
 def make_axes_pretty(ax):
@@ -38,15 +45,15 @@ fig = plt.figure()
 fig.suptitle('Comparison of GHI Scores from 2 methods', fontsize=22)
 ax1 = fig.add_subplot(211)
 # sizes are constant times the mean times one over the species number
-#foj_sizes  = 100 * sum(foj_spnos)  / (foj_spnos  * len(foj_spnos) )
-#hori_sizes = 100 * sum(hori_spnos) / (hori_spnos * len(hori_spnos))
-ax1.scatter(hori_scores, hmean_scores, alpha=0.5)
+mean_sizes  = 20 * sum(hmean_spnos)  / (hmean_spnos  * len(hmean_spnos) )
+max_sizes   = 20 * sum(hmax_spnos) / (hmax_spnos * len(hmax_spnos))
+ax1.scatter(hori_scores, hmean_scores, s=mean_sizes, c=mean_colours, alpha=0.5)
 ax1.set_ylabel('Cell-based Mean Hori Score', fontsize=18)
 #ax1.set_title('Mean Hori scores vs Holistic Hori scores', fontsize=22)
 make_axes_pretty(ax1)
 
 ax2 = fig.add_subplot(212)
-ax2.scatter(hori_scores, hmax_scores, alpha=0.5)
+ax2.scatter(hori_scores, hmax_scores, s=max_sizes, c=max_colours, alpha=0.5)
 ax2.set_ylabel('Cell-based Maximum Hori Score', fontsize=18)
 #ax2.set_title('Max Hori scores vs Holistic Hori scores', fontsize=22)
 make_axes_pretty(ax2)
