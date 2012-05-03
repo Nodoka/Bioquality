@@ -2,8 +2,10 @@
 # workscripApr21_compref_aggl_source.R
 
 # uncomment to select agglomeration method
-# agglomeration <- ''
-agglomeration <- 'uniq'
+# '' = holistic by default
+agglomeration <- ''
+# agglomeration <- 'uniq'
+
 # corresponding input and output file names
 input_scores   <- paste('../data/FOJHori', agglomeration, '_scores.csv', sep='')
 input_spnos    <- paste('../data/FOJHori', agglomeration, '_spnos.csv', sep='')

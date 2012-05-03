@@ -1,8 +1,10 @@
 source('../library/sanitise_data.R')
 
 # uncomment to select agglomeration method
-# agglomeration <- ''
-agglomeration <- 'uniq'
+# '' = holistic by default
+agglomeration <- ''
+# agglomeration <- 'uniq'
+
 # corresponding input and output file names
 input_file    <- paste('../data/cell_', agglomeration, 'pref.csv', sep='')
 output_file   <- paste("../data/species_", agglomeration, "pref.csv", sep="") 

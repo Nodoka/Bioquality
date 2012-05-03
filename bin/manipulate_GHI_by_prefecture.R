@@ -2,8 +2,10 @@ source('../library/sanitise_data.R')
 source('../bin/produce_cell_score.R')
 
 # uncomment to select agglomeration method
-# agglomeration <- ''
-agglomeration <- 'uniq'
+# '' = holistic by default
+agglomeration <- ''
+# agglomeration <- 'uniq'
+
 # corresponding input and output file names
 input_file       <- paste('../data/cell_', agglomeration, 'pref.csv', sep='')
 output_file_mean <- paste("../data/hori", agglomeration, "_meanscores.csv", sep="") 
