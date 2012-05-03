@@ -44,6 +44,12 @@ spcount <- spnum_cell > 39
 # filter cell with index
 valid_scores <- scores[spcount,]
 
+# write results to file
+write.csv(valid_scores,
+          file="../data/horicell_BDmeasures.csv",
+          fileEncoding="UTF-8",
+          row.names = FALSE)
+
 # correlation analsysis
 cor(valid_scores$GHI,    valid_scores$spno,   method="spearman")
 cor(valid_scores$sum_we, valid_scores$spno,   method="spearman")
