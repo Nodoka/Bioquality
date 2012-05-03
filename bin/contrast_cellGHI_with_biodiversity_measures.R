@@ -6,8 +6,21 @@ source('../bin/produce_cell_score.R')
 # manually calculate WE and CWE
 # check results with
 # hori_score <- read.csv('../data/Hori_plot_score.csv', row.names = NULL)
+
+# weight = inverse of the number of cells present
+weight <- 1/table(species_cell$spnumber)
+sp_weight <- data.frame(spnumber=row.names(weight),cwe=weight[])
+
+# filter relevant columns
+spcell <- species_cell[,c('sampname','spnumber','star_infs','hori_cwe')]
+
+# merge species_cell data and calculated weight data
+we_spcell <- merge(spcell,sp_weight)
+
 # WE = sum weighted endemism
-sum_we <- tapply(species_cell$hori_cwe,species_cell$sampname,sum)
+# check results with
+# sum_we <- tapply(species_cell$hori_cwe,species_cell$sampname,sum)
+sum_we  <- tapply(we_spcell$cwe, we_spcell$sampname,sum)
 
 # Corrected WE = WE/spnum_cell
 cwe <- sum_we/spnum_cell
@@ -31,3 +44,10 @@ spcount <- spnum_cell > 39
 # filter cell with index
 valid_scores <- scores[spcount,]
 
+# correlation analsysis
+cor(valid_scores$GHI,    valid_scores$spno,   method="spearman")
+cor(valid_scores$sum_we, valid_scores$spno,   method="spearman")
+cor(valid_scores$cwe,    valid_scores$spno,   method="spearman")
+cor(valid_scores$GHI,    valid_scores$sum_we, method="spearman")
+cor(valid_scores$GHI,    valid_scores$cwe,    method="spearman")
+cor(valid_scores$sum_we, valid_scores$cwe,    method="spearman")
