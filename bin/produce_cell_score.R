@@ -24,13 +24,19 @@ filter_grass <- function(species_plot){
 # uncomment to filter out grass
 # species_cell <- filter_grass(species_cell)
 
+# calculate species count for cell
+spnum_cell <- table(species_cell$sampname)
+
 # GHI scores by cell (sampname) for a chosen star classification method
 cal_cell_score <- tapply(species_cell$star_infs,  species_cell$sampname,  calculate_score)
+
+# check if the order of row name(sampname) is the same
+which(row.names(cal_cell_score) != row.names(spnum_cell))
 
 # convert results to dataframe
 cell_score <- data.frame(sampname=row.names(cal_cell_score),              
                          GHI=cal_cell_score[],
-                         row.names=NULL)
+                         spno=spnum_cell[])
 
 # OPTIONAL: filter cell with spcount > 39
 # deleted from this script

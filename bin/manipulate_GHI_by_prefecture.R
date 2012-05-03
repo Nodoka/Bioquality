@@ -26,8 +26,6 @@ cell_pref <- cell_pref[,c('pref','sampname')]
 
 # cell_score is generated in produce_cell_score.R
 # OPTIONAL: filter cell with spcount > 39
-# calculate species count for cell
-spnum_cell <- table(species_cell$sampname)
 # index T/F of spcount >39
 spcount <- spnum_cell > 39
 # filter cell with index
@@ -39,13 +37,18 @@ pref_score <- merge(cell_score, cell_pref)
 # calculate mean and maximum scores by prefecture
 pref_score_mean <- tapply(pref_score$GHI, pref_score$pref, mean)
 pref_score_max  <- tapply(pref_score$GHI, pref_score$pref, max)
+pref_spno_mean  <- tapply(pref_score$spno, pref_score$pref, mean)
+pref_spno_max   <- tapply(pref_score$spno, pref_score$pref, max)
+
 
 # convert results to dataframe
 score_meanframe <- data.frame(pref=row.names(pref_score_mean),      
-		    meanGHI=pref_score_mean[])
+		    meanGHI=pref_score_mean[],
+                    meanspno=pref_spno_mean[])
 
 score_maxframe  <- data.frame(pref=row.names(pref_score_max),      
-		    maxGHI=pref_score_max[])
+		    maxGHI=pref_score_max[],
+                    maxspno=pref_spno_max[])
 
 # write results of scores
 # change file name to "horiuniq_m*scores" when using cell_uniqpref
