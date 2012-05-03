@@ -56,58 +56,57 @@ write.csv(sp_x1count,
           fileEncoding="UTF-8",
           row.names = FALSE)
 ------------------------------
-## calculate area by grid unit
-# calculate area of mainland and small islands by selected column
-# land_types <- c('MAINISL_KM', 'SMALLISL_KM')
-# ids <- c("ID", "ID_2") or sampnmae
-# sum_area <- function(data,area,column){
-#  return(tapply(data[,area], data[,column], sum))}
-# for (area in land_type) {
-#  for(id in ids) {    
-#    data <- sum_area(data, area)}}
+# compute range size stats
+compute_area_sum <- function(area_records, grouping) {
+  mainisl   <- tapply(area_records[,1], grouping, sum)
+  smallisl  <- tapply(area_records[,2], grouping, sum)
+  totalland <- mainisl + smallisl
+  areasum   <- cbind(mainisl,smallisl,totalland)
+}
 
-qr_mainisl   <- tapply(cell_grid$MAINISL_KM,cell_grid$ID,sum)
-qr_smallisl  <- tapply(cell_grid$SMALLISL_KM,cell_grid$ID,sum)
-qr_totalland <- qr_mainisl + qr_smallisl
-qr_areasum   <- cbind(qr_mainisl,qr_smallisl,qr_totalland)
-qr_area      <- data.frame(qrgrid=row.names(qr_areasum),      
-		qr_mainisl=qr_areasum[,1],
-		qr_smallisl=qr_areasum[,2],
-		qr_totalland=qr_areasum[,3])
+# run compute range size stats for cell_grid records
+compute_area_sum_for_cell <- function(grid_data, grid_id) {
+  grid_area <- grid_data[,c('MAINISL_KM', 'SMALLISL_KM')]
+  compute_area_sum(grid_area, grid_id)
+}
 
-x1_mainisl   <- tapply(cell_grid$MAINISL_KM,cell_grid$ID_2,sum)
-x1_smallisl  <- tapply(cell_grid$SMALLISL_KM,cell_grid$ID_2,sum)
-x1_totalland <- x1_mainisl + x1_smallisl
-x1_areasum   <- cbind(x1_mainisl,x1_smallisl,x1_totalland)
-x1_area      <- data.frame(x1grid=row.names(x1_areasum),      
-		x1_mainisl=x1_areasum[,1],
-		x1_smallisl=x1_areasum[,2],
-		x1_totalland=x1_areasum[,3])
-----------------------------------------------------------------------
+compute_area_sum_for_species <- function(sp_griddata, spnumber) {
+  grid_area <- sp_griddata[,c('mainisl', 'smallisl')]
+  compute_area_sum(grid_area, spnumber)
+}
+
+# convert stats results to dataframe
+sum_to_dataframe <- function(grid_areasum){
+data.frame(datatype=row.names(grid_areasum),
+           mainisl=grid_areasum[,1],
+           smallisl=grid_areasum[,2],
+           totalland=grid_areasum[,3])
+}
+
+
+# calculate area by grid unit
+qr_areasum <- compute_area_sum_for_cell(cell_grid, cell_grid$ID)
+qr_area <- sum_to_dataframe(qr_areasum)
+names(qr_area)[1] <- 'qrgrid'
+
+x1_areasum <- compute_area_sum_for_cell(cell_grid, cell_grid$ID_2)
+x1_area <- sum_to_dataframe(x1_areasum)
+names(x1_area)[1] <- 'x1grid'
+
+
 ## area calculation for species on grids
 # combine species_grid and grid_area
 species_qrarea <- merge(species_qrgrid, qr_area)
 species_x1area <- merge(species_x1grid, x1_area)
 
 # sum area by species
-spqr_mainisl   <- tapply(species_qrarea$qr_mainisl,species_qrarea$spnumber,sum)
-spqr_smallisl  <- tapply(species_qrarea$qr_smallisl,species_qrarea$spnumber,sum)
-spqr_totalland <- spqr_mainisl + spqr_smallisl
-spqr_areasum   <- cbind(spqr_mainisl,spqr_smallisl,spqr_totalland)
-spqr_area      <- data.frame(spnumber=row.names(spqr_areasum),      
-		  spqr_mainisl=spqr_areasum[,1],
-		  spqr_smallisl=spqr_areasum[,2],
-		  spqr_totalland=spqr_areasum[,3])
+spqr_areasum <- compute_area_sum_for_species(species_qrarea, species_qrarea$spnumber)
+spqr_area <- sum_to_dataframe(spqr_areasum)
+names(spqr_area)[1] <- 'spnumber'
 
-spx1_mainisl   <- tapply(species_x1area$x1_mainisl,species_x1area$spnumber,sum)
-spx1_smallisl  <- tapply(species_x1area$x1_smallisl,species_x1area$spnumber,sum)
-spx1_totalland <- spx1_mainisl + spx1_smallisl
-spx1_areasum   <- cbind(spx1_mainisl,spx1_smallisl,spx1_totalland)
-spx1_area      <- data.frame(spnumber=row.names(spx1_areasum),      
-		  spx1_mainisl=spx1_areasum[,1],
-		  spx1_smallisl=spx1_areasum[,2],
-		  spx1_totalland=spx1_areasum[,3])
-
+spx1_areasum <- compute_area_sum_for_species(species_x1area, species_x1area$spnumber)
+spx1_area <- sum_to_dataframe(spx1_areasum)
+names(spx1_area)[1] <- 'spnumber'
 
 # write results to file
 write.csv(spqr_area,
@@ -119,3 +118,14 @@ write.csv(spx1_area,
           file="../data/species_x1area.csv",
           fileEncoding="UTF-8",
           row.names = FALSE)
+
+# column names prior to May01:
+# grid_area
+# mainisl = qr_mainisl or x1_mainisl
+# small isl = qr_smallisl or x1_smallisl
+# totalland = qr_totalland or x1_totalland
+# sp_gridarea
+# mainisl = spqr_mainisl or spx1_mainisl
+# small isl = spqr_smallisl or spx1_smallisl
+# totalland = spqr_totalland or spx1_totalland
+
