@@ -82,7 +82,7 @@ no_grass_tdwg <- tdwgx1[not_gramineae,]
 tdwgx1 <- no_grass_tdwg
 
 # mean x1count and then weight
-meancount <- tapply(tdwg$x1count, tdwg$star_infs, mean)
+meancount <- tapply(tdwgx1$x1count, tdwgx1$star_infs, mean)
 w <- meancount['GN']/meancount
 
 
