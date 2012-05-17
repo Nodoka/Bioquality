@@ -70,3 +70,19 @@ write.csv(tdwg_count,
           file="../data/tdwgsp_x1count.csv",
           fileEncoding="UTF-8",
           row.names = FALSE)
+
+# calculate weights
+tdwgx1 <- tdwg_count
+
+# index T/F of family != (not equal) Gramineae,
+fam           <- tdwgx1[,'family']
+not_gramineae <- fam != 'Gramineae'
+# then filter tdwg with the index.
+no_grass_tdwg <- tdwgx1[not_gramineae,]
+tdwgx1 <- no_grass_tdwg
+
+# mean x1count and then weight
+meancount <- tapply(tdwg$x1count, tdwg$star_infs, mean)
+w <- meancount['GN']/meancount
+
+
