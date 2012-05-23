@@ -40,8 +40,8 @@ def plot_stacked_bar(results):
     plt.xticks(ind+width/2., ('Star FOJ','infs FOJ','Star Kew','infs Kew') )
 
 plot_stacked_bar(populations)
-plt.ylabel('Number of Taxa')
-plt.title('Number of Taxa Assigned to Stars from 4 Data Sources')
+plt.ylabel('Number of Taxa', size='large')
+plt.title('1) Number of Taxa Assigned to Stars from 4 Data Sources', y=-0.1)
 plt.show()
 
 # calculate proportions by normalising populations
@@ -54,7 +54,7 @@ norm_infs_kew  = infs_kew  / np.sum(infs_kew ).astype(float)
 proportions = np.array([norm_star_foj,norm_infs_foj,norm_star_kew,norm_infs_kew])
 
 plot_stacked_bar(proportions)
-plt.ylabel('Proportion of Taxa')
-plt.title('Proportion of Taxa Assigned to Stars from 4 Data Sources')
+plt.ylabel('Proportion of Taxa', size='large')
+plt.title('2) Proportion of Taxa Assigned to Stars from 4 Data Sources', y=-0.1)
 
 plt.show()
