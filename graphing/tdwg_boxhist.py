@@ -34,9 +34,10 @@ bp = ax.boxplot([bk, gd, bu, gn],
 # configure axes
 # ax.set_xlim(0, 10000)
 # ax.set_ylim(-0.2, 1.4)
+ax.set_xscale('log')
 ax.yaxis.set_ticklabels(["Black","Gold","Blue","Green"])
-ax.set_xlabel('Species Range Size')
-ax.set_ylabel('Star')
+ax.set_xlabel('Log Species Range Size (10$^4$km$^2$)', fontsize='large')
+ax.set_ylabel('Star', fontsize='large')
 # plt.setp(bp['whiskers'], color='k',  linestyle='-' )
 # plt.setp(bp['fliers'], markersize=3.0)
 plt.show()
@@ -46,10 +47,11 @@ plt.show()
 histfig = plt.figure()
 histaxes = histfig.add_subplot(111)
 n, bins, patches = histaxes.hist([bk,gd,bu,gn],
-                              bins=25,
-                              normed=True,
-                              color=['k', 'y', 'b', 'g'])  
-histaxes.set_xlabel('Species Range Size')              
-histaxes.set_ylabel('Frequency')
+                              #bins=np.linspace(-10000,100000,num=100),
+                              #normed=True,
+                              color=['k', 'y', 'b', 'g']) 
+histaxes.set_xscale('log') 
+histaxes.set_xlabel('Log Species Range Size (10$^4$km$^2$)', fontsize='large')              
+histaxes.set_ylabel('Frequency', fontsize='large')
 plt.show()
 # pylab.savefig("../graphing/horiall_histogram.png")

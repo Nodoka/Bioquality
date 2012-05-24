@@ -16,13 +16,13 @@ file_name = "../data/Hori_area_weight_filtered.csv"
 # 23 or 22(filtered) - qgr_totalland
 # 26 or 25(filtered) - X1gr_totalland
 star_infs = np.genfromtxt(file_name, delimiter=',', dtype=None, skip_header=1, usecols=11)
-grid_land = np.genfromtxt(file_name, delimiter=',', dtype=None, skip_header=1, usecols=22)
+grid_land = np.genfromtxt(file_name, delimiter=',', dtype=None, skip_header=1, usecols=18)
 
 # delete "" when using original data
-bk = grid_land[star_infs == '"BK"']
-gd = grid_land[star_infs == '"GD"']
-bu = grid_land[star_infs == '"BU"']
-gn = grid_land[star_infs == '"GN"']
+bk = grid_land[star_infs == '"BK"']/10000
+gd = grid_land[star_infs == '"GD"']/10000
+bu = grid_land[star_infs == '"BU"']/10000
+gn = grid_land[star_infs == '"GN"']/10000
 
 # box plots
 fig = plt.figure()
@@ -36,11 +36,11 @@ bp = ax.boxplot([bk, gd, bu, gn],
                 bootstrap=5000)
 
 # configure axes
-ax.set_xlim(0, 10000)
+#ax.set_xlim(0, 10000)
 
 ax.yaxis.set_ticklabels(["Black","Gold","Blue","Green"])
-ax.set_xlabel('Species Range Size')
-ax.set_ylabel('Star')
+ax.set_xlabel('Species Range Size', size='x-large')
+ax.set_ylabel('Star', size='x-large')
 # ax.set_ylim(-0.2, 1.4)
 # plt.setp(bp['whiskers'], color='k',  linestyle='-' )
 # plt.setp(bp['fliers'], markersize=3.0)
@@ -54,7 +54,7 @@ n, bins, patches = histaxes.hist([bk,gd,bu,gn],
                               bins=25,
                               normed=True,
                               color=['k', 'y', 'b', 'g'])  
-histaxes.set_xlabel('Species Range Size')              
-histaxes.set_ylabel('Frequency')
+histaxes.set_xlabel('Species Range Size', size='x-large')              
+histaxes.set_ylabel('Normalised Frequency', size='x-large')
 plt.show()
 # pylab.savefig("../graphing/horiall_histogram.png")

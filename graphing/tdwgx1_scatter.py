@@ -36,7 +36,7 @@ ax.set_ylim(0, 15000.1)
 
 ax.set_xlabel('Number of TDWG Level 3 Code', fontsize=18)
 ax.set_ylabel('Number of Degree Grid', fontsize=18)
-ax.set_title('Species Geographic Range Size', fontsize=22)
+ax.set_title('Species Geographic Range Size', y=-0.1, fontsize=22)
 ax.grid(True)
 
 plt.show()

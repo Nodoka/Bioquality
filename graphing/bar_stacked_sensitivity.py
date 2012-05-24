@@ -24,7 +24,8 @@ def plot_stacked_bar(results):
     p4 = plt.bar(ind, gn, width, color='green' , bottom=bk + gd + bu)
     plt.xlabel('Star Classification Method')
     plt.legend( (p1[0], p2[0], p3[0], p4[0]), labels)
-    plt.xticks(ind+width/2., ('Default','GEO','GEO-Up','GEO-Down','INFRA-Auto','INFRA-Selective'), size='large')
+    #plt.xticks(ind+width/2., ('Default','GEO','GEO-U','GEO-D','INFRA-A','INFRA-S') )
+    plt.xticks(ind+width/2., ('Default','GEO','GEO-Up','GEO-Down','INFRA-Auto','INFRA-Selective') )
 
 plot_stacked_bar(star_sens)
 plt.ylabel('Number of Taxa', size='xx-large')
