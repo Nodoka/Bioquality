@@ -22,14 +22,15 @@ def plot_stacked_bar(results):
     p2 = plt.bar(ind, gd, width, color='yellow', bottom=bk)
     p3 = plt.bar(ind, bu, width, color='blue'  , bottom=bk + gd)
     p4 = plt.bar(ind, gn, width, color='green' , bottom=bk + gd + bu)
-    plt.xlabel('Star Classification Method')
+    plt.xlabel('Star Classification Method', size='large')
     plt.legend( (p1[0], p2[0], p3[0], p4[0]), labels)
     #plt.xticks(ind+width/2., ('Default','GEO','GEO-U','GEO-D','INFRA-A','INFRA-S') )
     plt.xticks(ind+width/2., ('Default','GEO','GEO-Up','GEO-Down','INFRA-Auto','INFRA-Selective') )
 
 plot_stacked_bar(star_sens)
-plt.ylabel('Number of Taxa', size='xx-large')
-plt.title('1) Number of Taxa Assigned to Stars for 6 Star Classification Methods', y=-0.1)
+plt.ylabel('Number of Taxa', size='x-large')
+plt.title('(1)', position=(1,-0.1))
+#plt.title('1) Number of Taxa Assigned to Stars for 6 Star Classification Methods', y=-0.1)
 
 plt.show()
 
@@ -38,7 +39,8 @@ plt.show()
 prop_star_sens = star_sens /sum(star_sens).astype(float)
 
 plot_stacked_bar(prop_star_sens)
-plt.ylabel('Proportion of Taxa', size='xx-large')
-plt.title('2) Proportion of Taxa Assigned to Stars for 6 Star Classification Methods', y=-0.1)
+plt.ylabel('Proportion of Taxa', size='x-large')
+plt.title('(2)', position=(1,-0.1))
+#plt.title('2) Proportion of Taxa Assigned to Stars for 6 Star Classification Methods', y=-0.1)
 
 plt.show()

@@ -35,13 +35,15 @@ def plot_stacked_bar(results):
     p2 = plt.bar(ind, gd, width, color='yellow', bottom=bk)
     p3 = plt.bar(ind, bu, width, color='blue'  , bottom=bk + gd)
     p4 = plt.bar(ind, gn, width, color='green' , bottom=bk + gd + bu)
-    plt.xlabel('Data Source')
+    plt.xlabel('Data Source', size ='large')
     plt.legend( (p1[0], p2[0], p3[0], p4[0]), star_category)
     plt.xticks(ind+width/2., ('Star FOJ','infs FOJ','Star Kew','infs Kew') )
 
 plot_stacked_bar(populations)
 plt.ylabel('Number of Taxa', size='large')
-plt.title('1) Number of Taxa Assigned to Stars from 4 Data Sources', y=-0.1)
+plt.title('(1)', position=(1,-0.1))
+#plt.title('1) Number of Taxa Assigned to Stars from 4 Data Sources', y=-0.1)
+
 plt.show()
 
 # calculate proportions by normalising populations
@@ -55,6 +57,7 @@ proportions = np.array([norm_star_foj,norm_infs_foj,norm_star_kew,norm_infs_kew]
 
 plot_stacked_bar(proportions)
 plt.ylabel('Proportion of Taxa', size='large')
-plt.title('2) Proportion of Taxa Assigned to Stars from 4 Data Sources', y=-0.1)
+plt.title('(2)', position=(1,-0.1))
+#plt.title('2) Proportion of Taxa Assigned to Stars from 4 Data Sources', y=-0.1)
 
 plt.show()
