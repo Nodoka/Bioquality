@@ -23,7 +23,7 @@ horiuniq_*scores.csv
 workdata*.csv
 FOJHori*.csv
 species_cell_rmmoss.csv
-Hori_area_weight_filtered.csv
+Hori_area_weight_filtered*.csv
 cell_uniqpref.csv
 species_uniqpref.csv
 Horisp_resol_diffs.csv
