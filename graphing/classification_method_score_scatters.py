@@ -15,30 +15,29 @@ scores = np.genfromtxt("../data/sensitivity_scores.csv", delimiter=',', dtype=No
 
 fig = plt.figure()
 scoring_types = (
-    'star_default',
-    'star_geo',
-    'star_geou',
-    'star_geod',
-    'star_infa',
-    'star_infs',
+    'Default',
+    'GEO',
+    'GEO-Up',
+    'GEO-Down',
+    'INFRA-Auto',
+    'INFRA-Selective',
 )
 
 def plot_scatter(index):
     ax = fig.add_subplot(230 + index)
     ax.scatter(scores[:,0], scores[:,index], alpha=0.5)
-    xtix = np.arange(0, 1750.1, 250)
-    ytix = np.arange(0, 1750.1, 250)
+    xtix = np.arange(0, 1250.1, 250)
+    ytix = np.arange(0, 1250.1, 250)
     ax.xaxis.set_ticks(xtix)
     ax.yaxis.set_ticks(ytix)
     ax.tick_params(labelsize=8)
     ax.set_aspect(1)
-    ax.set_xlim([0, 1750])
-    ax.set_ylim([0, 1750])
-    
-    ax.set_xlabel(scoring_types[0]     + ' score', fontsize=10)
-    ax.set_ylabel(scoring_types[index] + ' score', fontsize=10)
-    ax.set_title('Comparison of GHI Scores From ' + scoring_types[0] + ' and ' + scoring_types[index], fontsize=10)
-    
+    ax.set_xlim([0, 1250])
+    ax.set_ylim([0, 1250])
+    ax.set_xlabel(scoring_types[0]     + ' score', fontsize='large')
+    ax.set_ylabel(scoring_types[index] + ' score', fontsize='large')
+    #ax.set_title('Comparison of GHI Scores From ' + scoring_types[0] + ' and ' + scoring_types[index], fontsize=10)
+    ax.set_title(index, position = (1,-0.15))
     ax.grid(True)
 
 

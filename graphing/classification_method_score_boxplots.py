@@ -18,11 +18,11 @@ preflist = np.genfromtxt(file_name, delimiter=',', dtype=None, skip_header=1, us
 scores = np.genfromtxt(file_name, delimiter=',', dtype=None, skip_header=1, usecols=range(1,6))
 
 scoring_types = (
-    'star_geo',
-    'star_geou',
-    'star_geod',
-    'star_infa',
-    'star_infs',
+    'GEO',
+    'GEO-Up',
+    'GEO-Down',
+    'INFRA-Auto',
+    'INFRA-Selective',
 )
 
 # box plots
@@ -39,9 +39,10 @@ ax.set_ylim(-100, 100)
 ax.xaxis.set_ticklabels(scoring_types)
 # plt.setp(bp['whiskers'], color='k',  linestyle='-' )
 # plt.setp(bp['fliers'], markersize=3.0)
-ax.set_xlabel('Star Classification Methods')
-ax.set_ylabel('Differences in GHI scores')
-ax.set_title('Comparison of GHI Scores From Default And 5 Classification Methods', fontsize=14)
+ax.set_xlabel('Star Classification Methods', fontsize='large')
+ax.set_ylabel('Differences in GHI Scores Compared to the Default', fontsize='large')
+#ax.set_title('Comparison of GHI Scores From Default And 5 Classification Methods', fontsize=14)
+ax.set_title('(1)', position=(1,-0.1))
 
 
 plt.show()

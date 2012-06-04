@@ -22,10 +22,11 @@ ax = fig.add_subplot(111)
 p1 = ax.bar(ind, diffmeans, width, color='r', yerr=diffstd)
 
 # add some
-ax.set_xlabel('Star Classification Method')
-ax.set_ylabel('Difference in Mean GHI Scores Compared to the Default')
-ax.set_title('Difference in Mean GHI Scores between 5 classification methods and the Default')
+ax.set_xlabel('Star Classification Method', fontsize='large')
+ax.set_ylabel('Difference in Mean GHI Scores Compared to the Default', fontsize='large')
+#ax.set_title('Difference in Mean GHI Scores between 5 classification methods and the Default')
+ax.set_title('(2)', position=(1,-0.1))
 ax.set_xticks(ind+width)
-ax.set_xticklabels( ('Geo', 'Geo-up', 'Geo-down', 'Infra-auto', 'Infra-selective') )
+ax.set_xticklabels( ('GEO', 'GEO-Up', 'GEO-Down', 'INFRA-auto', 'INFRA-selective'), fontsize='large' )
 
 plt.show()

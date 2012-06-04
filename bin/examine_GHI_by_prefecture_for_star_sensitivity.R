@@ -87,12 +87,22 @@ write.csv(score_diffs,
 -----------------------------------------------
 # rank correlation analysis: * = 3~7
 # cor(sens_scores_frame[,2],sens_scores_frame[,*],method="spearman")
+cor(sens_scores_frame[,2],sens_scores_frame[,3],method="spearman")
+cor(sens_scores_frame[,2],sens_scores_frame[,4],method="spearman")
+cor(sens_scores_frame[,2],sens_scores_frame[,5],method="spearman")
+cor(sens_scores_frame[,2],sens_scores_frame[,6],method="spearman")
+cor(sens_scores_frame[,2],sens_scores_frame[,7],method="spearman")
 
 # wilcoxon's signed-ranks test : non-parametric equivalent of paried-t test 
 # for non-normally distributed data
 # null hypothesis: difference in medians of two related samples = 0
 # pair: default = frame[,2] vs clessification method * = 3~7
 # wilcox.test(sens_scores_frame[,2], sens_scores_frame[,*], paired=T, conf.int=T)
+wilcox.test(sens_scores_frame[,2], sens_scores_frame[,3], paired=T, conf.int=T)
+wilcox.test(sens_scores_frame[,2], sens_scores_frame[,4], paired=T, conf.int=T)
+wilcox.test(sens_scores_frame[,2], sens_scores_frame[,5], paired=T, conf.int=T)
+wilcox.test(sens_scores_frame[,2], sens_scores_frame[,6], paired=T, conf.int=T)
+wilcox.test(sens_scores_frame[,2], sens_scores_frame[,7], paired=T, conf.int=T)
 
 ----------------------------
 # calculate number of species in prefecture for each method
