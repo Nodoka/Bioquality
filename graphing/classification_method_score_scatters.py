@@ -13,6 +13,10 @@ import matplotlib.pyplot as plt
 preflist = np.genfromtxt("../data/sensitivity_scores.csv", delimiter=',', dtype=None, skip_header=1, usecols=0)
 scores = np.genfromtxt("../data/sensitivity_scores.csv", delimiter=',', dtype=None, skip_header=1, usecols=range(1,7))
 
+# add y = x line
+lx = np.arange(0,1250)
+ly = np.arange(0,1250)
+
 fig = plt.figure()
 scoring_types = (
     'Default',
@@ -26,6 +30,7 @@ scoring_types = (
 def plot_scatter(index):
     ax = fig.add_subplot(230 + index)
     ax.scatter(scores[:,0], scores[:,index], alpha=0.5)
+    ax.plot(lx, ly, c="k", alpha=0.2)
     xtix = np.arange(0, 1250.1, 250)
     ytix = np.arange(0, 1250.1, 250)
     ax.xaxis.set_ticks(xtix)
