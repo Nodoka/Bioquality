@@ -30,6 +30,10 @@ hori_spnos  = np.array( map(lambda row: row[2], spnos) )
 foj_colours  = map(lambda spno: 'r' if spno < 1500 else 'b', foj_spnos)
 hori_colours = map(lambda spno: 'r' if spno < 270  else 'b', hori_spnos)
 
+# add y = x line
+lx = np.arange(0,500)
+ly = np.arange(0,500)
+
 # plot 2 graphs
 def make_axes_pretty(ax):
     # plt.axis('equal')
@@ -41,22 +45,28 @@ def make_axes_pretty(ax):
     ax.set_xlim([0, 1200])
     ax.set_ylim([0, 500])
     ax.set_xlabel('Flora Of Japan score', fontsize=18)
-    ax.set_ylabel('Hori score', fontsize=18)
+    ax.set_ylabel('Horikawa score', fontsize=18)
     ax.grid(True)
 
 fig = plt.figure()
-fig.suptitle('Comparison of GHI Scores from 2 Sources', fontsize=22)
+#fig.suptitle('Comparison of GHI Scores from 2 Sources', fontsize=22)
+fig.suptitle('(1) Border Repeat', fontsize=22)
+#fig.suptitle('(2) Border Unique', fontsize=22)
 ax1 = fig.add_subplot(211)
 # sizes are constant times the mean times one over the species number
-foj_sizes  = 100 * sum(foj_spnos)  / (foj_spnos  * len(foj_spnos) )
-hori_sizes = 100 * sum(hori_spnos) / (hori_spnos * len(hori_spnos))
+foj_sizes  = 50 * sum(foj_spnos)  / (foj_spnos  * len(foj_spnos) )
+hori_sizes = 50 * sum(hori_spnos) / (hori_spnos * len(hori_spnos))
 ax1.scatter(foj_scores, hori_scores, s=foj_sizes, c=foj_colours, alpha=0.5)
-ax1.set_title('size proportional to 1 / foj sample number', fontsize=22)
+ax1.plot(lx, ly, c='k', alpha=0.2)
+#ax1.set_title('size proportional to 1 / foj sample number', fontsize=22)
+ax1.set_title('(a)', position=(1,-0.15))
 make_axes_pretty(ax1)
 
 ax2 = fig.add_subplot(212)
 ax2.scatter(foj_scores, hori_scores, s=hori_sizes, c=hori_colours, alpha=0.5)
-ax2.set_title('size proportional to 1 / hori sample number', fontsize=22)
+ax2.plot(lx, ly, c='k', alpha=0.2)
+#ax2.set_title('size proportional to 1 / hori sample number', fontsize=22)
+ax2.set_title('(b)', position=(1,-0.15))
 make_axes_pretty(ax2)
 
 plt.show()
