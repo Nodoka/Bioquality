@@ -3,6 +3,7 @@
 A scatter graph of hori vs foj raw scores,
 with bubble size inversely proportional to
 total number of foj species in prefecture.
+CHECK max score (lim = 400?)
 """
 import numpy as np
 import matplotlib.pyplot as plt

@@ -20,8 +20,8 @@ hmean_scores = np.array( map(lambda row: row[5], scores) )
 hmax_scores  = np.array( map(lambda row: row[6], scores) )
 
 # add y = x line
-lx = np.arange(0,300)
-ly = np.arange(0,300)
+lx = np.arange(0,400)
+ly = np.arange(0,400)
 
 # plot 2 graphs
 def make_axes_pretty(ax):
@@ -32,8 +32,8 @@ def make_axes_pretty(ax):
     #ax.yaxis.set_ticks(ytix)
     ax.plot(lx, ly, c='k', alpha=0.2)
     ax.set_aspect(1)
-    ax.set_xlim([0, 300])
-    ax.set_ylim([0, 300])
+    ax.set_xlim([0, 400])
+    ax.set_ylim([0, 400])
     ax.grid(True)
 
 fig = plt.figure()
