@@ -31,6 +31,6 @@ testprefscores.csv
 horiw*.csv
 tdwg*.csv
 hori*mean.csv
-prefscores_calc_*methods.csv
+prefscores_calc_*methods*.csv
 horicell_*.csv
 mainsp_famstats*.csv
