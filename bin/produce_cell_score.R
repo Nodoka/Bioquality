@@ -1,4 +1,5 @@
 source('../library/sanitise_data.R')
+source('../library/GHI.R')
 
 # load data
 species_cell   <- read.csv('../data/species_cell.csv', row.names = NULL)
@@ -34,9 +35,17 @@ cal_cell_score <- tapply(species_cell$star_infs,  species_cell$sampname,  calcul
 which(row.names(cal_cell_score) != row.names(spnum_cell))
 
 # convert results to dataframe
-cell_score <- data.frame(sampname=row.names(cal_cell_score),              
+cell_score <- data.frame(sampname=row.names                (cal_cell_score),              
                          GHI=cal_cell_score[],
                          spno=spnum_cell[])
 
 # OPTIONAL: filter cell with spcount > 39
-# deleted from this script
+# spcount <- spnum_cell > 39
+# valid_scores <- cell_score[spcount,]
+
+# write results to csv
+write.csv(cell_score,
+          file="../data/hori_plot_scoreR.csv",
+          row.names=FALSE,
+          fileEncoding="UTF-8")
+
