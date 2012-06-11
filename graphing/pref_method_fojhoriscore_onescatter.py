@@ -17,7 +17,7 @@ hori_scores  = np.array( map(lambda row: row[2], scores) )
 foj_spnos    = np.array( map(lambda row: row[3], scores) )
 hori_spnos   = np.array( map(lambda row: row[4], scores) )
 hmean_scores = np.array( map(lambda row: row[5], scores) )
-hmax_scores  = np.array( map(lambda row: row[6], scores) )
+hmax_scores  = np.array( map(lambda row: row[7], scores) )
 
 # add y = x line
 lx = np.arange(0,400)
