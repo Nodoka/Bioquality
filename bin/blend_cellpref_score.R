@@ -10,7 +10,6 @@ cell_pref  <- read.csv('../data/cell_pref.csv',    row.names = NULL)
 # cell_score <- read.csv('../data/hori_plot_scoreR.csv', row.names = NULL)
 # scores_frame <- read.csv ('../data/FOJHori_scores.csv', row.names = NULL)
 
-
 # change column names
 names(scores_frame)[1] <- 'Pref'
 
@@ -20,12 +19,16 @@ pref_scores <- scores_frame[c('Pref','hori_scores')]
 # merge agglomerated pref scores to cell_pref
 aggscore <- merge(cell_pref,pref_scores)
 
-# set sampname levels???? 
-cell <- unique(cell_pref$sampname)
-cell_score$sampname <- factor(cell_score$sampname,cell)
-
 # merge agglomerated scores to cell_scores
-cellpref_scores <- merge(cell_score, aggscore)
+cellpref_scores <- merge(cell_score, aggscore, all.y=TRUE)
+
+# make a new column with either of cell or pref score absed on spno
+less_than_40 <- cellpref_scores$spno < 40
+less_than_40[is.na(less_than_40)] <- T
+
+cellpref_scores[less_than_40,'valid_scores'] <- cellpref_scores[less_than_40,'hori_scores']
+
+cellpref_scores[!less_than_40,'valid_scores'] <- cellpref_scores[!less_than_40,'GHI']
 
 # write results to csv
 write.csv(cellpref_scores,
