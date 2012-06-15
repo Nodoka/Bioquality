@@ -53,10 +53,27 @@ plotscore_frame <- data.frame(gazcode=row.names(plot_score),
                              GHI=plot_score[,1],
                              spno=plot_score[,2])
 
-gazscore <- merge(latlong, plotscore_frame, all.x=T)
+gazscores <- merge(latlong, plotscore_frame, all.x=T)
+
+# make a new column with either of cell or pref score absed on spno
+less_than_40 <- gazscores$spno < 40
+less_than_40[is.na(less_than_40)] <- T
+
+gazscores[!less_than_40,'valid_scores'] <- gazscores[!less_than_40,'GHI']
+
+## OPTIONAL
+# only keep gazcode with valid scores
+valid_gazscores   <- subset(gazscores, spno != NA | spno != 0)
+
 
 # write results to csv
-write.csv(gazscore,
+write.csv(gazscores,
           file="../data/MOEgazcode_scoreR.csv",
           row.names=FALSE,
           fileEncoding="UTF-8")
+
+write.csv(valid_gazscores,
+          file="../data/MOEgazcode_validscoreR.csv",
+          row.names=FALSE,
+          fileEncoding="UTF-8")
+
