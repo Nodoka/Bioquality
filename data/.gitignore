@@ -10,12 +10,9 @@ spnos.csv
 star_sensitivity_spnos_data.csv
 star_sensitivity_spnos_diff.csv
 *.tiff
-species_qrgrid.csv
-species_x1grid.csv
-species_qrarea.csv
-species_x1area.csv
-species_qrcount.csv
-species_x1count.csv
+species_*grid.csv
+species_*area.csv
+species_*count.csv
 *Gtestdata.csv
 hori_*scores.csv
 horiuniq_*scores.csv
@@ -37,3 +34,4 @@ mainsp_famstats*.csv
 hori_plot_scoreR.csv
 cellpref_score.csv
 MOE*.csv
+Horicell_kmgrid.csv
