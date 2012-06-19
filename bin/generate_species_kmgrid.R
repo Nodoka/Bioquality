@@ -49,8 +49,10 @@ source('../library/star_weight_stats.R')
 
 # load data
 horiw <- read.csv('../data/Hori_area_weight.csv', row.names=NULL)
+# read data from the generated csv (optional)
+sp_kmcount <- read.csv('../data/species_kmcount.csv', row.names=NULL)
 
-# filter relevant columns
+# filter relevant columns (optional)
 horiw <- horiw[c('spnumber','family','infra','star_infs','horim_page','horim_end')]
 
 # merge count data to hori data
