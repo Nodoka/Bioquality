@@ -37,8 +37,14 @@ wilcox.test(accsp$kmcount, accsp$gridcount, paired=TRUE)
 wilcox.test(accsp$kmcount, accsp$tdwgcount, paired=TRUE)
 wilcox.test(accsp$gridcount, accsp$tdwgcount, paired=TRUE)
 
+# fit a linear model (linear regression analysis
+lm(accsp$kmcount ~ accsp$tdwgcount)
+
+# remove NA values
+valid_accsp <- na.omit(accsp)
+
 # write results to file
-write.csv(accsp,
+write.csv(valid_accsp,
           file="../data/conifer_counts.csv",
           fileEncoding="UTF-8",
           row.names = FALSE)
