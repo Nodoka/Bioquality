@@ -7,7 +7,9 @@ import matplotlib.pyplot as plt
 
 # extract data from csv
 file_name = "../data/Hori_area_weight_filtered.csv"
-#file_name = "../data/Hori_area_weight_filterednoGN.csv"
+# delete "" if to use graphing file
+#file_name = "../data/Hori_area_weight_filteredgraphing.csv"
+
 
 # columns:
 # 11 - star_infs
@@ -17,9 +19,17 @@ star_infs = np.genfromtxt(file_name, delimiter=',', dtype=None, skip_header=1, u
 # count
 hori_count = np.genfromtxt(file_name, delimiter=',', dtype=None, skip_header=1, usecols=14)
 grid_count = np.genfromtxt(file_name, delimiter=',', dtype=None, skip_header=1, usecols=[13,29])
+endemics = np.genfromtxt(file_name, delimiter=',', dtype=None, skip_header=1, usecols=6)
+
+# filter endemics (OPTIONAL)
+is_endemic = endemics == 'endemic'
+hori_count = hori_count[is_endemic]
+grid_count = grid_count[is_endemic]
 
 # remove "" from the text string
 stars = [star[1:-1] for star in star_infs]
+# if to use graphing file, only change the name
+stars = star_infs
 
 colours = map(lambda star_colour: 'k' if star_colour == 'BK' else 'y' if star_colour == 'GD' else 'b' if star_colour == 'BU' else 'g' if star_colour == 'GN' else 'w', stars)
 
@@ -41,7 +51,7 @@ fig = plt.figure()
 fig.suptitle('Comparison of Species Within-Japan Range Size Measured at 2 Resolutions Using Horikawa Maps and TDWG data', fontsize=12)
 
 def plot_scatter(index):
-    ax = fig.add_subplot(211 + index)
+    ax = fig.add_subplot(121 + index)
     ax.scatter(hori_count, grid_count[:,index], color=colours, alpha=0.5)
     ax.set_aspect(10)
     ax.set_xlim([0, 1418])
