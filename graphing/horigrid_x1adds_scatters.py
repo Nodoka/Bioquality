@@ -7,8 +7,9 @@ import matplotlib.pyplot as plt
 
 # extract data from csv
 file_name = "../data/Hori_area_weight_filtered.csv"
-# delete "" if to use graphing file
+# delete "" if to use graphing or noGN file
 #file_name = "../data/Hori_area_weight_filteredgraphing.csv"
+#file_name = "../data/Hori_area_weight_filterednoGN.csv"
 
 
 # columns:
