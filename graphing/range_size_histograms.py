@@ -9,6 +9,8 @@ import pylab
 
 # uncomment when using filtered data
 file_name = "../data/Hori_area_weight_filtered.csv"
+# use for endemics
+file_name = "../data/Hori_area_weight_filteredgraphendemics.csv"
 
 # columns:
 # 12 or 11(filtered) - star_infs
@@ -16,9 +18,14 @@ file_name = "../data/Hori_area_weight_filtered.csv"
 # 23 or 22(filtered) - qgr_totalland
 # 26 or 25(filtered) - X1gr_totalland
 star_infs = np.genfromtxt(file_name, delimiter=',', dtype=None, skip_header=1, usecols=11)
-grid_land = np.genfromtxt(file_name, delimiter=',', dtype=None, skip_header=1, usecols=25)
+grid_land = np.genfromtxt(file_name, delimiter=',', dtype=None, skip_header=1, usecols=18)
+endemics = np.genfromtxt(file_name, delimiter=',', dtype=None, skip_header=1, usecols=6)
 
-# delete "" when using original data
+# filter endemics (TOO MANY BOOLIAN INDECIES)
+is_endemic = endemics == '"endemic"'
+grid_land = grid_land[is_endemic]
+
+# delete "" when using original and graphing data
 bk = grid_land[star_infs == '"BK"']/10000
 gd = grid_land[star_infs == '"GD"']/10000
 bu = grid_land[star_infs == '"BU"']/10000
@@ -53,7 +60,7 @@ histaxes = histfig.add_subplot(111)
 n, bins, patches = histaxes.hist([bk,gd,bu,gn],
                               bins=25,
                               normed=True,
-                              color=['k', 'y', 'b', 'g'])  
+                              color=['k', 'y', 'b', 'g']) # log = True
 histaxes.set_xlabel('Species Range Size (10$^4$km$^2$)', size='x-large')              
 histaxes.set_ylabel('Normalised Frequency', size='x-large')
 plt.show()
