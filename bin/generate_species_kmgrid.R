@@ -16,7 +16,7 @@ species_cell <- species_cell[,c('sampname','spnumber','star')]
 cell_grid[,'rounded_x']  <- round(cell_grid[,'XI']/100000,0)
 cell_grid[,'rounded_y'] <- round(cell_grid[,'YI']/100000,0)
 kmplot <- unique(cell_grid[,c('rounded_x','rounded_y')])
-kmplot$kmgrid <- 1:nrow(coord)  
+kmplot$kmgrid <- 1:nrow(kmplot)  
 
 cell_grid <- merge(cell_grid, kmplot)
 
