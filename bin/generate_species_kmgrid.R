@@ -65,7 +65,7 @@ horiw_km <- filter_rows_by_valid_star(horiw_km,'star_infs')
 horiw_km <- filter_infra(horiw_km)
 
 # uncomment to run analysis only with endemics
-# horiw_km <- filter_endemics(horiw_km)
+horiw_km <- filter_endemics(horiw_km)
 
 # uncomment to run analysis without GN
 # horiw_km <- filter_nogn(horiw_km)
@@ -74,4 +74,5 @@ horiw_km <- filter_infra(horiw_km)
 mean_count <- tapply(horiw_km$kmcount, horiw_km$star_infs, mean)
 
 # calculate weights for stars
+weight_countGN <- mean_count['GN']/mean_count
 weight_count <- mean_count['BU']/mean_count

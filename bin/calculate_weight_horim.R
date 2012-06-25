@@ -15,7 +15,7 @@ horiw <- cbind(horiw[,-5],species)
 horiw <- filter_infra(horiw)
 
 # uncomment to run analysis only with endemics
-# horiw <- filter_endemics(horiw)
+horiw <- filter_endemics(horiw)
 
 # uncomment to run analysis only with grids on main islands
 # horiw <- filter_mainisl(horiw)
@@ -36,6 +36,10 @@ differences <- as.matrix(horiw[,c('qgr_totalland','X1gr_totalland')]) - replicat
 logdiff     <- log(differences/horiw[,'mgr_totalland']+1)
 
 diff_frame <- data.frame(rownum=row.names(logdiff), qrt_landdiff=logdiff[,1], x1_landdiff=logdiff[,2])
+
+# after filtering out GN, calculate mean & weight for x1adds count
+mean_x1adds <- tapply(horiw$x1gridadds, horiw$star_infs, mean)
+weight_x1adds <- mean_x1adds['BU']/mean_x1adds
 
 -----------------------------
 # write filtered data to file 
