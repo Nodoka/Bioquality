@@ -38,6 +38,27 @@ differences      <- sens_scores[,-1] - replicate(5,sens_scores[,1])
 difference_means <- apply(differences,2,mean)
 difference_sds   <- apply(differences,2,sd)
 
+----------------------------
+# calculate number of species in prefecture for each method
+foj_spsum_star       <- table(foj_star$pref)
+foj_spsum_star_geo   <- table(foj_star_geo$pref)
+foj_spsum_star_geou  <- table(foj_star_geou$pref)
+foj_spsum_star_geod  <- table(foj_star_geod$pref)
+foj_spsum_star_infa  <- table(foj_star_infa$pref)
+foj_spsum_star_infs  <- table(foj_star_infs$pref)
+sens_spsum           <- cbind(foj_spsum_star,foj_spsum_star_geo,foj_spsum_star_geou,foj_spsum_star_geod,foj_spsum_star_infa,foj_spsum_star_infs)
+
+# calculate the differences of the number of species between each star method and the default
+spsum_diff <- sens_spsum[,-1] - replicate(5,sens_spsum[,1])
+spsum_diff_means <- apply(spsum_diff,2,mean)
+spsum_diff_sds   <- apply(spsum_diff,2,sd)
+
+# index T/F of spcount > 39 using default star method
+spcount       <- foj_spsum_star > 39
+# then filter tdwg with the index.
+sens_scores <- sens_scores[spcount,]
+
+------------------------------------
 # convert scores to dataframe
 sens_scores_frame <- data.frame(preflist=row.names(sens_scores), 
 		     star_default=sens_scores[,1], 
@@ -104,27 +125,6 @@ wilcox.test(sens_scores_frame[,2], sens_scores_frame[,5], paired=T, conf.int=T)
 wilcox.test(sens_scores_frame[,2], sens_scores_frame[,6], paired=T, conf.int=T)
 wilcox.test(sens_scores_frame[,2], sens_scores_frame[,7], paired=T, conf.int=T)
 
-----------------------------
-# calculate number of species in prefecture for each method
-foj_spsum_star       <- table(foj_star$pref)
-foj_spsum_star_geo   <- table(foj_star_geo$pref)
-foj_spsum_star_geou  <- table(foj_star_geou$pref)
-foj_spsum_star_geod  <- table(foj_star_geod$pref)
-foj_spsum_star_infa  <- table(foj_star_infa$pref)
-foj_spsum_star_infs  <- table(foj_star_infs$pref)
-sens_spsum           <- cbind(foj_spsum_star,foj_spsum_star_geo,foj_spsum_star_geou,foj_spsum_star_geod,foj_spsum_star_infa,foj_spsum_star_infs)
-
-# calculate the differences of the number of species between each star method and the default
-spsum_diff <- sens_spsum[,-1] - replicate(5,sens_spsum[,1])
-spsum_diff_means <- apply(spsum_diff,2,mean)
-spsum_diff_sds   <- apply(spsum_diff,2,sd)
-
-# index T/F of spcount > 39 using default star method
-spcount       <- foj_spsum_star > 39
-# then filter tdwg with the index.
-sens_scores <- sens_scores[spcount,]
-
-------------------------------------
 # bar plot
 barplot(foj_scores_sensitivity,legend.text=c('star','star_geo','star_geou','star_geod','star_infa','star_infs'),beside=TRUE,xlab='prefecture',ylab='GHI score')
 
