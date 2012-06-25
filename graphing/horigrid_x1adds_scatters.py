@@ -10,6 +10,7 @@ file_name = "../data/Hori_area_weight_filtered.csv"
 # delete "" if to use graphing or noGN file
 #file_name = "../data/Hori_area_weight_filteredgraphing.csv"
 #file_name = "../data/Hori_area_weight_filterednoGN.csv"
+#file_name = "../data/Hori_area_weight_filteredgraphendemics.csv"
 
 
 # columns:
@@ -63,7 +64,7 @@ def plot_scatter(index):
     # ytix = np.arange(0, 1000.1, 200)
     # ax.xaxis.set_ticks(xtix)
     # ax.yaxis.set_ticks(ytix)
-    ax.set_xlabel('Grid count at 0.1 lat. by 0.15 long. geoquadrat', fontsize=12)
+    ax.set_xlabel('Grid count at 10\' lat. by 15\' long. geoquadrat', fontsize=12)
     ax.set_ylabel('Grid count at ' + resolutions[index], fontsize=12)
     #ax.set_title('Comparison of range size between area and count at ' + resolutions[index], fontsize=12)
     ax.grid(True)
