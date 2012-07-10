@@ -3,15 +3,21 @@ source('../bin/compare_prefscore_agglomeration.R')
 # load data
 rept <- read.csv('../data/prefscores_calc_methods.csv', row.names=NULL)
 uniq <- read.csv('../data/prefscores_calc_uniqmethods.csv', row.names=NULL)
-
+excl <- read.csv('../data/prefscores_calc_exclmethods.csv', row.names=NULL)
 
 # omit NA values
 valid_rept <- na.omit(rept)
 valid_uniq <- na.omit(uniq)
+valid_excl <- na.omit(excl)
 
 # omit Izu 
 valid_rept <- valid_rept[-48,]
 valid_uniq <- valid_uniq[-48,]
+valid_excl <- valid_excl[-47,]
+
+# omit Tokyo when comparing with 'excl' method
+no_tokyo   <- valid_rept$preflist != 'Tokyo'
+valid_rept <- valid_rept[no_tokyo,]
 
 # the Shapiro-Wilk test of normality: shapiro.test(x)
 # summary statsitics: summary(x)
