@@ -5,6 +5,7 @@
 # '' = holistic by default
 agglomeration <- ''
 # agglomeration <- 'uniq'
+# agglomeration <- 'excl'
 
 # corresponding input and output file names
 input_scores   <- paste('../data/FOJHori', agglomeration, '_scores.csv', sep='')

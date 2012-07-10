@@ -4,6 +4,7 @@ source('../library/sanitise_data.R')
 # '' = holistic by default
 agglomeration <- ''
 # agglomeration <- 'uniq'
+# agglomeration <- 'excl'
 
 # corresponding input and output file names
 input_file    <- paste('../data/cell_', agglomeration, 'pref.csv', sep='')

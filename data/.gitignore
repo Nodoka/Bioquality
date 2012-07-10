@@ -16,6 +16,7 @@ species_*count.csv
 *Gtestdata.csv
 hori_*scores.csv
 horiuniq_*scores.csv
+horiexcl_*scores.csv
 *test.csv
 workdata*.csv
 FOJHori*.csv
