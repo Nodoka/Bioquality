@@ -22,7 +22,9 @@ FOJHori*.csv
 species_cell_rmmoss.csv
 Hori_area_weight_filtered*.csv
 cell_uniqpref.csv
+cell_exclpref.csv
 species_uniqpref.csv
+species_exclpref.csv
 Horisp_resol_diffs.csv
 testprefscores.csv
 horiw*.csv
