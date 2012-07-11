@@ -25,14 +25,17 @@ valid_rept <- valid_rept[no_tokyo,]
 
 ## Horikawa data
 # Spearman's rank correlation analysis: 
-# Holistics vs mean, max for repeat and valid_unique
+# Holistics vs mean, max for repeat and valid_unique, valid_excl
 cor(valid_rept$hori_scores, valid_rept$meanGHI, method='spearman')
-cor(valid_rept$hori_scores, valid_rept$maxGHI,method='spearman')
+cor(valid_rept$hori_scores, valid_rept$maxGHI,  method='spearman')
 cor(valid_uniq$hori_scores, valid_uniq$meanGHI, method='spearman')
-cor(valid_uniq$hori_scores, valid_uniq$maxGHI,method='spearman')
+cor(valid_uniq$hori_scores, valid_uniq$maxGHI,  method='spearman')
+cor(valid_excl$hori_scores, valid_excl$meanGHI, method='spearman')
+cor(valid_excl$hori_scores, valid_excl$maxGHI,  method='spearman')
 
 # Spearman's rank correlation analysis: 
-# valid_rept vs valid_uniq on scores and spno
+# valid_rept vs valid_uniq or valid_excl on scores and spno
+# comparison of valid_uniq vs valid_excl omitted
 cor(valid_rept$hori_scores, valid_uniq$hori_scores, method='spearman')
 cor(valid_rept$meanGHI,     valid_uniq$meanGHI,     method='spearman')
 cor(valid_rept$maxGHI,      valid_uniq$maxGHI,      method='spearman')
@@ -40,6 +43,14 @@ cor(valid_rept$maxGHI,      valid_uniq$maxGHI,      method='spearman')
 cor(valid_rept$hori_spno,   valid_uniq$hori_spno,   method='spearman')
 cor(valid_rept$meanspno,    valid_uniq$meanspno,    method='spearman')
 cor(valid_rept$maxspno,     valid_uniq$maxspno,     method='spearman')
+
+cor(valid_rept$hori_scores, valid_excl$hori_scores, method='spearman')
+cor(valid_rept$meanGHI,     valid_excl$meanGHI,     method='spearman')
+cor(valid_rept$maxGHI,      valid_excl$maxGHI,      method='spearman')
+
+cor(valid_rept$hori_spno,   valid_excl$hori_spno,   method='spearman')
+cor(valid_rept$meanspno,    valid_excl$meanspno,    method='spearman')
+cor(valid_rept$maxspno,     valid_excl$maxspno,     method='spearman')
 
 ## FOJ vs. Horikawa data
 # Spearman's rank correlation analysis:
@@ -49,6 +60,10 @@ cor(valid_rept$foj_scores, valid_rept$maxGHI,      method ='spearman')
 cor(valid_uniq$foj_scores, valid_uniq$hori_scores, method ='spearman')
 cor(valid_uniq$foj_scores, valid_uniq$meanGHI,     method ='spearman')
 cor(valid_uniq$foj_scores, valid_uniq$maxGHI,      method ='spearman')
+cor(valid_excl$foj_scores, valid_excl$hori_scores, method ='spearman')
+cor(valid_excl$foj_scores, valid_excl$meanGHI,     method ='spearman')
+cor(valid_excl$foj_scores, valid_excl$maxGHI,      method ='spearman')
+
 # Wilcoxon's signed-t test
 wilcox.test(valid_rept$foj_scores, valid_rept$hori_scores, paired=T)
 wilcox.test(valid_rept$foj_scores, valid_rept$meanGHI,     paired=T)
@@ -56,7 +71,9 @@ wilcox.test(valid_rept$foj_scores, valid_rept$maxGHI,      paired=T)
 wilcox.test(valid_uniq$foj_scores, valid_uniq$hori_scores, paired=T)
 wilcox.test(valid_uniq$foj_scores, valid_uniq$meanGHI,     paired=T)
 wilcox.test(valid_uniq$foj_scores, valid_uniq$maxGHI,      paired=T)
-
+wilcox.test(valid_excl$foj_scores, valid_excl$hori_scores, paired=T)
+wilcox.test(valid_excl$foj_scores, valid_excl$meanGHI,     paired=T)
+wilcox.test(valid_excl$foj_scores, valid_excl$maxGHI,      paired=T)
 
 # change names of relevant columns
 # $foj_scores = [,2]
@@ -66,23 +83,23 @@ wilcox.test(valid_uniq$foj_scores, valid_uniq$maxGHI,      paired=T)
 names(valid_rept)[3] <- 'holshori_scores'
 names(valid_rept)[6] <- 'holsmeanGHI'
 names(valid_rept)[8] <- 'holsmaxGHI'
-names(valid_uniq)[3] <- 'valid_uniqhori_scores'
-names(valid_uniq)[6] <- 'valid_uniqmeanGHI'
-names(valid_uniq)[8] <- 'valid_uniqmaxGHI'
+names(valid_uniq)[3] <- 'uniqhori_scores'
+names(valid_uniq)[6] <- 'uniqmeanGHI'
+names(valid_uniq)[8] <- 'uniqmaxGHI'
 # filter relevant columns & merge 2 data sets
 brep <- valid_rept[c('preflist','holshori_scores','holsmeanGHI','holsmaxGHI')]
-bunq <- valid_uniq[c('preflist','valid_uniqhori_scores','valid_uniqmeanGHI','valid_uniqmaxGHI')]
+bunq <- valid_uniq[c('preflist','uniqhori_scores','uniqmeanGHI','uniqmaxGHI')]
 calscores <- merge(brep, bunq)
 
 # Wilcoxon's signed-t test:
 # valid_rept vs valid_uniq on scores
-wilcox.test(calscores$holshori_scores, calscores$valid_uniqhori_scores, paired=T)
-wilcox.test(calscores$holsmeanGHI, calscores$valid_uniqmeanGHI,     paired=T)
-wilcox.test(calscores$holsmaxGHI,  calscores$valid_uniqmaxGHI,      paired=T)
+wilcox.test(calscores$holshori_scores, calscores$uniqhori_scores, paired=T)
+wilcox.test(calscores$holsmeanGHI, calscores$uniqmeanGHI, paired=T)
+wilcox.test(calscores$holsmaxGHI,  calscores$uniqmaxGHI,  paired=T)
 
 # Wilcoxons' signed-t test: 
-# Holistics vs mean, max for repeat and valid_unique
+# Holistics vs mean, max for repeat and unique
 wilcox.test(calscores$holshori_scores, calscores$holsmaxGHI, paired=T)
 wilcox.test(calscores$holshori_scores, calscores$holsmeanGHI,paired=T)
-wilcox.test(calscores$valid_uniqhori_scores, calscores$valid_uniqmaxGHI, paired=T)
-wilcox.test(calscores$valid_uniqhori_scores, calscores$valid_uniqmeanGHI,paired=T)
+wilcox.test(calscores$uniqhori_scores, calscores$uniqmaxGHI, paired=T)
+wilcox.test(calscores$uniqhori_scores, calscores$uniqmeanGHI,paired=T)
