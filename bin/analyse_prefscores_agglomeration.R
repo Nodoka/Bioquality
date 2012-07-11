@@ -17,7 +17,8 @@ valid_excl <- valid_excl[-47,]
 
 # omit Tokyo when comparing with 'excl' method
 no_tokyo   <- valid_rept$preflist != 'Tokyo'
-valid_rept <- valid_rept[no_tokyo,]
+mvalid_rept <- valid_rept[no_tokyo,]
+mvalid_uniq <- valid_uniq[no_tokyo,]
 
 # the Shapiro-Wilk test of normality: shapiro.test(x)
 # summary statsitics: summary(x)
@@ -34,8 +35,7 @@ cor(valid_excl$hori_scores, valid_excl$meanGHI, method='spearman')
 cor(valid_excl$hori_scores, valid_excl$maxGHI,  method='spearman')
 
 # Spearman's rank correlation analysis: 
-# valid_rept vs valid_uniq or valid_excl on scores and spno
-# comparison of valid_uniq vs valid_excl omitted
+# valid_rept vs valid_uniq on scores and spno
 cor(valid_rept$hori_scores, valid_uniq$hori_scores, method='spearman')
 cor(valid_rept$meanGHI,     valid_uniq$meanGHI,     method='spearman')
 cor(valid_rept$maxGHI,      valid_uniq$maxGHI,      method='spearman')
@@ -44,13 +44,22 @@ cor(valid_rept$hori_spno,   valid_uniq$hori_spno,   method='spearman')
 cor(valid_rept$meanspno,    valid_uniq$meanspno,    method='spearman')
 cor(valid_rept$maxspno,     valid_uniq$maxspno,     method='spearman')
 
-cor(valid_rept$hori_scores, valid_excl$hori_scores, method='spearman')
-cor(valid_rept$meanGHI,     valid_excl$meanGHI,     method='spearman')
-cor(valid_rept$maxGHI,      valid_excl$maxGHI,      method='spearman')
+# comparison of modified valid_rept or valid_uniq vs valid_excl
+cor(mvalid_rept$hori_scores, valid_excl$hori_scores, method='spearman')
+cor(mvalid_rept$meanGHI,     valid_excl$meanGHI,     method='spearman')
+cor(mvalid_rept$maxGHI,      valid_excl$maxGHI,      method='spearman')
 
-cor(valid_rept$hori_spno,   valid_excl$hori_spno,   method='spearman')
-cor(valid_rept$meanspno,    valid_excl$meanspno,    method='spearman')
-cor(valid_rept$maxspno,     valid_excl$maxspno,     method='spearman')
+cor(mvalid_rept$hori_spno,   valid_excl$hori_spno,   method='spearman')
+cor(mvalid_rept$meanspno,    valid_excl$meanspno,    method='spearman')
+cor(mvalid_rept$maxspno,     valid_excl$maxspno,     method='spearman')
+
+cor(mvalid_uniq$hori_scores, valid_excl$hori_scores, method='spearman')
+cor(mvalid_uniq$meanGHI,     valid_excl$meanGHI,     method='spearman')
+cor(mvalid_uniq$maxGHI,      valid_excl$maxGHI,      method='spearman')
+
+cor(mvalid_uniq$hori_spno,   valid_excl$hori_spno,   method='spearman')
+cor(mvalid_uniq$meanspno,    valid_excl$meanspno,    method='spearman')
+cor(mvalid_uniq$maxspno,     valid_excl$maxspno,     method='spearman')
 
 ## FOJ vs. Horikawa data
 # Spearman's rank correlation analysis:
