@@ -11,9 +11,13 @@ import matplotlib.pyplot as plt
 scores = np.genfromtxt("../data/FOJHori_scores.csv", delimiter=',', dtype=None, names=True)
 spnos = np.genfromtxt("../data/FOJHori_spnos.csv", delimiter=',', dtype=None, names=True)
 
-# uncomment to use uniq method
+## uncomment to use uniq method
 # scores = np.genfromtxt("../data/FOJHoriuniq_scores.csv", delimiter=',', dtype=None, names=True)
 # spnos = np.genfromtxt("../data/FOJHoriuniq_spnos.csv", delimiter=',', dtype=None, names=True)
+
+## uncomment to use excl method
+# scores = np.genfromtxt("../data/FOJHoriexcl_scores.csv", delimiter=',', dtype=None, names=True)
+# spnos = np.genfromtxt("../data/FOJHoriexcl_spnos.csv", delimiter=',', dtype=None, names=True)
 
 # check that the prefecture labels are the same and in the same order
 scores_prefnames = [row[0] for row in scores]
@@ -52,6 +56,7 @@ fig = plt.figure()
 #fig.suptitle('Comparison of GHI Scores from 2 Sources', fontsize=22)
 fig.suptitle('(1) Border Repeat', fontsize=22)
 #fig.suptitle('(2) Border Unique', fontsize=22)
+#fig.suptitle('(3) Border Exclude', fontsize=22)
 ax1 = fig.add_subplot(211)
 # sizes are constant times the mean times one over the species number
 foj_sizes  = 50 * sum(foj_spnos)  / (foj_spnos  * len(foj_spnos) )

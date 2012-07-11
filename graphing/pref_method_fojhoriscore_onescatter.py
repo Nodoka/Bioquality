@@ -9,7 +9,9 @@ import matplotlib.pyplot as plt
 # load a numpy record array from scores.csv
 scores = np.genfromtxt("../data/prefscores_calc_methods.csv", delimiter=',', dtype=None, names=True)
 # uncomment to use uniq method
-# scores = np.genfromtxt("../data/prefscores_calc_uniqmethods.csv", delimiter=',', dtype=None, names=True)
+#scores = np.genfromtxt("../data/prefscores_calc_uniqmethods.csv", delimiter=',', dtype=None, names=True)
+# uncomment to use excl method
+#scores = np.genfromtxt("../data/prefscores_calc_exclmethods.csv", delimiter=',', dtype=None, names=True)
 
 # extract scores and spnos
 foj_scores   = np.array( map(lambda row: row[1], scores) )
@@ -41,11 +43,12 @@ ax1 = fig.add_subplot(111)
 ax1.scatter(foj_scores, hori_scores, marker='o', color='m', alpha=0.5)
 ax1.scatter(foj_scores, hmean_scores, marker='d', color='c', alpha=0.5)
 ax1.scatter(foj_scores, hmax_scores, marker='^', color='r', alpha=0.5)
-ax1.set_xlabel('FOJ scores', fontsize=18)
-ax1.set_ylabel('Holistic, Average, Max Horikawa Score', fontsize=18)
+ax1.set_xlabel('Prefecture-FOJ Score', fontsize=18)
+ax1.set_ylabel('Holistic, Average, Max Prefecture-Level Horikawa Score', fontsize=18)
 #ax1.set_title('Hori scores with 3 calculation methods vs FOJ scores', fontsize=22)
 ax1.set_title('(1) Border Repeat', fontsize=22)
 #ax1.set_title('(2) Border Unique', fontsize=22)
+#ax1.set_title('(3) Border Exclude', fontsize=22)
 make_axes_pretty(ax1)
 
 plt.show()

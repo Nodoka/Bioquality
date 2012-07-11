@@ -12,6 +12,8 @@ import matplotlib.pyplot as plt
 scores = np.genfromtxt("../data/prefscores_calc_methods.csv", delimiter=',', dtype=None, names=True)
 # uncomment to use uniq method
 # scores = np.genfromtxt("../data/prefscores_calc_uniqmethods.csv", delimiter=',', dtype=None, names=True)
+# uncomment to use excl method
+# scores = np.genfromtxt("../data/prefscores_calc_exclmethods.csv", delimiter=',', dtype=None, names=True)
 
 # extract scores and spnos
 foj_scores   = np.array( map(lambda row: row[1], scores) )
@@ -51,6 +53,7 @@ fig = plt.figure()
 #fig.suptitle('Comparison of GHI Scores from 2 methods', fontsize=22)
 fig.suptitle('(1) Border Repeat', fontsize=20)
 #fig.suptitle('(2) Border Unique', fontsize=20)
+#fig.suptitle('(3) Border Exclude', fontsize=20)
 ax1 = fig.add_subplot(211)
 # sizes are constant times the mean times one over the species number
 mean_sizes  = 20 * sum(hmean_spnos)  / (hmean_spnos  * len(hmean_spnos) )
