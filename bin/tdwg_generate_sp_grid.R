@@ -30,6 +30,8 @@ tdwg_grid <- valid_area
 
 # grid stats: the number of x1grid per l3code
 countsum <- table(tdwg_grid$l3code)
+count <- data.frame(l3=row.names(countsum),freq=countsum[])
+
 
 # grid stats: mean and sum of x1 grid area per l3 code
 areamean <- tapply(tdwg_grid$areas, tdwg_grid$l3code, mean)
