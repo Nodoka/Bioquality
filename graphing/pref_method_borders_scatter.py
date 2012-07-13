@@ -40,9 +40,9 @@ uniq_max_spnos    = np.array( map(lambda row: row[8], uniq) )
 #rept_hori_scores  = np.genfromtxt(rept_file, delimiter=',', dtype=None, skip_header=1, usecols=2)
 
 # sizes are constant times the mean times one over the species number
-rept_sizes  = 20 * sum(uniq_mean_spnos)  / (uniq_mean_spnos  * len(uniq_mean_spnos) )
+hols_sizes  = 20 * sum(uniq_hori_spnos)  / (uniq_hori_spnos  * len(uniq_hori_spnos) )
 mean_sizes  = 20 * sum(uniq_mean_spnos)  / (uniq_mean_spnos  * len(uniq_mean_spnos) )
-max_sizes   = 20 * sum(uniq_max_spnos) / (uniq_max_spnos * len(uniq_max_spnos))
+max_sizes   = 20 * sum(uniq_max_spnos) / (uniq_max_spnos * len(uniq_max_spnos) )
 
 # add y = x line
 lx = np.arange(0,300)
@@ -67,13 +67,13 @@ def make_axes_pretty(ax):
 fig = plt.figure()
 fig.suptitle('Comparison of GHI Scores between 2 border treatments', fontsize=18)
 ax1 = fig.add_subplot(131)
-ax1.scatter(rept_hori_scores, uniq_hori_scores, s=rept_sizes, marker='o', color='m', alpha=0.5)
+ax1.scatter(rept_hori_scores, uniq_hori_scores, s=hols_sizes, marker='o', color='m', alpha=0.5)
 ax1.set_xlabel('Repeat Holistic Hori Score', fontsize=12)
 ax1.set_ylabel('Unique Holistic Hori Score', fontsize=12)
 make_axes_pretty(ax1)
 
 ax2 = fig.add_subplot(132)
-ax2.scatter(rept_hori_scores, uniq_hori_scores, s=mean_sizes, marker='d', color='c', alpha=0.5)
+ax2.scatter(rept_mean_scores, uniq_mean_scores, s=mean_sizes, marker='d', color='c', alpha=0.5)
 ax2.set_xlabel('Repeat Average Hori Score', fontsize=12)
 ax2.set_ylabel('Unique Average Hori Score', fontsize=12)
 make_axes_pretty(ax2)
@@ -109,7 +109,7 @@ rept_max_spnos    = np.array( map(lambda row: row[8], rept) )
 
 
 # sizes are constant times the mean times one over the species number
-rept_sizes  = 20 * sum(excl_mean_spnos)  / (excl_mean_spnos  * len(excl_mean_spnos) )
+hols_sizes  = 20 * sum(excl_hori_spnos)  / (excl_hori_spnos  * len(excl_hori_spnos) )
 mean_sizes  = 20 * sum(excl_mean_spnos)  / (excl_mean_spnos  * len(excl_mean_spnos) )
 max_sizes   = 20 * sum(excl_max_spnos) / (excl_max_spnos * len(excl_max_spnos))
 
@@ -117,13 +117,13 @@ max_sizes   = 20 * sum(excl_max_spnos) / (excl_max_spnos * len(excl_max_spnos))
 fig = plt.figure()
 fig.suptitle('Comparison of GHI Scores between 2 border treatments', fontsize=18)
 ax1 = fig.add_subplot(131)
-ax1.scatter(rept_hori_scores, excl_hori_scores, s=rept_sizes, marker='o', color='m', alpha=0.5)
+ax1.scatter(rept_hori_scores, excl_hori_scores, s=hols_sizes, marker='o', color='m', alpha=0.5)
 ax1.set_xlabel('Repeat Holistic Hori Score', fontsize=12)
 ax1.set_ylabel('Exclude Holistic Hori Score', fontsize=12)
 make_axes_pretty(ax1)
 
 ax2 = fig.add_subplot(132)
-ax2.scatter(rept_hori_scores, excl_hori_scores, s=mean_sizes, marker='d', color='c', alpha=0.5)
+ax2.scatter(rept_mean_scores, excl_mean_scores, s=mean_sizes, marker='d', color='c', alpha=0.5)
 ax2.set_xlabel('Repeat Average Hori Score', fontsize=12)
 ax2.set_ylabel('Exclude Average Hori Score', fontsize=12)
 make_axes_pretty(ax2)
@@ -150,7 +150,7 @@ uniq_max_scores   = np.array( map(lambda row: row[7], uniq) )
 uniq_max_spnos    = np.array( map(lambda row: row[8], uniq) )
 
 # sizes are constant times the mean times one over the species number
-uniq_sizes  = 20 * sum(excl_mean_spnos)  / (excl_mean_spnos  * len(excl_mean_spnos) )
+hols_sizes  = 20 * sum(excl_hori_spnos)  / (excl_hori_spnos  * len(excl_hori_spnos) )
 mean_sizes  = 20 * sum(excl_mean_spnos)  / (excl_mean_spnos  * len(excl_mean_spnos) )
 max_sizes   = 20 * sum(excl_max_spnos) / (excl_max_spnos * len(excl_max_spnos))
 
@@ -158,13 +158,13 @@ max_sizes   = 20 * sum(excl_max_spnos) / (excl_max_spnos * len(excl_max_spnos))
 fig = plt.figure()
 fig.suptitle('Comparison of GHI Scores between 2 border treatments', fontsize=18)
 ax1 = fig.add_subplot(131)
-ax1.scatter(uniq_hori_scores, excl_hori_scores, s=uniq_sizes, marker='o', color='m', alpha=0.5)
+ax1.scatter(uniq_hori_scores, excl_hori_scores, s=hols_sizes, marker='o', color='m', alpha=0.5)
 ax1.set_xlabel('Unique Holistic Hori Score', fontsize=12)
 ax1.set_ylabel('Exclude Holistic Hori Score', fontsize=12)
 make_axes_pretty(ax1)
 
 ax2 = fig.add_subplot(132)
-ax2.scatter(uniq_hori_scores, excl_hori_scores, s=mean_sizes, marker='d', color='c', alpha=0.5)
+ax2.scatter(uniq_mean_scores, excl_mean_scores, s=mean_sizes, marker='d', color='c', alpha=0.5)
 ax2.set_xlabel('Unique Average Hori Score', fontsize=12)
 ax2.set_ylabel('Exclude Average Hori Score', fontsize=12)
 make_axes_pretty(ax2)
@@ -176,3 +176,6 @@ ax3.set_ylabel('Exclude Maximum Hori Score', fontsize=12)
 make_axes_pretty(ax3)
 
 plt.show()
+
+# .astype(float)???
+# integer(hols - uniq +1)*2??
