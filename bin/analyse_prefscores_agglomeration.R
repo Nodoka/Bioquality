@@ -20,6 +20,37 @@ no_tokyo   <- valid_rept$preflist != 'Tokyo'
 mvalid_rept <- valid_rept[no_tokyo,]
 mvalid_uniq <- valid_uniq[no_tokyo,]
 
+# summary statistics
+diff_reptuniq <- valid_rept[,-1]  - valid_uniq[,-1]
+diff_reptexcl <- mvalid_rept[,-1] - valid_excl[,-1]
+diff_uniqexcl <- mvalid_uniq[,-1] - valid_excl[,-1]
+
+sapply(diff_reptuniq, mean)
+sapply(diff_reptuniq, sd)
+sapply(diff_reptexcl, mean)
+sapply(diff_reptexcl, sd)
+sapply(diff_uniqexcl, mean)
+sapply(diff_uniqexcl, sd)
+
+# select columns for scores
+rept_scores  <- valid_rept[,c('hori_scores','meanGHI','maxGHI')]
+uniq_scores  <- valid_uniq[,c('hori_scores','meanGHI','maxGHI')]
+excl_scores  <- valid_excl[,c('hori_scores','meanGHI','maxGHI')]
+
+# diff between calculation methods
+diff_rept <- rept_scores[,-1] - replicate(2,rept_scores[,1])
+diff_uniq <- uniq_scores[,-1] - replicate(2,uniq_scores[,1])
+diff_excl <- excl_scores[,-1] - replicate(2,excl_scores[,1])
+
+# diff between foj
+foj_scores  <- valid_rept[,c('preflist','foj_scores')]
+mfoj_scores <- mvalid_rept[,c('preflist','foj_scores')]
+
+rept_foj <- replicate(3,foj_scores[-1,2]) - rept_scores
+uniq_foj <- replicate(3,foj_scores[-1,2]) - uniq_scores
+excl_foj <- replicate(3,mfoj_scores[-1,2]) - excl_scores
+
+
 # the Shapiro-Wilk test of normality: shapiro.test(x)
 # summary statsitics: summary(x)
 # standard deviation: sapply(x, sd)
