@@ -35,3 +35,20 @@ write.csv(cell_pref,
           row.names=FALSE,
           fileEncoding="UTF-8")
 
+# compile exclded cell
+excl_cell <- subset(pref_freq, prefno != 1)
+# filter list by valid_cell
+excell_pref <- merge(excl_cell, valid_sampfreq) 
+
+# write results of excluded cell pref unique pair
+write.csv(excl_cell,
+          file="../data/excluded_cell.csv",
+          row.names=FALSE,
+          fileEncoding="UTF-8")
+
+write.csv(excell_pref,
+          file="../data/excluded_cellpref.csv",
+          row.names=FALSE,
+          fileEncoding="UTF-8")
+
+
