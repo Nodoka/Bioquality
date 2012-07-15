@@ -1,5 +1,5 @@
 source('../library/sanitise_data.R')
-# use excle_cell
+# use excl_cell & valid_cell
 source('../bin/manipulate_bexcl_cell_pref.R')
 
 # load data
@@ -15,12 +15,18 @@ species_cell <- not_moss
 
 # merge cell and species
 excl_sp <- merge(excl_cell, species_cell)
+incl_sp <- merge(valid_cell, species_cell)
 
 # filter relevant columns
-excl_sp <- t[,c("sampname","prefno","scode","spnumber","star_infs")]
+excl_sp <- excl_sp[,c("sampname","prefno","scode","spnumber","star_infs")]
+incl_sp <- incl_sp[,c("sampname","prefno","scode","spnumber","star_infs")]
 
 # unique sort species
 uniq_exclsp <- unique(excl_sp[,c("spnumber", "star_infs")])
+uniq_inclsp <- unique(incl_sp[,c("spnumber", "star_infs")])
+
+# identify removed species
+opt_sp <- setdiff(uniq_exclsp$spnumber, uniq_inclsp$spnumber)
 
 # tabulate star_infs statistics
 stars <- table(uniq_exclsp$star_infs)
