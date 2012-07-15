@@ -25,10 +25,17 @@ hmean_spnos  = np.array( map(lambda row: row[6], scores) )
 hmax_scores  = np.array( map(lambda row: row[7], scores) )
 hmax_spnos   = np.array( map(lambda row: row[8], scores) )
 
+# sizes are difference in spnos between holistic and the other
+mean_sizes  = ((hori_spnos - hmean_spnos)*0.2).astype(int)
+max_sizes   = ((hori_spnos - hmax_spnos)*0.2).astype(int)
+
 # flag outliers in red
-## in compasion with hori_spnos?????
-mean_colours  = map(lambda spno: 'r' if spno < 100 else 'b', hmean_spnos)
-max_colours = map(lambda spno: 'r' if spno < 100  else 'b', hmax_spnos)
+# spno <25% of mean hori_spnos
+prop_meanspno = (hmean_spnos)* len(hori_spnos)*100/sum(hori_spnos)
+prop_maxspno  = (hmax_spnos)* len(hori_spnos)*100/sum(hori_spnos)
+
+mean_colours  = map(lambda spno: 'r' if spno < 25 else 'b', prop_meanspno)
+max_colours   = map(lambda spno: 'r' if spno < 25  else 'b', prop_maxspno)
 
 # add y = x line
 lx = np.arange(0,300)
@@ -55,9 +62,6 @@ fig.suptitle('(1) Border Repeat', fontsize=20)
 #fig.suptitle('(2) Border Unique', fontsize=20)
 #fig.suptitle('(3) Border Exclude', fontsize=20)
 ax1 = fig.add_subplot(211)
-# sizes are constant times the mean times one over the species number
-mean_sizes  = 20 * sum(hmean_spnos)  / (hmean_spnos  * len(hmean_spnos) )
-max_sizes   = 20 * sum(hmax_spnos) / (hmax_spnos * len(hmax_spnos))
 ax1.scatter(hori_scores, hmean_scores, s=mean_sizes, c=mean_colours, alpha=0.5)
 ax1.set_ylabel('Cell-based Average Hori Score', fontsize=16)
 #ax1.set_title('Mean Hori scores vs Holistic Hori scores', fontsize=22)
