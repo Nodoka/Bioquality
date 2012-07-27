@@ -38,7 +38,8 @@ wilcox.test(accsp$kmcount, accsp$tdwgcount, paired=TRUE)
 wilcox.test(accsp$gridcount, accsp$tdwgcount, paired=TRUE)
 
 # fit a linear model (linear regression analysis
-lm(accsp$kmcount ~ accsp$tdwgcount)
+LM <- lm(accsp$kmcount ~ accsp$tdwgcount)
+summary(LM)
 
 # remove NA values
 valid_accsp <- na.omit(accsp)
