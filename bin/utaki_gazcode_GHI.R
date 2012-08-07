@@ -7,10 +7,14 @@ sp_utaki <- read.csv('../data/Utaki_species.csv',     row.names = NULL)
 plot_utaki <- read.csv('../data/Utaki_plot.csv',     row.names = NULL)
 gaz_utaki  <- read.csv('../data/Utaki_gazcode.csv', row.names = NULL)
 
+# filter relevant columns
+sp_utaki <- sp_utaki[,c('scode','sampname','spnumber','star_infs')]
+plot_utaki <- plot_utaki[,c('scode','sampname','gazcode')]
+
 # using plot scode, apply gazcode to spdata
-# sp_utaki already contains gazcode, so not necessary??
-# sp_gaz <- merge(sp_utaki,plot_utaki)
-sp_gaz <- sp_utaki
+sp_gaz <- merge(sp_utaki, plot_utaki)
+# if sp_utaki already contains gazcode, only change the name
+# sp_gaz <- sp_utaki
 
 # filter valid stars for star_infs
 utaki_sp <- filter_rows_by_valid_star(sp_gaz, 'star_infs')
@@ -32,6 +36,7 @@ scores_frame <- data.frame(gazcode=row.names(gaz_scores),
                            gaz_score=gaz_scores[,1],               
                            gaz_spcount=gaz_scores[,2], 
                            row.names=NULL)
+# CHECK IF 474 SAMPLES!!
 
 # make a new column with either of cell or pref score absed on spno
 less_than_40 <- scores_frame$gaz_spcount < 40
@@ -44,22 +49,30 @@ scores_frame[!less_than_40,'valid_score'] <- scores_frame[!less_than_40, 'gaz_sc
 gaz <- gaz_utaki[,c('gazcode','major','minor','locality','lat','ns','long','ew')]
 
 # merge scores and gazcode
-gaz_ghi <- merge(gaz, scores_frame)
+gaz_ghi <- merge(gaz, scores_frame, all.x = TRUE)
 
 # optional: add ME major1 classification
-gazme <- read.csv('../data/Utaki_gazMEvg.csv', row.names =NULL)
-me <- gazme[,c('gazcode','MAJOR1','NAME')]
+#gazme <- read.csv('../data/Utaki_gazMEvg.csv', row.names =NULL)
+#me <- gazme[,c('gazcode','MAJOR1','NAME')]
 # merge MEvg to scores
-gaz_ghi <- merge(gaz_ghi, me)
+#gaz_ghi <- merge(gaz_ghi, me)
 
 # optional: add 50m elevation
 #gazelev <- read.csv('../data/Utaki_gazELEV.csv', row.names =NULL)
 #elev <- gazelev[,c('gazcode','ELEV')]
+# merge gazelev to scores
+#gaz_ghi <- merge(gaz_ghi, elev)
 
+# merge scores and full gazcode infor
+gazinfo_ghi <- merge(gaz_utaki, scores_frame)
 
 # write results to csv
 write.csv(gaz_ghi,
           file="../data/Utakigaz_score.csv",
+          fileEncoding="UTF-8",
+          row.names = FALSE)
+write.csv(gazinfo_ghi,
+          file="../data/Utakigaz_scoreinfo.csv",
           fileEncoding="UTF-8",
           row.names = FALSE)
 
