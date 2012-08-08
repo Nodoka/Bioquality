@@ -38,6 +38,14 @@ wes <- cbind(sum_we,cwe)
 # cell_score is generated in produce_cell_score.R
 scores <- cbind(cell_score, wes)
 
+# make a new column with either endemic spcount or % endemics
+endemino <- tapply(species_cell$horim_end.1, species_cell$sampname, sum)
+propend <- endemino*100/spnum_cell
+endemics <- cbind(endemino, propend)
+# combine results
+scores <- cbind(scores, endemics)
+
+
 # OPTIONAL: filter out spcount <40
 # index of spnum_cell >39
 spcount <- spnum_cell > 39
@@ -50,10 +58,34 @@ write.csv(valid_scores,
           fileEncoding="UTF-8",
           row.names = FALSE)
 
+write.csv(scores,
+          file="../data/horicell_BDmeasures1385.csv",
+          fileEncoding="UTF-8",
+          row.names = FALSE)
+
 # correlation analsysis
-cor(valid_scores$GHI,    valid_scores$spno,   method="spearman")
-cor(valid_scores$sum_we, valid_scores$spno,   method="spearman")
-cor(valid_scores$cwe,    valid_scores$spno,   method="spearman")
-cor(valid_scores$GHI,    valid_scores$sum_we, method="spearman")
-cor(valid_scores$GHI,    valid_scores$cwe,    method="spearman")
-cor(valid_scores$sum_we, valid_scores$cwe,    method="spearman")
+cor(valid_scores$GHI,     valid_scores$spno,    method="spearman")
+cor(valid_scores$GHI,     valid_scores$sum_we,  method="spearman")
+cor(valid_scores$GHI,     valid_scores$cwe,     method="spearman")
+cor(valid_scores$GHI,     valid_scores$endemino,method="spearman")
+cor(valid_scores$GHI,     valid_scores$propend, method="spearman")
+cor(valid_scores$sum_we,  valid_scores$spno,    method="spearman")
+cor(valid_scores$cwe,     valid_scores$spno,    method="spearman")
+cor(valid_scores$endemino,valid_scores$spno,    method="spearman")
+cor(valid_scores$sum_we,  valid_scores$cwe,     method="spearman")
+cor(valid_scores$endemino,valid_scores$cwe,     method="spearman")
+cor(valid_scores$propend, valid_scores$cwe,     method="spearman")
+
+cor(scores$GHI,     scores$spno,    method="spearman")
+cor(scores$GHI,     scores$sum_we,  method="spearman")
+cor(scores$GHI,     scores$cwe,     method="spearman")
+cor(scores$GHI,     scores$endemino,method="spearman")
+cor(scores$GHI,     scores$propend, method="spearman")
+cor(scores$sum_we,  scores$spno,    method="spearman")
+cor(scores$cwe,     scores$spno,    method="spearman")
+cor(scores$endemino,scores$spno,    method="spearman")
+cor(scores$sum_we,  scores$cwe,     method="spearman")
+cor(scores$endemino,scores$cwe,     method="spearman")
+cor(scores$propend, scores$cwe,     method="spearman")
+
+
