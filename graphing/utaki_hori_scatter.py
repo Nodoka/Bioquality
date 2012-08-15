@@ -18,8 +18,8 @@ utakihori_score = np.genfromtxt(utaki_file, delimiter=',', dtype=None, skip_head
 utakispcount = np.genfromtxt(utaki_file, delimiter=',', dtype=None, skip_header=1, usecols=9)
 
 # add y = x line
-#lx = np.arange(0,460)
-#ly = np.arange(0,460)
+lx = np.arange(0,500)
+ly = np.arange(0,500)
 
 # define colours
 colours = map(lambda spcount: 'c' if spcount > 39 else 'w', utakispcount)
@@ -31,7 +31,7 @@ utaki_size = utakispcount
 fig = plt.figure()
 fig.suptitle('Comparison of GHI between Utaki groves and Horikawa maps', fontsize=20)
 ax = fig.add_subplot(111)
-#ax.plot(lx, ly, c='k', alpha=0.2) 
+ax.plot(lx, ly, c='k', alpha=0.2) 
 ax.scatter(utakihori_score, utaki_score, s=utaki_size, color = colours, marker='d', alpha=0.5)
 ax.set_aspect(1) 
 ax.set_xlim([0, 500])

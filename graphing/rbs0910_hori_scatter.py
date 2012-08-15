@@ -18,8 +18,8 @@ hori_score = np.genfromtxt(file_name, delimiter=',', dtype=None, skip_header=1, 
 spcount = np.genfromtxt(file_name, delimiter=',', dtype=None, skip_header=1, usecols=16)
 
 # add y = x line
-#lx = np.arange(0,460)
-#ly = np.arange(0,460)
+lx = np.arange(0,460)
+ly = np.arange(0,460)
 
 # define colours
 colours = map(lambda plot_type: 'm' if plot_type < 40 else 'r', scode)
@@ -33,7 +33,7 @@ fig = plt.figure()
 fig.suptitle('Comparison of GHI between RBS samples and Horikawa maps', fontsize=20)
 ax = fig.add_subplot(111)
 ax.scatter(hori_score, rbs_score, s= sizes, color=colours, alpha=0.5)
-#ax.plot(lx, ly, c='k', alpha=0.2) 
+ax.plot(lx, ly, c='k', alpha=0.2) 
 ax.set_aspect(1) 
 ax.set_xlim([0, 460])
 ax.set_ylim([0, 460])
