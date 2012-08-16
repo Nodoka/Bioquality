@@ -44,6 +44,9 @@ spcount <- spnum_cell > 39
 valid_scores <- cell_score[spcount,]
 # alternatively: add valid_score column
 cell_score[spcount,'valid_scores'] <- cell_score[spcount,'GHI']
+# replace NA with 0 or make a column with 0 (valid_score)
+#cell_score$valid_scores[is.na(cell_score$valid_scores)] <- 0
+cell_score$valid_score[is.na(cell_score$valid_score)] <- 0
 
 # write results to csv
 write.csv(cell_score,
