@@ -52,6 +52,13 @@ spcount <- spnum_cell > 39
 # filter cell with index
 valid_scores <- scores[spcount,]
 
+
+# OPTIONAL: add lat long data to csv
+hori_samp    <- read.csv("../data/horim_Pheader.csv")
+hori_latlong <- hori_samp[,c('scode','sampname','lat','long')]
+scores       <- merge(hori_latlong, scores, all.x=T)
+valid_scores <- merge(hori_latlong, valid_scores, all.x=T)
+
 # write results to file
 write.csv(valid_scores,
           file="../data/horicell_BDmeasures.csv",
