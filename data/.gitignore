@@ -34,7 +34,7 @@ hori*mean.csv
 prefscores_calc_*methods*.csv
 horicell_*.csv
 mainsp_famstats*.csv
-hori_plot_scoreR.csv
+hori_plot_*scoreR.csv
 cellpref_score.csv
 MOE*.csv
 Horicell_kmgrid.csv

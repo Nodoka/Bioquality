@@ -40,8 +40,10 @@ cell_score <- data.frame(sampname=row.names                (cal_cell_score),
                          spno=spnum_cell[])
 
 # OPTIONAL: filter cell with spcount > 39
-# spcount <- spnum_cell > 39
-# valid_scores <- cell_score[spcount,]
+spcount <- spnum_cell > 39
+valid_scores <- cell_score[spcount,]
+# alternatively: add valid_score column
+cell_score[spcount,'valid_scores'] <- cell_score[spcount,'GHI']
 
 # write results to csv
 write.csv(cell_score,
@@ -49,3 +51,7 @@ write.csv(cell_score,
           row.names=FALSE,
           fileEncoding="UTF-8")
 
+write.csv(valid_scores,
+          file="../data/hori_plot_validscoreR.csv",
+          row.names=FALSE,
+          fileEncoding="UTF-8")
