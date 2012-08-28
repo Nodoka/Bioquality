@@ -69,28 +69,61 @@ write.csv(valid_scores,
           row.names = FALSE)
 
 # correlation analsysis
-cor(valid_scores$GHI,     valid_scores$spno,    method="spearman")
-cor(valid_scores$GHI,     valid_scores$sum_we,  method="spearman")
-cor(valid_scores$GHI,     valid_scores$cwe,     method="spearman")
-cor(valid_scores$GHI,     valid_scores$endemino,method="spearman")
-cor(valid_scores$GHI,     valid_scores$propend, method="spearman")
-cor(valid_scores$sum_we,  valid_scores$spno,    method="spearman")
-cor(valid_scores$cwe,     valid_scores$spno,    method="spearman")
-cor(valid_scores$endemino,valid_scores$spno,    method="spearman")
-cor(valid_scores$sum_we,  valid_scores$cwe,     method="spearman")
-cor(valid_scores$endemino,valid_scores$cwe,     method="spearman")
-cor(valid_scores$propend, valid_scores$cwe,     method="spearman")
+cor.test(valid_scores$GHI,     valid_scores$spno,    method="kendall")
+cor.test(valid_scores$GHI,     valid_scores$sum_we,  method="kendall")
+cor.test(valid_scores$GHI,     valid_scores$cwe,     method="kendall")
+cor.test(valid_scores$GHI,     valid_scores$endemino,method="kendall")
+cor.test(valid_scores$GHI,     valid_scores$propend, method="kendall")
+cor.test(valid_scores$sum_we,  valid_scores$spno,    method="kendall")
+cor.test(valid_scores$cwe,     valid_scores$spno,    method="kendall")
+cor.test(valid_scores$endemino,valid_scores$spno,    method="kendall")
+cor.test(valid_scores$sum_we,  valid_scores$cwe,     method="kendall")
+cor.test(valid_scores$endemino,valid_scores$cwe,     method="kendall")
+cor.test(valid_scores$propend, valid_scores$cwe,     method="kendall")
 
-cor(scores$GHI,     scores$spno,    method="spearman")
-cor(scores$GHI,     scores$sum_we,  method="spearman")
-cor(scores$GHI,     scores$cwe,     method="spearman")
-cor(scores$GHI,     scores$endemino,method="spearman")
-cor(scores$GHI,     scores$propend, method="spearman")
-cor(scores$sum_we,  scores$spno,    method="spearman")
-cor(scores$cwe,     scores$spno,    method="spearman")
-cor(scores$endemino,scores$spno,    method="spearman")
-cor(scores$sum_we,  scores$cwe,     method="spearman")
-cor(scores$endemino,scores$cwe,     method="spearman")
-cor(scores$propend, scores$cwe,     method="spearman")
+cor.test(scores$GHI,     scores$spno,    method="kendall")
+cor.test(scores$GHI,     scores$sum_we,  method="kendall")
+cor.test(scores$GHI,     scores$cwe,     method="kendall")
+cor.test(scores$GHI,     scores$endemino,method="kendall")
+cor.test(scores$GHI,     scores$propend, method="kendall")
+cor.test(scores$sum_we,  scores$spno,    method="kendall")
+cor.test(scores$cwe,     scores$spno,    method="kendall")
+cor.test(scores$endemino,scores$spno,    method="kendall")
+cor.test(scores$sum_we,  scores$cwe,     method="kendall")
+cor.test(scores$endemino,scores$cwe,     method="kendall")
+cor.test(scores$propend, scores$cwe,     method="kendall")
 
+# spatial autocorrelation using Moran's I
+# install Moran's I
+install.packages("ape")
+library(ape)
 
+# calculate distance matrix
+celldists <- as.matrix(dist(cbind(valid_scores$long, valid_scores$lat)))
+celldists_inv <- 1/celldists
+diag(celldists_inv) <- 0
+
+# calculate Moran's I
+Moran.I(valid_scores$GHI,      celldists_inv, na.rm=TRUE)
+Moran.I(valid_scores$spno,     celldists_inv, na.rm=TRUE)
+Moran.I(valid_scores$endemino, celldists_inv, na.rm=TRUE)
+Moran.I(valid_scores$cwe,      celldists_inv, na.rm=TRUE)
+
+# alternatively, use binary distance
+celldists_bin <- (celldists>0 & celldists <= 0.75)
+
+Moran.I(valid_scores$GHI,      celldists_bin, na.rm=TRUE)
+Moran.I(valid_scores$spno,     celldists_bin, na.rm=TRUE)
+Moran.I(valid_scores$endemino, celldists_bin, na.rm=TRUE)
+Moran.I(valid_scores$cwe,      celldists_bin, na.rm=TRUE)
+
+# for scores
+celldists <- as.matrix(dist(cbind(scores$long, scores$lat)))
+celldists_inv <- 1/celldists
+diag(celldists_inv) <- 0
+
+# calculate Moran's I
+Moran.I(scores$GHI,      celldists_inv, na.rm=TRUE)
+Moran.I(scores$spno,     celldists_inv, na.rm=TRUE)
+Moran.I(scores$endemino, celldists_inv, na.rm=TRUE)
+Moran.I(scores$cwe,      celldists_inv, na.rm=TRUE)
