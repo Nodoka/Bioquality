@@ -69,6 +69,7 @@ write.csv(valid_scores,
           row.names = FALSE)
 
 # correlation analsysis
+# if to use cor, use="complete.obs" to remove missing values
 cor.test(valid_scores$GHI,     valid_scores$spno,    method="kendall")
 cor.test(valid_scores$GHI,     valid_scores$sum_we,  method="kendall")
 cor.test(valid_scores$GHI,     valid_scores$cwe,     method="kendall")
@@ -94,7 +95,8 @@ cor.test(scores$endemino,scores$cwe,     method="kendall")
 cor.test(scores$propend, scores$cwe,     method="kendall")
 
 # spatial autocorrelation using Moran's I
-# install Moran's I
+# install Moran's I test from package ("ape) 
+# also check package ("spdep")!!
 install.packages("ape")
 library(ape)
 
