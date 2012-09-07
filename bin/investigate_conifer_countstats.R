@@ -40,6 +40,9 @@ wilcox.test(accsp$gridcount, accsp$tdwgcount, paired=TRUE)
 # fit a linear model (linear regression analysis
 LM <- lm(accsp$kmcount ~ accsp$tdwgcount)
 summary(LM)
+# LM for tdwg vs degree
+LMd <- lm(accsp$gridcount ~ accsp$tdwgcount)
+summary(LMd)
 
 # remove NA values
 valid_accsp <- na.omit(accsp)
