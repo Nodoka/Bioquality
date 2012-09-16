@@ -58,51 +58,51 @@ excl_foj <- replicate(3,mfoj_scores[-1,2]) - excl_scores
 ## Horikawa data
 # Spearman's rank correlation analysis: 
 # Holistics vs mean, max for repeat and valid_unique, valid_excl
-cor(valid_rept$hori_scores, valid_rept$meanGHI, method='spearman')
-cor(valid_rept$hori_scores, valid_rept$maxGHI,  method='spearman')
-cor(valid_uniq$hori_scores, valid_uniq$meanGHI, method='spearman')
-cor(valid_uniq$hori_scores, valid_uniq$maxGHI,  method='spearman')
-cor(valid_excl$hori_scores, valid_excl$meanGHI, method='spearman')
-cor(valid_excl$hori_scores, valid_excl$maxGHI,  method='spearman')
+cor.test(valid_rept$hori_scores, valid_rept$meanGHI, method='spearman')
+cor.test(valid_rept$hori_scores, valid_rept$maxGHI,  method='spearman')
+cor.test(valid_uniq$hori_scores, valid_uniq$meanGHI, method='spearman')
+cor.test(valid_uniq$hori_scores, valid_uniq$maxGHI,  method='spearman')
+cor.test(valid_excl$hori_scores, valid_excl$meanGHI, method='spearman')
+cor.test(valid_excl$hori_scores, valid_excl$maxGHI,  method='spearman')
 
 # Spearman's rank correlation analysis: 
 # valid_rept vs valid_uniq on scores and spno
-cor(valid_rept$hori_scores, valid_uniq$hori_scores, method='spearman')
-cor(valid_rept$meanGHI,     valid_uniq$meanGHI,     method='spearman')
-cor(valid_rept$maxGHI,      valid_uniq$maxGHI,      method='spearman')
+cor.test(valid_rept$hori_scores, valid_uniq$hori_scores, method='spearman')
+cor.test(valid_rept$meanGHI,     valid_uniq$meanGHI,     method='spearman')
+cor.test(valid_rept$maxGHI,      valid_uniq$maxGHI,      method='spearman')
 
-cor(valid_rept$hori_spno,   valid_uniq$hori_spno,   method='spearman')
-cor(valid_rept$meanspno,    valid_uniq$meanspno,    method='spearman')
-cor(valid_rept$maxspno,     valid_uniq$maxspno,     method='spearman')
+cor.test(valid_rept$hori_spno,   valid_uniq$hori_spno,   method='spearman')
+cor.test(valid_rept$meanspno,    valid_uniq$meanspno,    method='spearman')
+cor.test(valid_rept$maxspno,     valid_uniq$maxspno,     method='spearman')
 
 # comparison of modified valid_rept or valid_uniq vs valid_excl
-cor(mvalid_rept$hori_scores, valid_excl$hori_scores, method='spearman')
-cor(mvalid_rept$meanGHI,     valid_excl$meanGHI,     method='spearman')
-cor(mvalid_rept$maxGHI,      valid_excl$maxGHI,      method='spearman')
+cor.test(mvalid_rept$hori_scores, valid_excl$hori_scores, method='spearman')
+cor.test(mvalid_rept$meanGHI,     valid_excl$meanGHI,     method='spearman')
+cor.test(mvalid_rept$maxGHI,      valid_excl$maxGHI,      method='spearman')
 
-cor(mvalid_rept$hori_spno,   valid_excl$hori_spno,   method='spearman')
-cor(mvalid_rept$meanspno,    valid_excl$meanspno,    method='spearman')
-cor(mvalid_rept$maxspno,     valid_excl$maxspno,     method='spearman')
+cor.test(mvalid_rept$hori_spno,   valid_excl$hori_spno,   method='spearman')
+cor.test(mvalid_rept$meanspno,    valid_excl$meanspno,    method='spearman')
+cor.test(mvalid_rept$maxspno,     valid_excl$maxspno,     method='spearman')
 
-cor(mvalid_uniq$hori_scores, valid_excl$hori_scores, method='spearman')
-cor(mvalid_uniq$meanGHI,     valid_excl$meanGHI,     method='spearman')
-cor(mvalid_uniq$maxGHI,      valid_excl$maxGHI,      method='spearman')
+cor.test(mvalid_uniq$hori_scores, valid_excl$hori_scores, method='spearman')
+cor.test(mvalid_uniq$meanGHI,     valid_excl$meanGHI,     method='spearman')
+cor.test(mvalid_uniq$maxGHI,      valid_excl$maxGHI,      method='spearman')
 
-cor(mvalid_uniq$hori_spno,   valid_excl$hori_spno,   method='spearman')
-cor(mvalid_uniq$meanspno,    valid_excl$meanspno,    method='spearman')
-cor(mvalid_uniq$maxspno,     valid_excl$maxspno,     method='spearman')
+cor.test(mvalid_uniq$hori_spno,   valid_excl$hori_spno,   method='spearman')
+cor.test(mvalid_uniq$meanspno,    valid_excl$meanspno,    method='spearman')
+cor.test(mvalid_uniq$maxspno,     valid_excl$maxspno,     method='spearman')
 
 ## FOJ vs. Horikawa data
 # Spearman's rank correlation analysis:
-cor(valid_rept$foj_scores, valid_rept$hori_scores, method ='spearman')
-cor(valid_rept$foj_scores, valid_rept$meanGHI,     method ='spearman')
-cor(valid_rept$foj_scores, valid_rept$maxGHI,      method ='spearman')
-cor(valid_uniq$foj_scores, valid_uniq$hori_scores, method ='spearman')
-cor(valid_uniq$foj_scores, valid_uniq$meanGHI,     method ='spearman')
-cor(valid_uniq$foj_scores, valid_uniq$maxGHI,      method ='spearman')
-cor(valid_excl$foj_scores, valid_excl$hori_scores, method ='spearman')
-cor(valid_excl$foj_scores, valid_excl$meanGHI,     method ='spearman')
-cor(valid_excl$foj_scores, valid_excl$maxGHI,      method ='spearman')
+cor.test(valid_rept$foj_scores, valid_rept$hori_scores, method ='spearman')
+cor.test(valid_rept$foj_scores, valid_rept$meanGHI,     method ='spearman')
+cor.test(valid_rept$foj_scores, valid_rept$maxGHI,      method ='spearman')
+cor.test(valid_uniq$foj_scores, valid_uniq$hori_scores, method ='spearman')
+cor.test(valid_uniq$foj_scores, valid_uniq$meanGHI,     method ='spearman')
+cor.test(valid_uniq$foj_scores, valid_uniq$maxGHI,      method ='spearman')
+cor.test(valid_excl$foj_scores, valid_excl$hori_scores, method ='spearman')
+cor.test(valid_excl$foj_scores, valid_excl$meanGHI,     method ='spearman')
+cor.test(valid_excl$foj_scores, valid_excl$maxGHI,      method ='spearman')
 
 # Wilcoxon's signed-t test
 wilcox.test(valid_rept$foj_scores, valid_rept$hori_scores, paired=T)
@@ -143,3 +143,41 @@ wilcox.test(calscores$holshori_scores, calscores$holsmaxGHI, paired=T)
 wilcox.test(calscores$holshori_scores, calscores$holsmeanGHI,paired=T)
 wilcox.test(calscores$uniqhori_scores, calscores$uniqmaxGHI, paired=T)
 wilcox.test(calscores$uniqhori_scores, calscores$uniqmeanGHI,paired=T)
+
+
+
+# alternative Kendall correlation analysis:
+# install package 'Kendall'
+install.packages("Kendall")
+library("Kendall")
+## FOJ vs. Horikawa data
+Kendall(valid_rept$foj_scores, valid_rept$hori_scores)
+Kendall(valid_rept$foj_scores, valid_rept$meanGHI)
+Kendall(valid_rept$foj_scores, valid_rept$maxGHI)
+Kendall(valid_uniq$foj_scores, valid_uniq$hori_scores)
+Kendall(valid_uniq$foj_scores, valid_uniq$meanGHI)
+Kendall(valid_uniq$foj_scores, valid_uniq$maxGHI)
+Kendall(valid_excl$foj_scores, valid_excl$hori_scores)
+Kendall(valid_excl$foj_scores, valid_excl$meanGHI)
+Kendall(valid_excl$foj_scores, valid_excl$maxGHI)
+
+## comparison of border treatment
+Kendall(valid_rept$hori_scores,  valid_uniq$hori_scores)
+Kendall(valid_rept$meanGHI,      valid_uniq$meanGHI)
+Kendall(valid_rept$maxGHI,       valid_uniq$maxGHI)
+Kendall(mvalid_rept$hori_scores, valid_excl$hori_scores)
+Kendall(mvalid_rept$meanGHI,     valid_excl$meanGHI)
+Kendall(mvalid_rept$maxGHI,      valid_excl$maxGHI)
+Kendall(mvalid_uniq$hori_scores, valid_excl$hori_scores)
+Kendall(mvalid_uniq$meanGHI,     valid_excl$meanGHI)
+Kendall(mvalid_uniq$maxGHI,      valid_excl$maxGHI)
+
+## comparison of GHI calculation
+Kendall(valid_rept$hori_scores, valid_rept$maxGHI)
+Kendall(valid_rept$hori_scores, valid_rept$meanGHI)
+Kendall(valid_uniq$hori_scores, valid_uniq$maxGHI)
+Kendall(valid_uniq$hori_scores, valid_uniq$meanGHI)
+Kendall(valid_excl$hori_scores, valid_excl$maxGHI)
+Kendall(valid_excl$hori_scores, valid_excl$meanGHI)
+
+
