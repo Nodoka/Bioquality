@@ -12,13 +12,14 @@ tdwg <- filter_rows_by_valid_star(tdwg,'star_infs')
 # filter infra taxa
 tdwg_sp <- subset(tdwg, rank1 != "subsp." & rank1 != "var." & rank1 != "f.")
 # uncomment to run analysis without infra taxa
-# tdwg <- tdwg_sp
+tdwg <- tdwg_sp
 
 # index T/F of family != (not equal) Gramineae,
 fam           <- tdwg[,'family']
 not_gramineae <- fam != 'Gramineae'
 # then filter tdwg with the index.
 no_grass_tdwg <- tdwg[not_gramineae,]
+tdwg <- no_grass_tdwg
 
 # calculate mean of selected column grouped by stars
 tdwgc <- tapply(tdwg$tdwgtotals, tdwg$star_infs, mean)

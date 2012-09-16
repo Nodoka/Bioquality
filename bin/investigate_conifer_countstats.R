@@ -27,17 +27,17 @@ shapiro.test(accsp$kmcount)
 shapiro.test(accsp$gridcount)
 shapiro.test(accsp$tdwgcount)
 
-# Spearman's rank correlation coefficcient
-cor(accsp$kmcount, accsp$gridcount, use = "na.or.complete", method="spearman")
-cor(accsp$kmcount, accsp$tdwgcount, use = "na.or.complete", method="spearman")
-cor(accsp$gridcount, accsp$tdwgcount, use = "na.or.complete", method="spearman")
+# Kendall's rank correlation coefficcient because of ties
+cor.test(accsp$kmcount, accsp$gridcount, use = "na.or.complete", method="kendall")
+cor.test(accsp$kmcount, accsp$tdwgcount, use = "na.or.complete", method="kendall")
+cor.test(accsp$gridcount, accsp$tdwgcount, use = "na.or.complete", method="kendall")
 
 # Wilcoxon singed-rank test
 wilcox.test(accsp$kmcount, accsp$gridcount, paired=TRUE)
 wilcox.test(accsp$kmcount, accsp$tdwgcount, paired=TRUE)
 wilcox.test(accsp$gridcount, accsp$tdwgcount, paired=TRUE)
 
-# fit a linear model (linear regression analysis
+# fit a linear model (linear regression analysis)
 LM <- lm(accsp$kmcount ~ accsp$tdwgcount)
 summary(LM)
 # LM for tdwg vs degree
