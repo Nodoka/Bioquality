@@ -10,13 +10,6 @@ mainsplistR     <- read.csv('../data/mainsplistR.csv',     row.names = NULL)
 
 # filter rows by valid star on selected column
 # how to reduce redundancy in star* used across this section?
-# splist_star_scenario* <- filter_rows_by_valid_star(mainsplistR,'star*')
-# summary of the number of valid stars for each star classification methods
-# star_table_scenario* <- table(splist_star_scenario[,'star*'])
-# star summary table with all star classification methods
-# stars_table <- rbind(star_table_scenario,,,,,)
-
-# individual scripts run in R
 splist_star      <- filter_rows_by_valid_star(mainsplistR,'star')
 splist_star_geo  <- filter_rows_by_valid_star(mainsplistR,'star_geo')
 splist_star_geou <- filter_rows_by_valid_star(mainsplistR,'star_geou')
