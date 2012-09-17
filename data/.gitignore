@@ -33,7 +33,7 @@ tdwg*.csv
 hori*mean.csv
 prefscores_calc_*methods*.csv
 horicell_*.csv
-mainsp_famstats*.csv
+mainsp_fam*stats*.csv
 hori_plot_*scoreR.csv
 cellpref_score.csv
 MOE*.csv

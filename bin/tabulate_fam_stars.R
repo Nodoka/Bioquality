@@ -17,8 +17,10 @@ fam_scores <- tapply(main_starinfs$star_infs, main_starinfs$family, calculate_sc
 fam_starinfs <- table(main_starinfs$family,main_starinfs$star_infs)
 # number of species per family
 spno_fam <- table(main_starinfs$family)
+spno     <- table(mainsplistR$family)
+starless <- spno - spno_fam
 # combine tables
-famstats <- cbind(fam_starinfs, spno_fam)
+famstats <- cbind(fam_starinfs, starless)
 
 # convert summary table and family socres to dataframe
 famstats_frame <- data.frame(family=row.names(famstats), 
@@ -26,15 +28,39 @@ famstats_frame <- data.frame(family=row.names(famstats),
                     GD=famstats[,2],
                     BU=famstats[,3], 
                     GN=famstats[,4],
-                    spno=famstats[,5], 
+                    starless=famstats[,5],
+                    starsp=spno_fam[],
+                    spcount=spno[], 
                     famscore=fam_scores[],row.names=NULL)
 
-# filter families with small number of species??
+# filter families with starred sp < 40
+# make a new column with either of famscore or 'NA' based on starsp
+less_than_40 <- famstats_frame$starsp < 40
+less_than_40[is.na(less_than_40)] <- T
+
+famstats_frame[!less_than_40,'valid_scores'] <- famstats_frame[!less_than_40,'famscore']
+
+# list of families by different sources
+famnames <- unique(mainsplistR[,c('family','kew_fam','apg_fam','apg_order','moss')])
+
+# merge family names KEW, APG, APGorder
+famnames_stats <- merge(famstats_frame, famnames)
 
 # write results to csv
-# change name suffix to KEW, APG, APGorder
 write.csv(famstats_frame,
           file="../data/mainsp_famstats.csv",
           row.names=FALSE,
           fileEncoding="UTF-8")
 
+write.csv(famnames_stats,
+          file="../data/mainsp_famnamestats.csv",
+          row.names=FALSE,
+          fileEncoding="UTF-8")
+
+# optional: APG ref
+apgref <- unique(famnames[,c('family','apg_fam','apg_order','moss')])
+famapg_stats <- merge(famstats_frame, apgref)
+write.csv(famapg_stats,
+          file="../data/mainsp_famapgstats.csv",
+          row.names=FALSE,
+          fileEncoding="UTF-8")
