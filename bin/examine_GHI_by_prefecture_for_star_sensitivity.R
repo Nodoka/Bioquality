@@ -108,11 +108,11 @@ write.csv(score_diffs,
 -----------------------------------------------
 # rank correlation analysis: * = 3~7
 # cor(sens_scores_frame[,2],sens_scores_frame[,*],method="spearman")
-cor(sens_scores_frame[,2],sens_scores_frame[,3],method="spearman")
-cor(sens_scores_frame[,2],sens_scores_frame[,4],method="spearman")
-cor(sens_scores_frame[,2],sens_scores_frame[,5],method="spearman")
-cor(sens_scores_frame[,2],sens_scores_frame[,6],method="spearman")
-cor(sens_scores_frame[,2],sens_scores_frame[,7],method="spearman")
+cor.test(sens_scores_frame[,2],sens_scores_frame[,3],method="spearman")
+cor.test(sens_scores_frame[,2],sens_scores_frame[,4],method="spearman")
+cor.test(sens_scores_frame[,2],sens_scores_frame[,5],method="spearman")
+cor.test(sens_scores_frame[,2],sens_scores_frame[,6],method="spearman")
+cor.test(sens_scores_frame[,2],sens_scores_frame[,7],method="spearman")
 
 # wilcoxon's signed-ranks test : non-parametric equivalent of paried-t test 
 # for non-normally distributed data
