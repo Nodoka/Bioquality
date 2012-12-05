@@ -12,7 +12,7 @@ tdwg = np.genfromtxt('../data/conifer_tdwgcount.csv', delimiter=',', dtype=None,
 fig = plt.figure()
 ax = fig.add_subplot(111)
 ax.set_xlabel('Number of 100 km$^2$ Grid', fontsize='large')
-ax.set_ylabel('Normalised Frequency', fontsize='large')
+ax.set_ylabel('Normalised Species Frequency', fontsize='large')
 #ax.set_title('Normalised Frequency Distribution of Species Range Size')
 # histograms
 n, bins, patches = pylab.hist(kmcount,
@@ -24,7 +24,7 @@ pylab.show()
 fig = plt.figure()
 ax = fig.add_subplot(111)
 ax.set_xlabel('Number of TDWG level 3 Codes', fontsize='large')
-ax.set_ylabel('Normalised Frequency', fontsize='large')
+ax.set_ylabel('Normalised Species Frequency', fontsize='large')
 #ax.set_title('Normalised Frequency Distribution of Species Range Size')
 # histograms
 n, bins, patches = pylab.hist(tdwg,
